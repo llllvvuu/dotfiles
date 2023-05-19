@@ -1,0 +1,2 @@
+#!/bin/bash
+session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf-tmux) && tmux switch -t "$session" || true

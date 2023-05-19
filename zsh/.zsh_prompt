@@ -1,0 +1,36 @@
+MNML_RPROMPT=()
+ASYNC_PROC=0
+TMPDIR="/tmp"
+df $HOME/ramdisk 2>/dev/null | grep ramdisk >/dev/null 2>&1 && \
+    TMPDIR="$HOME/ramdisk"
+function rprompt_precmd {
+    function async {
+        printf "%s" "$(mnml_cwd)" > "$TMPDIR/zsh_prompt_$$"
+        # signal parent to redraw
+        kill -s USR1 $$
+        printf "%s" "$(mnml_cwd) $(mnml_git)"  > "$TMPDIR/zsh_prompt_$$"
+        kill -s USR1 $$
+    }
+    # do not clear RPROMPT, let it persist
+
+    # kill child if necessary
+    if [[ "${ASYNC_PROC}" != 0 ]]; then
+        kill -s HUP $ASYNC_PROC >/dev/null 2>&1 || :
+    fi
+
+    # start background computation
+    async &!
+    ASYNC_PROC=$!
+}
+
+function TRAPUSR1() {
+    RPROMPT="$(cat $TMPDIR/zsh_prompt_$$)"
+
+    # reset proc number
+    ASYNC_PROC=0
+
+    # redisplay
+    zle && zle reset-prompt
+}
+
+precmd_functions=($precmd_functions rprompt_precmd)

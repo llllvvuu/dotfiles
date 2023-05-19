@@ -1,0 +1,34 @@
+[include]
+	path = ~/.gitconfig_redact
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[core]
+	excludesfile = ~/.gitignore_global
+[alias]
+	a = add
+	c = commit
+	ca = commit --amend
+	co = checkout
+	f = fetch --all
+	g = grep
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	la = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	ls = ls-tree -r --name-only HEAD
+	pl = pull origin
+	ps = push origin
+	rb = rebase
+	rs = reset --hard
+	s = status -s
+	st = stash
+	u = reset HEAD --
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[color]
+	ui = always
+[push]
+	default = current

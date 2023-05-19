@@ -1,0 +1,84 @@
+[submodule "vim-javascript"]
+	path = vim/.vim/bundle/vim-javascript
+	url = git@github.com:pangloss/vim-javascript.git
+[submodule "zsh-syntax-highlighting"]
+	path = zsh/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "fzf"]
+	path = vim/.vim/bundle/fzf
+	url = git@github.com:junegunn/fzf.git
+[submodule "fzf.vim"]
+	path = vim/.vim/bundle/fzf.vim
+	url = git@github.com:junegunn/fzf.vim.git
+[submodule "base16-vim"]
+	path = vim/.vim/bundle/base16-vim
+	url = git@github.com:chriskempson/base16-vim.git
+[submodule "base16-shell"]
+	path = base16-shell/base16-shell
+	url = https://github.com/chriskempson/base16-shell
+[submodule "vim-sneak"]
+	path = vim/.vim/bundle/vim-sneak
+	url = git@github.com:justinmk/vim-sneak.git
+[submodule "vim-surround"]
+	path = vim/.vim/bundle/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule "vim-pathogen"]
+	path = vim/.vim/vim-pathogen
+	url = git@github.com:tpope/vim-pathogen.git
+[submodule "vimtex"]
+	path = vim/.vim/bundle/vimtex
+	url = git@github.com:lervag/vimtex.git
+[submodule "vim-commentary"]
+	path = vim/.vim/bundle/vim-commentary
+	url = git@github.com:tpope/vim-commentary.git
+[submodule "minimal"]
+	path = zsh/minimal
+	url = git@github.com:subnixr/minimal.git
+[submodule "vim-over"]
+	path = vim/.vim/bundle/vim-over
+	url = git@github.com:osyo-manga/vim-over.git
+[submodule "pandoc-templates"]
+	path = pandoc/pandoc-templates
+	url = git@github.com:kjhealy/pandoc-templates.git
+[submodule "yats.vim"]
+	path = vim/.vim/bundle/yats.vim
+	url = https://github.com/HerringtonDarkholme/yats.vim
+[submodule "vim-solidity"]
+	path = vim/.vim/bundle/vim-solidity
+	url = git@github.com:TovarishFin/vim-solidity.git
+[submodule "vim/.vim/nvim-lspconfig"]
+	path = vim/.vim/bundle.nvim/nvim-lspconfig
+	url = git@github.com:neovim/nvim-lspconfig
+[submodule "vim/.vim/bundle.nvim/nvim-compe"]
+	path = vim/.vim/bundle.nvim/nvim-compe
+	url = git@github.com:hrsh7th/nvim-compe
+[submodule "cmp-nvim-lsp"]
+	path = vim/.vim/bundle.nvim/cmp-nvim-lsp
+	url = git@github.com:hrsh7th/cmp-nvim-lsp.git
+[submodule "nvim-cmp"]
+	path = vim/.vim/bundle.nvim/nvim-cmp
+	url = https://github.com/hrsh7th/nvim-cmp
+[submodule "friendly-snippets"]
+	path = vim/.vim/bundle.nvim/friendly-snippets
+	url = git@github.com:rafamadriz/friendly-snippets.git
+[submodule "LuaSnip"]
+	path = vim/.vim/bundle.nvim/LuaSnip
+	url = git@github.com:L3MON4D3/LuaSnip.git
+[submodule "cmp-path"]
+	path = vim/.vim/bundle.nvim/cmp-path
+	url = git@github.com:hrsh7th/cmp-path.git
+[submodule "cmp_luasnip"]
+	path = vim/.vim/bundle.nvim/cmp_luasnip
+	url = git@github.com:saadparwaiz1/cmp_luasnip.git
+[submodule "cmp-buffer"]
+	path = vim/.vim/bundle.nvim/cmp-buffer
+	url = git@github.com:hrsh7th/cmp-buffer.git
+[submodule "copilot.vim"]
+	path = vim/.vim/bundle.nvim/copilot.vim
+	url = git@github.com:github/copilot.vim.git
+[submodule "plenary.nvim"]
+	path = vim/.vim/bundle.nvim/plenary.nvim
+	url = git@github.com:nvim-lua/plenary.nvim.git
+[submodule "lean.nvim"]
+	path = vim/.vim/bundle.nvim/lean.nvim
+	url = git@github.com:Julian/lean.nvim.git

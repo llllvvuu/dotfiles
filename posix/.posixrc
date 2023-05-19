@@ -1,0 +1,51 @@
+# Aliases
+alias l='ls -lF'
+alias la='ls -laF'
+alias g='git'
+alias gl='git log --no-color --oneline --abbrev-commit | fzf --preview '"'"'echo {} | cut -f 1 -d " " | xargs git show'"'"' --color light --margin 2,10'
+alias moshl='mosh --server="~/bin/mosh-server"'
+alias crontab='VIM_CRONTAB=true crontab'
+alias rm='rm -i'
+command -v xdg-open >/dev/null 2>&1 && alias open='xdg-open'
+command -v thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
+command -v nvim >/dev/null 2>&1 && alias vim='nvim'
+export GPG_TTY=$(tty)
+
+# Functions
+vf()
+{
+  FILENAME="$(git ls-files | fzf --preview "{ highlight -l -O ansi {} 2>/dev/null || \
+      pygmentize -g {} 2>/dev/null || cat {} 2>/dev/null || ls -aF {}; } | \
+      head -$LINES" --color light --margin 2,10)"
+  [[ ! -z $FILENAME ]] && $EDITOR "$FILENAME"
+}
+
+f()
+{
+  rg --color=always "$@" | less -R
+}
+
+shit()
+{
+  docker exec -it $1 bash || docker exec -it $1 sh
+}
+
+cdfile()
+{
+  cd "$(dirname $1)"
+}
+
+# Sources
+[ -s $BASE16_SHELL ] && source $BASE16_SHELL
+
+# Local configuration
+if command -v pyenv 1>/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv virtualenv-init -)"
+  eval "$(pyenv init -)"
+fi
+[ -s ~/.localrc ] && source ~/.localrc
+
+# vim: set ft=sh:
