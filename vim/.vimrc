@@ -87,6 +87,31 @@ let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
 let g:copilot_filetypes = {'text': v:false}
 inoremap <C-q> <cmd>Copilot<Cr>
+let g:cornelis_max_width = 80
+let g:cornelis_split_location = 'vertical'
+au BufRead,BufNewFile *.agda call AgdaFiletype()
+function! AgdaFiletype()
+  inoremap <C-a> <cmd>execute "CornelisLoad"\|CornelisGoal<Cr>
+  nnoremap <C-a> :execute "CornelisLoad"\|CornelisGoal<Cr>
+  inoremap <C-s> <cmd>CornelisAuto<Cr>
+  nnoremap <C-s> :CornelisAuto<Cr>
+  inoremap <C-e> <cmd>CornelisMakeCase<Cr>
+  nnoremap <C-e> :CornelisMakeCase<Cr>
+  nnoremap <silent> <Leader>d :CornelisGoToDefinition<CR>
+  nnoremap <silent> <Leader>n :CornelisNextGoal<CR>
+  nnoremap <silent> <Leader>p :CornelisPrevGoal<CR>
+endfunction
+function! CornelisLoadWrapper()
+  if exists(":CornelisLoad") ==# 2
+    CornelisLoad
+    CornelisGoal
+  endif
+endfunction
+au BufReadPre *.agda call CornelisLoadWrapper()
+au BufReadPre *.lagda* call CornelisLoadWrapper()
+au BufWritePost *.agda call CornelisLoadWrapper()
+au BufWritePost *.lagda* call CornelisLoadWrapper()
+call cornelis#bind_input("==>", "≡⟨⟩")
 
 " filetype settings
 set shiftround expandtab softtabstop=2 tabstop=2 shiftwidth=2

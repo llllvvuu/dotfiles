@@ -82,3 +82,12 @@
 [submodule "lean.nvim"]
 	path = vim/.vim/bundle.nvim/lean.nvim
 	url = git@github.com:Julian/lean.nvim.git
+[submodule "vim-textobj-user"]
+	path = vim/.vim/bundle/vim-textobj-user
+	url = git@github.com:kana/vim-textobj-user.git
+[submodule "nvim-hs.vim"]
+	path = vim/.vim/bundle.nvim/nvim-hs.vim
+	url = git@github.com:neovimhaskell/nvim-hs.vim.git
+[submodule "cornelis"]
+	path = vim/.vim/bundle.nvim/cornelis
+	url = git@github.com:isovector/cornelis.git
