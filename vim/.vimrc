@@ -1,5 +1,5 @@
 let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
-" let g:node_host_prog = $HOME.'/.nvm/versions/node/v16.15.0/bin/neovim-node-host'
+" let g:node_host_prog = $HOME.'/.nvm/versions/node/v18.16.0/bin/neovim-node-host'
 
 " vim plugin manager
 runtime vim-pathogen/autoload/pathogen.vim
@@ -16,7 +16,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
-local servers = { 'solc', 'rust_analyzer', 'pyright', 'tsserver', 'texlab' }
+local servers = { 'solc', 'rust_analyzer', 'pyright', 'tsserver', 'texlab', 'hls' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         capabilities = capabilities,
@@ -86,6 +86,7 @@ let g:vimtex_view_general_viewer = 'SumatraPDF'
 let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
 let g:copilot_filetypes = {'text': v:false}
+inoremap <C-q> <cmd>Copilot<Cr>
 
 " filetype settings
 set shiftround expandtab softtabstop=2 tabstop=2 shiftwidth=2
