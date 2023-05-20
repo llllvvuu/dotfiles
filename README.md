@@ -5,46 +5,28 @@ StackOverflow members, etc.
 
 Should be pretty portable.
 
-## Setup (Work in Progress)
-I haven't set up any provisioning (e.g. Vagrant) yet,
-though the following may work:
+## Setup
+### `nvim`
+* set up `nvm` and `npm install -g neovim`
+* set up `pyenv virtualenv` and set up `neovim3` in a venv called `neovim3`
+* `pip install Pygments` in your default environment
+* Install LSPs listed in `vim/.vim/plugins/cmp.lua`
+
+The following submodules also need initial setup (`cd` in),
+because I was too lazy to use Packer or anything like that:
 ```
-$ make setup
+vim/.vim/bundle/fzf
+vim/.vim/bundle.nvim/cornelis
 ```
 
-## pyenv for Neovim
+## Install
 ```
-pyenv install 3.10.0
-pyenv virtualenv 3.10.0 neovim3
-pyenv activate neovim3
-pip install neovim pynvim
+stow */
+ln -sfn ~/.vim ~/.config/nvim
+ln -sf ~/.vimrc ~/.config/nvim/init.vim
 ```
 
-## Other Neovim stuff
-For Rust completion, install the `rust-analyzer` binary.
-
-## Install/Uninstall
-I use
-[GNU Stow](http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html)
-for management.
-
-To install all configs at once:
+## Uninstall
 ```
-$ make install
-```
-To uninstall all configs at once:
-```
-$ make uninstall
-```
-To clean out build artifacts:
-```
-$ make clean
-```
-To individually install a config for `$PACKAGENAME`:
-```
-stow $PACKAGENAME
-```
-To individually uninstall a config for `$PACKAGENAME`:
-```
-stow -D $PACKAGENAME
+stow -D */
 ```
