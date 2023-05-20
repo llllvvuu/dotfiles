@@ -16,7 +16,30 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
-local servers = { 'solc', 'rust_analyzer', 'pyright', 'tsserver', 'texlab', 'hls' }
+local servers = {
+  'bashls',
+  'bufls', -- Protobuf
+  'clangd',
+  'cssls',
+  'cssmodules_ls',
+  'custom_elements_ls',
+  'docker_compose_language_service',
+  'dockerls',
+  'eslint',
+  'graphql',
+  'hls', -- Haskell
+  'html',
+  'jsonls',
+  'pyright',
+  'rust_analyzer',
+  'solc', -- Solidity
+  'sqlls',
+  'tailwindcss',
+  'texlab',
+  'tsserver',
+  'vimls',
+  'vuels',
+}
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         capabilities = capabilities,
