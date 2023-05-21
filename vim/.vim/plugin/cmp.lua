@@ -4,7 +4,6 @@ luasnip.filetype_extend('typescript', { 'typescriptreact' })
 require("luasnip.loaders.from_vscode").lazy_load()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local lspconfig = require('lspconfig')
 
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.api.nvim_set_keymap(
@@ -32,37 +31,6 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
-local servers = {
-  'bashls',
-  'bufls', -- Protobuf
-  'clangd',
-  'cssls',
-  'cssmodules_ls',
-  'custom_elements_ls',
-  'docker_compose_language_service',
-  'dockerls',
-  'eslint',
-  'graphql',
-  'hls', -- Haskell
-  'html',
-  'lua_ls',
-  'jsonls',
-  'pyright',
-  'rust_analyzer',
-  'solc', -- Solidity
-  'sqlls',
-  'tailwindcss',
-  'texlab',
-  'tsserver',
-  'vimls',
-  'vuels',
-}
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        capabilities = capabilities,
-    }
-end
-
 vim.opt.signcolumn = "yes:1"
 local cmp = require('cmp')
 cmp.setup {
@@ -76,10 +44,7 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()

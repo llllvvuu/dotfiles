@@ -1,6 +1,0 @@
-#!/bin/bash
-
-/bin/ln -nsf ~/base16-xresources/xresources/$COLORSCHEME-256.Xresources \
-    ~/.Xresources_colors
-/usr/bin/xrdb ~/.Xresources_colors
-/usr/bin/xrdb -merge ~/.Xresources

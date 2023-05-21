@@ -5,11 +5,11 @@ let g:node_host_prog = system('which neovim-node-host')
 runtime vim-pathogen/autoload/pathogen.vim
 
 if has('nvim')
-    execute pathogen#infect('bundle/{}', 'bundle.nvim/{}')
+  execute pathogen#infect('bundle/{}', 'bundle.nvim/{}')
 else
-    execute pathogen#infect('bundle/{}')
-    let g:netrw_liststyle=3
-    set backspace=2
+  execute pathogen#infect('bundle/{}')
+  let g:netrw_liststyle=3
+  set backspace=2
 endif
 
 " plugin bindings
@@ -43,8 +43,8 @@ inoremap jk <Esc>
 
 " application settings
 if $VIM_CRONTAB == "true"
-    set nobackup
-    set nowritebackup
+  set nobackup
+  set nowritebackup
 endif
 
 " vim settings
@@ -52,9 +52,9 @@ set timeoutlen=420
 set laststatus=2 " always display status lines
 set hidden " allow switching buffers without saving
 set wildmenu wildmode=list:longest,list:full wildignore=
-    \.git,*.swp,*/tmp/*,*.so,*.swp,*.zip,*.o,*.a,
-    \*.pyc,*.class,*.jar,*/node_modules/*,
-    \*/vendor/* " bash-like command completion
+  \.git,*.swp,*/tmp/*,*.so,*.swp,*.zip,*.o,*.a,
+  \*.pyc,*.class,*.jar,*/node_modules/*,
+  \*/vendor/* " bash-like command completion
 set incsearch " incremental search
 set tags=./tags;,tags;
 
@@ -69,24 +69,19 @@ function! StatuslineGit()
 endfunction
 
 set statusline=
-set statusline+=%#PmenuSel#
+set statusline+=%#Cursor#
 set statusline+=%{StatuslineGit()}
-set statusline+=%#CursorColumn#
+set statusline+=%#Visual#
 set statusline+=\ %y\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]
-set statusline+=%#LineNr#
+set statusline+=\[%{&fileformat}\]\ 
+set statusline+=%#Normal#
 set statusline+=\ %f\ %h%w%m%r%=%-14.(%l:%c%V\ \/\ %L%)\ %P
-
 " A E S T H E T I C settings
-set background=dark
-let base16colorspace=256
-colorscheme $COLORSCHEME
 set nowrap
 set foldmethod=indent
-autocmd BufWinEnter * call matchadd('ColorColumn', '\(\%80v\|\%100v\)', 100)
-set listchars=tab:▸\ ,trail:·
-set list
-set number
+let &colorcolumn="80,100,".join(range(120,999),",")
+set list listchars=tab:▸\ ,trail:·
+set number cuc cursorline
 set secure modeline modelines=5
 filetype plugin indent on
 syntax on
