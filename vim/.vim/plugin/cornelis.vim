@@ -17,7 +17,6 @@ endfunction
 function! CornelisLoadWrapper()
   if exists(":CornelisLoad") ==# 2
     CornelisLoad
-    CornelisGoal
   endif
 endfunction
 au BufReadPre *.agda call CornelisLoadWrapper()
