@@ -10,3 +10,25 @@ keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 keymap("n", "go", "<cmd>Lspsaga outline<CR>")
 keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+keymap("n", "<C-t>", "<cmd>Lspsaga term_toggle<CR>")
+
+
+local function repl(glob, cmd)
+  vim.api.nvim_create_autocmd(
+    { "BufRead", "BufNewFile" },
+    {
+      pattern = glob,
+      callback = function ()
+        keymap(
+          "n",
+          "<C-i>",
+          "<cmd>Lspsaga term_toggle LANG=en_US.UTF8\\ "
+          .. cmd .. "\\ " .. vim.api.nvim_buf_get_name(0)
+          .."<CR>"
+        )
+      end
+    }
+  )
+end
+
+repl("*.hs", "cabal\\ v2-repl")

@@ -6,6 +6,7 @@ alias gl='git log --no-color --oneline --abbrev-commit | fzf --preview '"'"'echo
 alias crontab='VIM_CRONTAB=true crontab'
 alias rm='rm -i'
 alias icat="kitty +kitten icat"
+alias hunit="cabal new-test --test-show-details=streaming"
 command -v xdg-open >/dev/null 2>&1 && alias open='xdg-open'
 command -v nvim >/dev/null 2>&1 && alias vim='nvim'
 export GPG_TTY=$(tty)
