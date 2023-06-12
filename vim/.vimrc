@@ -1,6 +1,3 @@
-let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
-let g:node_host_prog = system('which neovim-node-host')
-
 " vim plugin manager
 runtime vim-pathogen/autoload/pathogen.vim
 
@@ -55,6 +52,7 @@ if $VIM_CRONTAB == "true"
 endif
 
 " vim settings
+set number
 set timeout timeoutlen=300
 set laststatus=2 " always display status lines
 set hidden " allow switching buffers without saving
@@ -65,29 +63,9 @@ set wildmenu wildmode=list:longest,list:full wildignore=
 set incsearch " incremental search
 set tags=./tags;,tags;
 
-" statusline
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-
-set statusline=
-set statusline+=%#Cursor#
-set statusline+=%{StatuslineGit()}
-set statusline+=%#Visual#
-set statusline+=\ %y\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]\ 
-set statusline+=%#Normal#
-set statusline+=\ %f\ %h%w%m%r%=%-14.(%l:%c%V\ \/\ %L%)\ %P
 " A E S T H E T I C settings
 set nowrap
-let &colorcolumn="80,100,".join(range(120,999),",")
 set list listchars=tab:▸\ ,trail:·
-set number cuc cursorline
 set secure modeline modelines=5
 filetype plugin indent on
 syntax on
