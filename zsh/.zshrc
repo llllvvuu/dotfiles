@@ -16,7 +16,6 @@ zstyle ':completion:*:man:*' menu yes select
 # Sources
 [ -f $HOME/.posixrc ] && . $HOME/.posixrc
 [ -s $HOME/.zsh_prompt ] && source $HOME/.zsh_prompt
-[ -s $HOME/minimal/minimal.zsh ] && . $HOME/minimal/minimal.zsh
 [ -s $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
     . $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -s /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found

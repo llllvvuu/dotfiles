@@ -10,6 +10,7 @@ else
   execute pathogen#infect('bundle/{}')
   let g:netrw_liststyle=3
   set backspace=2
+  set foldmethod=indent
 endif
 
 " plugin bindings
@@ -22,7 +23,6 @@ let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line 
 " filetype settings
 set shiftround expandtab softtabstop=2 tabstop=2 shiftwidth=2
 autocmd FileType make,gitconfig setlocal noexpandtab
-autocmd FileType lua setlocal iskeyword+=:
 autocmd FileType markdown,mkd,md,tex,text setlocal spell spelllang=en_us
 autocmd FileType qf set nobuflisted
 autocmd WinEnter * if &previewwindow | set nobuflisted | endif
@@ -37,8 +37,15 @@ nnoremap <silent> <Leader>o :GFiles<CR>
 nnoremap <silent> <Leader>w :w<CR>
 nnoremap <silent> <Leader>q :bp\|bd #<CR>
 nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap ' :<C-u>marks<CR>:normal! `
+nnoremap <silent> <C-e> 8<C-e>
+nnoremap <silent> <C-y> 8<C-y>
+vnoremap <silent> <C-e> 8<C-e>
+vnoremap <silent> <C-y> 8<C-y>
+nnoremap <silent> gn :cn<CR>
+nnoremap <silent> gp :cp<CR>
+nnoremap <silent> gq :ccl<CR>
 nnoremap <silent> <C-L> :nohlsearch<CR>:mode<CR><C-L>
+nnoremap <silent> <C-o> :on<CR>
 inoremap jk <Esc>
 
 " application settings
@@ -48,7 +55,7 @@ if $VIM_CRONTAB == "true"
 endif
 
 " vim settings
-set timeoutlen=420
+set timeout timeoutlen=300
 set laststatus=2 " always display status lines
 set hidden " allow switching buffers without saving
 set wildmenu wildmode=list:longest,list:full wildignore=
@@ -78,7 +85,6 @@ set statusline+=%#Normal#
 set statusline+=\ %f\ %h%w%m%r%=%-14.(%l:%c%V\ \/\ %L%)\ %P
 " A E S T H E T I C settings
 set nowrap
-set foldmethod=indent
 let &colorcolumn="80,100,".join(range(120,999),",")
 set list listchars=tab:▸\ ,trail:·
 set number cuc cursorline

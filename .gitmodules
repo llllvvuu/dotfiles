@@ -30,10 +30,6 @@
 	path = vim/.vim/bundle/vim-commentary
 	url = git@github.com:tpope/vim-commentary.git
 	branch = master
-[submodule "minimal"]
-	path = zsh/minimal
-	url = git@github.com:subnixr/minimal.git
-	branch = master
 [submodule "vim-over"]
 	path = vim/.vim/bundle/vim-over
 	url = git@github.com:osyo-manga/vim-over.git
@@ -41,10 +37,6 @@
 [submodule "pandoc-templates"]
 	path = pandoc/pandoc-templates
 	url = git@github.com:kjhealy/pandoc-templates.git
-	branch = master
-[submodule "vim-solidity"]
-	path = vim/.vim/bundle/vim-solidity
-	url = git@github.com:TovarishFin/vim-solidity.git
 	branch = master
 [submodule "vim/.vim/nvim-lspconfig"]
 	path = vim/.vim/bundle.nvim/nvim-lspconfig
@@ -123,3 +115,12 @@
 [submodule "trouble.nvim"]
 	path = vim/.vim/bundle.nvim/trouble.nvim
 	url = git@github.com:folke/trouble.nvim.git
+[submodule "nvim-autopairs"]
+	path = vim/.vim/bundle.nvim/nvim-autopairs
+	url = git@github.com:windwp/nvim-autopairs.git
+[submodule "which-key.nvim"]
+	path = vim/.vim/bundle.nvim/which-key.nvim
+	url = git@github.com:folke/which-key.nvim.git
+[submodule "gitsigns.nvim"]
+	path = vim/.vim/bundle.nvim/gitsigns.nvim
+	url = git@github.com:lewis6991/gitsigns.nvim.git

@@ -14,6 +14,7 @@ local servers = {
   'html',
   'lua_ls',
   'jsonls',
+  'mm0_ls',
   'pyright',
   'rust_analyzer',
   'solc', -- Solidity
@@ -29,3 +30,11 @@ for _, lsp in ipairs(servers) do
         capabilities = capabilities,
     }
 end
+
+local on_attach_ruff = function(client, bufnr)
+  client.server_capabilities.hoverProvider= false
+end
+
+lspconfig.ruff_lsp.setup {
+  on_attach = on_attach_ruff,
+}

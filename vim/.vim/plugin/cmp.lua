@@ -32,6 +32,8 @@ vim.api.nvim_set_keymap(
 )
 
 vim.opt.signcolumn = "yes:1"
+require('nvim-autopairs').setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local cmp = require('cmp')
 cmp.setup {
   snippet = {
@@ -71,3 +73,7 @@ cmp.setup {
     {name = 'luasnip'},
   },
 }
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
