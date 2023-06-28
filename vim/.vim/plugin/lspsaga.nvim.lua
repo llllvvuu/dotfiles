@@ -3,7 +3,7 @@ local keymap = vim.keymap.set
 require("lspsaga").setup({})
 
 keymap("n", "<leader>d", "<cmd>Lspsaga lsp_finder<CR>")
-keymap("n", "<leader>t", "<cmd>Lspsaga peek_definition<CR>")
+keymap("n", "<leader>t", "<cmd>Lspsaga goto_type_definition<CR>")
 keymap({"n","v"}, "ga", "<cmd>Lspsaga code_action<CR>")
 keymap("n", "gr", "<cmd>Lspsaga rename<CR>")
 keymap("n", "gR", "<cmd>Lspsaga rename ++project<CR>")

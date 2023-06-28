@@ -26,10 +26,6 @@
 	path = vim/.vim/bundle/vimtex
 	url = git@github.com:lervag/vimtex.git
 	branch = master
-[submodule "vim-commentary"]
-	path = vim/.vim/bundle/vim-commentary
-	url = git@github.com:tpope/vim-commentary.git
-	branch = master
 [submodule "vim-over"]
 	path = vim/.vim/bundle/vim-over
 	url = git@github.com:osyo-manga/vim-over.git
@@ -124,3 +120,15 @@
 [submodule "gitsigns.nvim"]
 	path = vim/.vim/bundle.nvim/gitsigns.nvim
 	url = git@github.com:lewis6991/gitsigns.nvim.git
+[submodule "lualine.nvim"]
+	path = vim/.vim/bundle.nvim/lualine.nvim
+	url = git@github.com:nvim-lualine/lualine.nvim.git
+[submodule "refactoring.nvim"]
+	path = vim/.vim/bundle.nvim/refactoring.nvim
+	url = git@github.com:ThePrimeagen/refactoring.nvim.git
+[submodule "Comment.nvim"]
+	path = vim/.vim/bundle.nvim/Comment.nvim
+	url = git@github.com:numToStr/Comment.nvim.git
+[submodule "nvim-ts-context-commentstring"]
+	path = vim/.vim/bundle.nvim/nvim-ts-context-commentstring
+	url = git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git

@@ -1,4 +1,5 @@
 local lspconfig = require('lspconfig')
+local configs = require('lspconfig.configs')
 
 local servers = {
   'bashls',
@@ -17,7 +18,6 @@ local servers = {
   'mm0_ls',
   'pyright',
   'rust_analyzer',
-  'solc', -- Solidity
   'sqlls',
   'tailwindcss',
   'texlab',
@@ -38,3 +38,14 @@ end
 lspconfig.ruff_lsp.setup {
   on_attach = on_attach_ruff,
 }
+
+configs.solidity = {
+  default_config = {
+    cmd = {'nomicfoundation-solidity-language-server', '--stdio'},
+    filetypes = { 'solidity' },
+    root_dir = lspconfig.util.find_git_ancestor,
+    single_file_support = true,
+  },
+}
+
+lspconfig.solidity.setup {}

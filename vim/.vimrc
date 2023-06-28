@@ -19,6 +19,7 @@ let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line 
 
 " filetype settings
 set shiftround expandtab softtabstop=2 tabstop=2 shiftwidth=2
+autocmd FileType solidity setlocal softtabstop=4 tabstop=4 shiftwidth=4
 autocmd FileType make,gitconfig setlocal noexpandtab
 autocmd FileType markdown,mkd,md,tex,text setlocal spell spelllang=en_us
 autocmd FileType qf set nobuflisted
