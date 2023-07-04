@@ -13,9 +13,7 @@ endif
 " plugin bindings
 let g:fzf_action={'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
 let g:fzf_preview_window = ['right,50%,<70(up,40%)', 'ctrl-/']
-let g:vimtex_view_general_viewer = 'SumatraPDF'
-let g:vimtex_view_general_options = '-reuse-instance @pdf'
-let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_method='skim'
 
 " filetype settings
 set shiftround expandtab softtabstop=2 tabstop=2 shiftwidth=2

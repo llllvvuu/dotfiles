@@ -132,3 +132,9 @@
 [submodule "nvim-ts-context-commentstring"]
 	path = vim/.vim/bundle.nvim/nvim-ts-context-commentstring
 	url = git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git
+[submodule "import-cost.nvim"]
+	path = vim/.vim/bundle.nvim/import-cost.nvim
+	url = git@github.com:barrett-ruth/import-cost.nvim.git
+[submodule "zsh-autosuggestions"]
+	path = zsh/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
