@@ -14,6 +14,7 @@ endif
 let g:fzf_action={'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
 let g:fzf_preview_window = ['right,50%,<70(up,40%)', 'ctrl-/']
 let g:vimtex_view_method='skim'
+let g:hardtime_default_on = 1
 
 " filetype settings
 set shiftround expandtab softtabstop=2 tabstop=2 shiftwidth=2

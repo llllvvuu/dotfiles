@@ -8,8 +8,6 @@ alias crontab='VIM_CRONTAB=true crontab'
 alias rm='rm -i'
 alias icat="kitty +kitten icat"
 alias hunit="cabal new-test --test-show-details=streaming"
-command -v xdg-open >/dev/null 2>&1 && alias open='xdg-open'
-command -v nvim >/dev/null 2>&1 && alias vim='nvim'
 export GPG_TTY=$(tty)
 
 f()
@@ -22,14 +20,6 @@ shit()
   docker exec -it $1 bash || docker exec -it $1 sh
 }
 
-# Local configuration
-if command -v pyenv 1>/dev/null 2>&1; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-  eval "$(pyenv virtualenv-init -)"
-  eval "$(pyenv init -)"
-fi
 [ -s ~/.localrc ] && source ~/.localrc
 
 # vim: set ft=sh:
