@@ -141,3 +141,6 @@
 [submodule "vim-hardtime"]
 	path = vim/.vim/bundle/vim-hardtime
 	url = git@github.com:takac/vim-hardtime.git
+[submodule "zsh-completions"]
+	path = zsh/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git

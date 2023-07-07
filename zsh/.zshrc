@@ -19,6 +19,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 [ -f $HOME/.posixrc ] && . $HOME/.posixrc
 
 fpath+=~/.zfunc
+fpath+=~/zsh-completions/src
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
