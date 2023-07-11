@@ -30,10 +30,6 @@
 	path = vim/.vim/bundle/vim-over
 	url = git@github.com:osyo-manga/vim-over.git
 	branch = master
-[submodule "pandoc-templates"]
-	path = pandoc/pandoc-templates
-	url = git@github.com:kjhealy/pandoc-templates.git
-	branch = master
 [submodule "vim/.vim/nvim-lspconfig"]
 	path = vim/.vim/bundle.nvim/nvim-lspconfig
 	url = git@github.com:neovim/nvim-lspconfig
