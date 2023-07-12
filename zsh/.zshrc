@@ -9,8 +9,8 @@ setopt HIST_IGNORE_SPACE
 bindkey -v '^?' backward-delete-char
 bindkey -M viins 'jk' vi-cmd-mode
 
-HISTFILE=$HOME/.zsh_history
-KEYTIMEOUT=42
+export HISTFILE=$HOME/.zsh_history
+export KEYTIMEOUT=42
 
 # Plugins
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
