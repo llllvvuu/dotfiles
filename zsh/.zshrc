@@ -1,11 +1,17 @@
-[ -f $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
-
 setopt SH_WORD_SPLIT
 setopt magic_equal_subst
 setopt autopushd
 setopt EXTENDED_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+setopt HIST_BEEP
 bindkey -v '^?' backward-delete-char
 bindkey -M viins 'jk' vi-cmd-mode
 
@@ -22,6 +28,9 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 
 [ -x $HOME/bin/rtx ] && eval "$($HOME/bin/rtx activate zsh)"
 [ -f $HOME/.fzf.zsh ] && . $HOME/.fzf.zsh
+
+# Shell config
+[ -f $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
 
 # Completions
 fpath+=~/.zfunc

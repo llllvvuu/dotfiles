@@ -1,0 +1,72 @@
+version: 2
+root-markers:
+  - .git/
+lint-debounce: 1s
+tools:
+  solhint: &solhint
+    lint-command: 'solhint --formatter unix stdin'
+    lint-stdin: true
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%*[ ]%l:%c%*[ ]%trror%*[ ]%m'
+      - '%*[ ]%l:%c%*[ ]%tarning%*[ ]%m'
+      - '%f:%l:%c: %m [%trror/%r]'
+      - '%f:%l:%c: %m [%tarning/%r]'
+    lint-severity: 4
+    root-markers:
+      - .solhint.json
+  slither: &slither
+    # `solc` needs to be manually configured, see:
+    # https://github.com/foundry-rs/foundry/issues/5429
+    # https://github.com/crytic/slither/issues/2054
+    lint-command: >
+      (if [[ -f remappings.txt ]]; then
+      slither --solc-remaps "$(tr '\n' ' ' < remappings.txt | xargs)" ${INPUT}; 
+      else slither ${INPUT}; fi) 2>&1 | sort | uniq
+    # Lint won't rerun unless you save, see:
+    # https://github.com/crytic/slither/issues/2057
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-severity: 4
+    lint-formats:
+      # Information will be lost, see: https://github.com/crytic/slither/issues/2056
+      - '%r (%f#%l) %m'
+      - '%r (%f#%l-%r) %m'
+      - '%m (%f#%l):'
+      - '%m (%f#%l-%r):'
+    root-markers:
+      - hardhat.config.js
+      - hardhat.config.ts
+      - foundry.toml
+      - remappings.txt
+      - truffle.js
+      - truffle-config.js
+      - ape-config.yaml
+  prettierd: &prettierd
+    format-can-range: true
+    format-command: >
+      prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} \
+        ${--tab-width=tabSize} ${--use-tabs=!insertSpaces}
+    format-stdin: true
+    root-markers:
+      - .prettierrc
+      - .prettierrc.json
+      - .prettierrc.js
+      - .prettierrc.yml
+      - .prettierrc.yaml
+      - .prettierrc.json5
+      - .prettierrc.mjs
+      - .prettierrc.cjs
+      - .prettierrc.toml
+languages:
+  solidity:
+    - <<: *solhint
+    - <<: *slither
+  javascript:
+    - <<: *prettierd
+  typescript:
+    - <<: *prettierd
+  javascriptreact:
+    - <<: *prettierd
+  typescriptreact:
+    - <<: *prettierd

@@ -1,5 +1,3 @@
-[ -s $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
-
 [ -x $HOME/bin/rtx ] && eval "$($HOME/bin/rtx activate bash)"
 [ -f $HOME/.fzf.bash ] && . $HOME/.fzf.bash
 
@@ -30,3 +28,5 @@ bind 'TAB:menu-complete'
 bind '"\e[Z": menu-complete-backward'
 bind "set show-all-if-ambiguous on"
 bind "set menu-complete-display-prefix on"
+
+[ -s $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
