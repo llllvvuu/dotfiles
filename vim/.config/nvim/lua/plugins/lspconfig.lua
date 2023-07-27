@@ -86,13 +86,24 @@ return {
       },
       ---@type lspconfig.options
       servers = {
-        bashls = {},
+        bashls = {
+          on_attach = function(client)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
+        },
         bufls = {}, -- Protobuf
         clangd = {},
         cssls = {},
         cssmodules_ls = {},
         docker_compose_language_service = {},
         dockerls = {},
+        efm = {
+          init_options = {
+            documentFormatting = true,
+            documentRangeFormatting = true,
+          },
+        },
         eslint = {},
         gopls = {},
         graphql = {},
@@ -264,51 +275,52 @@ return {
       end
     end,
   },
-  {
-    'llllvvuu/efmls-configs-nvim',
-    branch = 'dev',
-    dependencies = { 'nvim-lspconfig' },
-    event = { "BufReadPre", "BufNewFile" },
-    config = function ()
-      local efmls = require('efmls-configs')
-      efmls.init {
-        init_options = {
-          documentFormatting = true,
-          documentRangeFormatting = true,
-        },
-      }
-
-      local prettierd = require('efmls-configs.formatters.prettier_d')
-      efmls.setup({
-        javascript = {
-          formatter = prettierd,
-        },
-        typescript = {
-          formatter = prettierd,
-        },
-        javascriptreact = {
-          formatter = prettierd,
-        },
-        typescriptreact = {
-          formatter = prettierd,
-        },
-        solidity = {
-          linter = {
-            require('efmls-configs.linters.solhint'),
-            require('efmls-configs.linters.slither'),
-          }
-        },
-        lua = {
-          linter = require('efmls-configs.linters.luacheck'),
-          formatter = require('efmls-configs.formatters.stylua'),
-        },
-        sh = {
-          linter = require('efmls-configs.linters.shellcheck'),
-          formatter = require('efmls-configs.formatters.shfmt'),
-        }
-      })
-    end
-  },
+  -- {
+  --   'llllvvuu/efmls-configs-nvim',
+  --   branch = 'dev',
+  --   dependencies = { 'nvim-lspconfig' },
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = function ()
+  --     local efmls = require('efmls-configs')
+  --     efmls.init {
+  --       init_options = {
+  --         documentFormatting = true,
+  --         documentRangeFormatting = true,
+  --       },
+  --     }
+  --
+  --     local prettierd = require('efmls-configs.formatters.prettier_d')
+  --     efmls.setup({
+  --       javascript = {
+  --         formatter = prettierd,
+  --       },
+  --       typescript = {
+  --         formatter = prettierd,
+  --       },
+  --       javascriptreact = {
+  --         formatter = prettierd,
+  --       },
+  --       typescriptreact = {
+  --         formatter = prettierd,
+  --       },
+  --       solidity = {
+  --         formatter= require('efmls-configs.formatters.forge_fmt'),
+  --         linter = {
+  --           require('efmls-configs.linters.solhint'),
+  --           require('efmls-configs.linters.slither'),
+  --         }
+  --       },
+  --       lua = {
+  --         linter = require('efmls-configs.linters.luacheck'),
+  --         formatter = require('efmls-configs.formatters.stylua'),
+  --       },
+  --       sh = {
+  --         linter = require('efmls-configs.linters.shellcheck'),
+  --         formatter = require('efmls-configs.formatters.shfmt'),
+  --       }
+  --     })
+  --   end
+  -- },
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-lspconfig" },

@@ -1,52 +1,22 @@
-version: 2
-root-markers:
-  - .git/
-lint-debounce: 1s
 tools:
-  solhint: &solhint
-    lint-command: 'solhint --formatter unix stdin'
-    lint-stdin: true
-    lint-ignore-exit-code: true
-    lint-formats:
-      - '%*[ ]%l:%c%*[ ]%trror%*[ ]%m'
-      - '%*[ ]%l:%c%*[ ]%tarning%*[ ]%m'
-      - '%f:%l:%c: %m [%trror/%r]'
-      - '%f:%l:%c: %m [%tarning/%r]'
-    lint-severity: 4
+  forge-fmt: &forge-fmt
+    format-command: 'forge fmt --raw -'
+    format-stdin: true
     root-markers:
-      - .solhint.json
-  slither: &slither
-    # `solc` needs to be manually configured, see:
-    # https://github.com/foundry-rs/foundry/issues/5429
-    # https://github.com/crytic/slither/issues/2054
-    lint-command: >
-      (if [[ -f remappings.txt ]]; then
-      slither --solc-remaps "$(tr '\n' ' ' < remappings.txt | xargs)" ${INPUT}; 
-      else slither ${INPUT}; fi) 2>&1 | sort | uniq
-    # Lint won't rerun unless you save, see:
-    # https://github.com/crytic/slither/issues/2057
-    lint-stdin: false
-    lint-ignore-exit-code: true
-    lint-severity: 4
-    lint-formats:
-      # Information will be lost, see: https://github.com/crytic/slither/issues/2056
-      - '%r (%f#%l) %m'
-      - '%r (%f#%l-%r) %m'
-      - '%m (%f#%l):'
-      - '%m (%f#%l-%r):'
-    root-markers:
-      - hardhat.config.js
-      - hardhat.config.ts
       - foundry.toml
-      - remappings.txt
-      - truffle.js
-      - truffle-config.js
-      - ape-config.yaml
+  luacheck: &luacheck
+    lint-command: 'luacheck --codes --no-color --quiet -'
+    lint-formats:
+      - '%.%#:%l:%c: (%t%n) %m'
+    lint-source: 'luacheck'
+    lint-stdin: true
+    rootMarkers:
+      - '.luacheckrc'
   prettierd: &prettierd
     format-can-range: true
     format-command: >
-      prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} \
-        ${--tab-width=tabSize} ${--use-tabs=!insertSpaces}
+      prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd}
+      ${--tab-width=tabSize} ${--use-tabs=!insertSpaces}
     format-stdin: true
     root-markers:
       - .prettierrc
@@ -58,15 +28,105 @@ tools:
       - .prettierrc.mjs
       - .prettierrc.cjs
       - .prettierrc.toml
+  shellcheck: &shellcheck
+    lint-command: "shellcheck --color=never --format=gcc -"
+    lint-source: "shellcheck"
+    lint-stdin: true
+    lintFormats:
+      - '-:%l:%c: %trror: %m'
+      - '-:%l:%c: %tarning: %m'
+      - '-:%l:%c: %tote: %m'
+  shfmt: &shfmt
+    format-command: "shfmt -filename ${INPUT} -"
+    format-stdin: true
+  slither: &slither
+    # `solc` needs to be manually configured, see:
+    # https://github.com/foundry-rs/foundry/issues/5429
+    # https://github.com/crytic/slither/issues/2054
+    # Also, `remappings.txt` needs to generated, e.g. `forge remappings > remappings.txt`
+    lint-command: >
+      (if [ -f remappings.txt ]; then
+        slither --sarif - ${INPUT} --solc-remaps "$(tr '\n' ' ' < remappings.txt | xargs)"
+      else
+        slither --sarif - ${INPUT}
+      fi)
+      | jq -r '.runs[].results[]
+      | "\(.locations[].physicalLocation.artifactLocation.uri):\(
+      .locations[].physicalLocation.region.startLine): \(
+      .message.text | gsub("\\s+";" ";"g"))"'
+    # Lint won't rerun unless you save, see:
+    # https://github.com/crytic/slither/issues/2057
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l: %m'
+    lint-severity: 2
+    lint-source: 'slither'
+    lint-stdin: false
+    root-markers:
+      - hardhat.config.js
+      - hardhat.config.ts
+      - foundry.toml
+      - remappings.txt
+      - truffle.js
+      - truffle-config.js
+      - ape-config.yaml
+  solhint: &solhint
+    lint-command: 'solhint --formatter unix stdin | tr -s " "'
+    lint-source: 'solhint'
+    lint-stdin: true
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%*[ ]%l:%c%*[ ]%trror%*[ ]%m'
+      - '%*[ ]%l:%c%*[ ]%tarning%*[ ]%m'
+      - '%f:%l:%c: %m [%trror/%r]'
+      - '%f:%l:%c: %m [%tarning/%r]'
+    root-markers:
+      - .solhint.json
+  stylua: &stylua
+    format-can-range: true
+    format-command: >
+      stylua ${--indent-width:tabSize} ${--range-start:charStart}
+      ${--range-end:charEnd} --color Never -
+    format-stdin: true
+    root-markers:
+      - 'stylua.toml'
+      - '.stylua.toml'
+  yamllint: &yamllint
+    lint-command: 'yamllint --strict --format parsable -'
+    lint-source: 'yamllint'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: [%t%*[a-z]] %m'
+    env:
+      - 'PYTHONIOENCODING=UTF-8'
+  yamlfix: &yamlfix
+    format-command: 'yamlfix -'
+    format-stdin: true
+version: 2
+log-file: /Users/llwu/efmlog.txt
+log-level: 9
+root-markers:
+  - .git/
+lint-debounce: 1s
 languages:
-  solidity:
-    - <<: *solhint
-    - <<: *slither
   javascript:
-    - <<: *prettierd
-  typescript:
     - <<: *prettierd
   javascriptreact:
     - <<: *prettierd
+  lua:
+    - <<: *luacheck
+    - <<: *stylua
+  solidity:
+    - <<: *solhint
+    - <<: *slither
+    - <<: *forge-fmt
+  sh:
+    - <<: *shellcheck
+    - <<: *shfmt
+  typescript:
+    - <<: *prettierd
   typescriptreact:
     - <<: *prettierd
+  yaml:
+    - <<: *yamllint
+    - <<: *yamlfix
