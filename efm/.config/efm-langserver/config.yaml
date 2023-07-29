@@ -40,26 +40,41 @@ tools:
     format-command: "shfmt -filename ${INPUT} -"
     format-stdin: true
   slither: &slither
-    # `solc` needs to be manually configured, see:
+    # USAGE:
+    # * `solc` needs to be manually configured, see:
     # https://github.com/foundry-rs/foundry/issues/5429
     # https://github.com/crytic/slither/issues/2054
-    # Also, `remappings.txt` needs to generated, e.g. `forge remappings > remappings.txt`
+    # * `remappings.txt` needs to generated, e.g. `forge remappings > remappings.txt`
+    lint-category-map:
+      I: N
+      O: N
+      H: E
+      M: W
+      L: I
+    # POSIX-compliant command
+    # (only POSIX shell syntax and POSIX features of `sed`/`awk`/`printf`)
+    # Explanation:
+    # 1. Add ASCII delimiters to mark keywords: https://en.wikipedia.org/wiki/Delimiter#ASCII_delimited_text
+    # 2. Use delimiters to format subsections of text. Delimit these as well.
+    # 3. Pick out the
     lint-command: >
-      (if [ -f remappings.txt ]; then
-        slither --sarif - ${INPUT} --solc-remaps "$(tr '\n' ' ' < remappings.txt | xargs)"
-      else
-        slither --sarif - ${INPUT}
-      fi)
-      | jq -r '.runs[].results[]
-      | "\(.locations[].physicalLocation.artifactLocation.uri):\(
-      .locations[].physicalLocation.region.startLine): \(
-      .message.text | gsub("\\s+";" ";"g"))"'
+      slither --json - "${INPUT}" --solc-remaps "$([ -f remappings.txt ] && tr '\n' ' ' < remappings.txt | xargs)"
+      | sed "s/filename_absolute/$(printf '%b' '\0036')filename_absolute/g"
+      | sed "s/lines/$(printf '%b' '\0036')lines/g"
+      | sed "s/description/$(printf '%b' '\0037')description/g"
+      | sed "s/impact/$(printf '%b' '\0036')impact/g"
+      | sed "s/\"elements\"[^$(printf '%b' '\0036')]*\"$(printf '%b' '\0036')filename_absolute\": \"\([^\"]*\)\"[^$(printf '%b' '\0036')]*\"$(printf '%b' '\0036')lines\": \[\([^]]*\)\][^0-9]*starting_column\": \([0-9]*\), \"ending_column\": \([0-9]*\)[^$(printf '%b' '\0037')]*$(printf '%b' '\0037')description\": \"\([^\"]*\)[^$(printf '%b' '\0036')]*\"$(printf '%b' '\0036')impact\": \"\([^\"]*\)\"/$(printf '%b' '\0035')\2| \3-\4 of \1 (\6): \5$(printf '%b' '\0035')/g"
+      | awk -F "$(printf '%b' '\0035')" '{for (i=2; i<=NF; i+=2) print $i}'
+      | awk -F "|" '{split($1, a, ", "); $1=a[1] "-" a[length(a)] ":"; print $0}'
     # Lint won't rerun unless you save, see:
     # https://github.com/crytic/slither/issues/2057
     lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l: %m'
-    lint-severity: 2
+      - "%l-%e:  %c-%k of %f (%tow): %m"
+      - "%l-%e:  %c-%k of %f (%tedium): %m"
+      - "%l-%e:  %c-%k of %f (%tigh): %m"
+      - "%l-%e:  %c-%k of %f (%tptimization): %m"
+      - "%l-%e:  %c-%k of %f (%tnformational): %m"
     lint-source: 'slither'
     lint-stdin: false
     root-markers:
@@ -103,8 +118,8 @@ tools:
     format-command: 'yamlfix -'
     format-stdin: true
 version: 2
-log-file: /Users/llwu/efmlog.txt
-log-level: 9
+# log-file: /Users/llwu/efmlog.txt
+# log-level: 9
 root-markers:
   - .git/
 lint-debounce: 1s

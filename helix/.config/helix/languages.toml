@@ -1,0 +1,22 @@
+[language-server.efm]
+command = "efm-langserver"
+
+[language-server.hardhat]
+command = "nomicfoundation-solidity-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "solidity"
+roots = [
+  'hardhat.config.js',
+  'hardhat.config.ts',
+  'foundry.toml',
+  'remappings.txt',
+  'truffle.js',
+  'truffle-config.js',
+  'ape-config.yaml'
+]
+language-servers = [
+  { name = "efm", only-features = [ "diagnostics", "format" ] },
+  { name = "hardhat", except-features = [ "format" ] }
+]
