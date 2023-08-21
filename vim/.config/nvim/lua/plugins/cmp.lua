@@ -7,12 +7,17 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
+      { "Saecki/crates.nvim", event = { "BufRead Cargo.toml" }, config = true },
+      "copilot-cmp",
+      "clangd_extensions.nvim",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local defaults = require("cmp.config.default")()
+      table.insert(defaults.sorting, require("copilot_cmp.comparators").prioritize)
+      table.insert(defaults.sorting, require("clangd_extensions.cmp_scores"))
       return {
         autocomplete = {
           cmp.TriggerEvent.InsertEnter,
@@ -56,6 +61,7 @@ return {
           { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "crates" },
           { name = "buffer" },
           { name = "path" },
         }),

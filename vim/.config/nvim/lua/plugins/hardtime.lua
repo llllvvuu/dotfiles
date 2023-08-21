@@ -4,6 +4,19 @@ return {
     opts = {
       max_count = 1,
       allow_different_key = true,
+      disabled_filetypes = {
+        "qf",
+        "netrw",
+        "NvimTree",
+        "lazy",
+        "mason",
+        "dapui_scopes",
+        "dapui_breakpoints",
+        "dapui_stacks",
+        "dapui_watches",
+        "dapui_console",
+        "dap-repl",
+      },
     },
   },
 }

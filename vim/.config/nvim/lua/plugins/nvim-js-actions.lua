@@ -3,6 +3,7 @@ local js_filetypes = {
   "javascriptreact",
   "typescript",
   "typescriptreact",
+  "vue",
 }
 
 return {

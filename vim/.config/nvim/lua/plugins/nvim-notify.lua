@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   keys = {
     {
-      "<leader>d",
+      "<leader><leader>",
       function()
         require("notify").dismiss()
       end,

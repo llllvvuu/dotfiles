@@ -20,6 +20,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "folke/neodev.nvim", opts = {} },
+      -- TODO: ensure installed DAP
       { "williamboman/mason-lspconfig.nvim", dependencies = { "williamboman/mason.nvim", opts = {} } },
       "hrsh7th/cmp-nvim-lsp",
     },
@@ -63,12 +64,12 @@ return {
     ---@class PluginLspOpts
     opts = {
       diagnostics = {
-        float = { border = "single" },
+        float = { border = "single", source = "always" },
         underline = true,
         update_in_insert = false,
         virtual_text = {
           spacing = 4,
-          source = "if_many",
+          source = "always",
           prefix = "icons",
         },
         severity_sort = true,
@@ -93,17 +94,29 @@ return {
           end,
         },
         bufls = {}, -- Protobuf
-        clangd = {},
+        clangd = {
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+            "--offset-encoding=utf-16",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+          },
+        },
+        cmake = {},
         cssls = {},
         cssmodules_ls = {},
         docker_compose_language_service = {},
         dockerls = {},
-        efm = {
-          init_options = {
-            documentFormatting = true,
-            documentRangeFormatting = true,
-          },
-        },
+        efm = {},
         eslint = {},
         gopls = {},
         graphql = {},
@@ -166,7 +179,47 @@ return {
             },
           },
         },
-        rust_analyzer = {},
+        rome = {},
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                allFeatures = true,
+                loadOutDirsFromCheck = true,
+                runBuildScripts = true,
+              },
+              -- Add clippy lints for Rust.
+              checkOnSave = {
+                allFeatures = true,
+                command = "clippy",
+                extraArgs = { "--no-deps" },
+              },
+              procMacro = {
+                enable = true,
+                ignored = {
+                  ["async-trait"] = { "async_trait" },
+                  ["napi-derive"] = { "napi" },
+                  ["async-recursion"] = { "async_recursion" },
+                },
+              },
+            },
+          },
+        },
+        taplo = {
+          keys = {
+            {
+              "K",
+              function()
+                if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+                  require("crates").show_popup()
+                else
+                  vim.lsp.buf.hover()
+                end
+              end,
+              desc = "Show Crate Documentation",
+            },
+          },
+        },
         solidity_ls_nomicfoundation = {},
         sqlls = {},
         tailwindcss = {},
@@ -174,27 +227,61 @@ return {
         vimls = {},
         vuels = {},
       },
-      setup = {},
+      setup = {
+        clangd = function(_, opts)
+          require("clangd_extensions").setup({ server = opts })
+          return true
+        end,
+        rust_analyzer = function(_, opts)
+          local ok, mason_registry = pcall(require, "mason-registry")
+          local adapter ---@type any
+          if ok then
+            -- rust tools configuration for debugging support
+            local codelldb = mason_registry.get_package("codelldb")
+            local extension_path = codelldb:get_install_path() .. "/extension/"
+            local codelldb_path = extension_path .. "adapter/codelldb"
+            local liblldb_path = vim.fn.has("mac") == 1 and extension_path .. "lldb/lib/liblldb.dylib"
+            or extension_path .. "lldb/lib/liblldb.so"
+            adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+          end
+          require("rust-tools").setup({
+            dap = {
+              adapter = adapter,
+            },
+            tools = {
+              on_initialized = function()
+                vim.cmd([[
+                  augroup RustLSP
+                  autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
+                  autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
+                  autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
+                  augroup END
+                  ]])
+              end,
+            },
+            server = opts,
+          })
+          vim.api.nvim_create_autocmd(
+            "FileType",
+            {
+              pattern = "rust",
+              command = [[
+                nnoremap <buffer> K <cmd>RustHoverActions<cr>
+                nnoremap <buffer> <leader>lg <cmd>RustDebuggables<cr>
+                nnoremap <buffer> <leader>lm <cmd>RustRunnables<cr>
+              ]]
+            }
+          )
+
+          return true
+        end,
+      },
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
       for name, icon in pairs(diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
-
-      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-
-      if opts.inlay_hints.enabled and inlay_hint then
-        vim.api.nvim_create_autocmd("LspAttach", {
-          callback = function(args)
-            local buffer = args.buf
-            local client = vim.lsp.get_client_by_id(args.data.client_id)
-            if client.server_capabilities.inlayHintProvider then
-              inlay_hint(buffer, true)
-            end
-          end,
-        })
       end
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
@@ -220,6 +307,12 @@ return {
         vim.lsp.handlers.hover, {
           border = "single",
           silent = true,
+        }
+      )
+
+      vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics, {
+          update_in_insert = true,
         }
       )
 
@@ -273,6 +366,20 @@ return {
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
+
+      -- local lspconfig = require("lspconfig")
+      -- local configs = require("lspconfig.configs")
+      --
+      -- configs.solidity = {
+      --   default_config = {
+      --     cmd = {'node', '--inspect-brk', '--nolazy', '/Users/llwu/git/@juanfranblanco/vscode-solidity/dist/extension/server.js', '--stdio'},
+      --     filetypes = { 'solidity' },
+      --     root_dir = lspconfig.util.find_git_ancestor,
+      --     single_file_support = true,
+      --   },
+      -- }
+      --
+      -- lspconfig.solidity.setup {}
     end,
   },
   -- {
@@ -335,14 +442,19 @@ return {
           includeInlayEnumMemberValueHints = true,
           importModuleSpecifierPreference = 'non-relative',
         },
-        vscode_configuration = {
-          ["typescript.suggest.completeFunctionCalls"] = true,
-        },
+        complete_function_calls = true,
+        publish_diagnostic_on = "change",
       },
       on_attach = function(client)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
       end,
     }
-  }
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    lazy = true,
+    dependencies = { "mfussenegger/nvim-dap", "nvim-lua/plenary.nvim" },
+  },
+  { "p00f/clangd_extensions.nvim", lazy = true },
 }
