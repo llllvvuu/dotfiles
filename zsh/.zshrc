@@ -46,6 +46,8 @@ autoload -U +X bashcompinit && bashcompinit
 [ -s $HOME/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh ] && \
     . $HOME/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh
 
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.*' insert-sections true
 zstyle ':completion:*:man:*' menu yes select

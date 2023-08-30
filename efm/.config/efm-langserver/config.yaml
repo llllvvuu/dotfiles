@@ -32,6 +32,13 @@ tools:
     lint-stdin: false
     root-markers:
       - '.ameba.yml'
+  black: &black
+    # pip install black
+    format-command: 'black --no-color -q -'
+    format-stdin: true
+    root-markers:
+      - pyproject.toml
+      - requirements.txt
   forge-fmt: &forge-fmt
     # curl -L https://foundry.paradigm.xyz | bash
     # foundryup
@@ -114,8 +121,6 @@ tools:
       | sed 's/\\t-/ |/g'
       | sed 's/\\n//g'
       | sed 's/\\t//g'
-    # Lint won't rerun unless you save, see:
-    # https://github.com/crytic/slither/issues/2057
     lint-ignore-exit-code: true
     lint-formats:
       - "%l-%e:  %c-%k of %f (%tow): %m"
@@ -124,6 +129,8 @@ tools:
       - "%l-%e:  %c-%k of %f (%tptimization): %m"
       - "%l-%e:  %c-%k of %f (%tnformational): %m"
     lint-source: 'slither'
+    # Lint won't rerun unless you save, see:
+    # https://github.com/crytic/slither/issues/2057
     lint-stdin: false
     root-markers:
       - hardhat.config.js
@@ -195,6 +202,8 @@ languages:
   markdown.mdx:
     - <<: *alex
     - <<: *prettierd
+  python:
+    - <<: *black
   solidity:
     - <<: *solhint
     - <<: *slither

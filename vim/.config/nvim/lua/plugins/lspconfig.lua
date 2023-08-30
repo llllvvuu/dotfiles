@@ -141,45 +141,9 @@ return {
         jsonls = {},
         marksman = {},
         mm0_ls = {},
-        pylsp = {
-          settings = {
-            pylsp = {
-              configurationSources = { "mypy", "ruff", "black", "rope_autoimport" },
-              plugins = {
-                jedi_completion = {
-                  enabled = true,
-                  eager = true,
-                  cache_for = { "numpy", "scipy", "matplotlib" },
-                },
-                jedi_definition = {
-                  enabled = true,
-                  follow_imports = true,
-                  follow_builtin_imports = true,
-                },
-                jedi_hover = { enabled = true },
-                jedi_references = { enabled = true },
-                jedi_signature_help = { enabled = true },
-                jedi_symbols = { enabled = true, all_scopes = true, include_import_symbols = true },
-                preload = { enabled = true, modules = { "numpy", "scipy", "matplotlib" } },
-                black = { enabled = true },
-                ruff = { enabled = true },
-                mypy = { enabled = true },
-                rope_autoimport = { enabled = true },
-                autopep8 = { enabled = false },
-                yapf = { enabled = false },
-                pycodestyle = { enabled = false, ignore = {} },
-                pyflakes = { enabled = false },
-                isort = { enabled = false },
-                flake8 = { enabled = false },
-                mccabe = { enabled = false },
-                pylint = { enabled = false },
-                rope_completion = { enabled = false },
-                pydocstyle = { enabled = false },
-              },
-            },
-          },
-        },
+        pyright = {},
         rome = {},
+        ruff_lsp = {},
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {
