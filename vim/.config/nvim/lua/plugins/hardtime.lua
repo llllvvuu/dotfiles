@@ -7,7 +7,11 @@ return {
       disabled_filetypes = {
         "qf",
         "netrw",
+        "help",
         "NvimTree",
+        "NeogitStatus",
+        "NeogitPopup",
+        "NeogitCommitView",
         "lazy",
         "mason",
         "dapui_scopes",
