@@ -39,6 +39,20 @@ tools:
     root-markers:
       - pyproject.toml
       - requirements.txt
+  fixit: &fixit
+    # pip install --pre "fixit >1"
+    lint-command: 'fixit lint ${INPUT}'
+    lint-formats:
+      - '%f@%l:%c %m'
+    lint-ignore-exit-code: true
+    lint-severity: 2  # DIsplay at "warning" level (Fixit 2 Violations don't specify severity)
+    lint-source: 'fixit2'
+    lint-stdin: false
+    root-markers:
+      - 'pyproject.toml'
+      - 'requirements.txt'
+      - '.fixit.toml'
+      - 'fixit.toml'
   forge-fmt: &forge-fmt
     # curl -L https://foundry.paradigm.xyz | bash
     # foundryup
@@ -203,6 +217,7 @@ languages:
     - <<: *alex
     - <<: *prettierd
   python:
+    - <<: *fixit
     - <<: *black
   solidity:
     - <<: *solhint

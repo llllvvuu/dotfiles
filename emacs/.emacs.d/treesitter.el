@@ -1,5 +1,3 @@
-
-
 ;; `M-x combobulate' (default: `C-c o o') to start using Combobulate
 (use-package treesit
   :preface
@@ -38,7 +36,16 @@
 
   :ensure nil
   :config
-  (mp-setup-install-grammars))
+  (mp-setup-install-grammars)
+  (use-package combobulate
+    :hook ((python-ts-mode . combobulate-mode)
+           (js-ts-mode . combobulate-mode)
+           (css-ts-mode . combobulate-mode)
+           (yaml-ts-mode . combobulate-mode)
+           (json-ts-mode . combobulate-mode)
+           (typescript-ts-mode . combobulate-mode)
+           (tsx-ts-mode . combobulate-mode))
+    :load-path ("~/combobulate")))
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-mode))
