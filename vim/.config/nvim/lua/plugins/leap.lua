@@ -8,9 +8,9 @@ return {
     config = function()
       local leap = require("leap")
       leap.add_default_mappings()
-      leap.add_repeat_mappings('g;', 'g,', {
+      leap.add_repeat_mappings("g;", "g,", {
         relative_directions = true,
-        modes = {'n', 'x', 'o'},
+        modes = { "n", "x", "o" },
       })
     end,
   },

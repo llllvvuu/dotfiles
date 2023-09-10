@@ -45,7 +45,7 @@ tools:
     lint-formats:
       - '%f@%l:%c %m'
     lint-ignore-exit-code: true
-    lint-severity: 2  # DIsplay at "warning" level (Fixit 2 Violations don't specify severity)
+    lint-severity: 2  # Display at "warning" level (Fixit 2 Violations don't specify severity)
     lint-source: 'fixit2'
     lint-stdin: false
     root-markers:
@@ -87,6 +87,17 @@ tools:
       - .prettierrc.mjs
       - .prettierrc.cjs
       - .prettierrc.toml
+  selene: &selene
+    lint-command: "selene --display-style quiet -"
+    lint-formats:
+      - '%f:%l:%c: %trror%m'
+      - '%f:%l:%c: %tarning%m'
+      - '%f:%l:%c: %tote%m'
+    lint-ignore-exit-code: true
+    lint-source: "selene"
+    lint-stdin: true
+    root-markers:
+      - selene.toml
   shellcheck: &shellcheck
     # brew, apt, pacman, yum, etc
     lint-command: "shellcheck --color=never --format=gcc -"
@@ -208,7 +219,7 @@ languages:
   javascriptreact:
     - <<: *prettierd
   lua:
-    - <<: *luacheck
+    - <<: *selene
     - <<: *stylua
   markdown:
     - <<: *alex
@@ -216,9 +227,6 @@ languages:
   markdown.mdx:
     - <<: *alex
     - <<: *prettierd
-  python:
-    - <<: *fixit
-    - <<: *black
   solidity:
     - <<: *solhint
     - <<: *slither

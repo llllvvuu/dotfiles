@@ -11,11 +11,11 @@ function toggle_quickfix()
   local win_info = vim.fn.getwininfo()
   for _, win in pairs(win_info) do
     if win.quickfix == 1 then
-      vim.cmd('cclose')
+      vim.cmd("cclose")
       return
     end
   end
-  vim.cmd('copen')
+  vim.cmd("copen")
 end
 
 function surround_in_quotes()
@@ -69,22 +69,27 @@ function toggle_commas()
 end
 
 map(
-  'v',
-  'q',
-  ':lua surround_in_quotes()<CR>',
+  "v",
+  "q",
+  ":lua surround_in_quotes()<CR>",
   { noremap = true, silent = true, desc = "Surround each line in quotes" }
 )
 map(
-  'v',
-  'm',
-  ':lua toggle_commas()<CR>',
+  "v",
+  "m",
+  ":lua toggle_commas()<CR>",
   { noremap = true, silent = true, desc = "Toggle co[m]mas after each line" }
 )
 
-map('n', '<leader>c', ':lua toggle_quickfix()<cr>', {noremap = true, silent = true})
-map('n', '<C-q>', ':cfdo e<cr>', {noremap = true, silent = true})
-map('n', 'gn', '<cmd>cn<cr>', {noremap = true, silent = true})
-map('n', 'gp', '<cmd>cp<cr>', {noremap = true, silent = true})
+map(
+  "n",
+  "<leader>c",
+  ":lua toggle_quickfix()<cr>",
+  { noremap = true, silent = true }
+)
+map("n", "<C-q>", ":cfdo e<cr>", { noremap = true, silent = true })
+map("n", "gn", "<cmd>cn<cr>", { noremap = true, silent = true })
+map("n", "gp", "<cmd>cp<cr>", { noremap = true, silent = true })
 
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save buffer" })
 map("n", "<leader>q", "<cmd>bp|bd #<cr>", { desc = "Close buffer" })
@@ -100,5 +105,5 @@ map("i", ";", ";<c-g>u")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
-map({ 'i', 's' }, 'jk', '<Esc>')
-map('t', 'jk', [[<C-\><C-n>]])
+map({ "i", "s" }, "jk", "<Esc>")
+map("t", "jk", [[<C-\><C-n>]])

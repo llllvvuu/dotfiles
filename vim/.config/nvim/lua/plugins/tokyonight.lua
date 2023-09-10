@@ -13,17 +13,17 @@ return {
     event = "VeryLazy",
     opts = function()
       return {
-        options = { theme = 'tokyonight' },
+        options = { theme = "tokyonight" },
         sections = {
           lualine_a = {
             {
-              'filename',
+              "filename",
               newfile_status = true,
               path = 1,
-            }
-          }
-        }
+            },
+          },
+        },
       }
-    end
-  }
+    end,
+  },
 }

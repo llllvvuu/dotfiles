@@ -1,12 +1,20 @@
 return {
   {
-    'nvim-telescope/telescope.nvim',
+    "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     keys = {
       { "<leader>o", "<cmd>Telescope git_files<cr>", desc = "Git Files" },
-      { "<leader>b", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Buffers" },
+      {
+        "<leader>b",
+        "<cmd>Telescope buffers show_all_buffers=true<cr>",
+        desc = "Buffers",
+      },
       { "<leader>f", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
-      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep Under Cursor" },
+      {
+        "<leader>*",
+        "<cmd>Telescope grep_string<cr>",
+        desc = "Grep Under Cursor",
+      },
     },
     opts = {
       defaults = {
@@ -26,15 +34,14 @@ return {
       pickers = {
         live_grep = {
           additional_args = function()
-            return {"--hidden"}
-          end
+            return { "--hidden" }
+          end,
         },
       },
     },
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-    }
-  }
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
 }
-

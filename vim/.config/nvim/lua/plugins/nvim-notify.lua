@@ -8,7 +8,7 @@ return {
         require("notify").dismiss()
       end,
       desc = "Dismiss All Notifications",
-    }
+    },
   },
   init = function()
     vim.notify = require("notify")

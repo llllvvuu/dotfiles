@@ -24,9 +24,9 @@ return {
       { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
     init = function()
-      local luasnip = require('luasnip')
-      luasnip.filetype_extend('typescript.tsx', { 'typescriptreact' })
-      luasnip.filetype_extend('typescript', { 'typescriptreact' })
-    end
+      local luasnip = require("luasnip")
+      luasnip.filetype_extend("typescript.tsx", { "typescriptreact" })
+      luasnip.filetype_extend("typescript", { "typescriptreact" })
+    end,
   },
 }
