@@ -26,7 +26,9 @@ opt.showmode = false
 opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
-opt.spelllang = { "en" }
+opt.spelllang = "en_us"
+opt.spell = true
+opt.spelloptions:append({ "camel" })
 opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 2
@@ -38,7 +40,7 @@ opt.wrap = false
 
 vim.api.nvim_create_autocmd("BufReadPre", {
   pattern = "*",
-  command = 'if getfsize(expand("%")) > 100000 | syntax off | endif',
+  command = 'if getfsize(expand("%")) > 1000000 | syntax off | endif',
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -48,7 +50,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     local size = vim.fn.getfsize(fname) / 1024
-    if size >= 100 then
+    if size >= 1024 then
       vim.schedule(function()
         vim.lsp.buf_detach_client(opts.buf, opts.data.client_id)
       end)

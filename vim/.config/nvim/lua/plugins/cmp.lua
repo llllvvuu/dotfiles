@@ -9,7 +9,6 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       { "Saecki/crates.nvim", event = { "BufRead Cargo.toml" }, config = true },
-      "copilot-cmp",
       "clangd_extensions.nvim",
     },
     opts = function()
@@ -21,10 +20,6 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local defaults = require("cmp.config.default")()
-      table.insert(
-        defaults.sorting,
-        require("copilot_cmp.comparators").prioritize
-      )
       table.insert(defaults.sorting, require("clangd_extensions.cmp_scores"))
       return {
         autocomplete = {
@@ -66,7 +61,6 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "copilot" },
           { name = "nvim_lsp" },
           {
             name = "omni",
@@ -79,12 +73,13 @@ return {
           { name = "buffer" },
           { name = "path" },
         }),
-        experimental = {
-          ghost_text = {
-            hl_group = "CmpGhostText",
+        sorting = defaults.sorting,
+        view = {
+          entries = {
+            selection_order = "near_cursor",
+            vertical_positioning = "above",
           },
         },
-        sorting = defaults.sorting,
         window = {
           completion = { -- thin-style scrollbar
             border = "single",

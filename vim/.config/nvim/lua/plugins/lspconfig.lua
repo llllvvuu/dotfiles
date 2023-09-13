@@ -19,8 +19,13 @@ return {
     branch = "feat/solidity_ls_nomicfoundation_singlefile",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      {
+        "folke/neoconf.nvim",
+        cmd = "Neoconf",
+        config = true,
+        dependencies = { "nvim-lspconfig" },
+      },
       { "folke/neodev.nvim", opts = {} },
-      -- TODO: ensure installed DAP
       {
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "williamboman/mason.nvim", opts = {} },
@@ -381,68 +386,8 @@ return {
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
-
-      -- local lspconfig = require("lspconfig")
-      -- local configs = require("lspconfig.configs")
-      --
-      -- configs.solidity = {
-      --   default_config = {
-      --     cmd = {'node', '--inspect-brk', '--nolazy', '/Users/llwu/git/@juanfranblanco/vscode-solidity/dist/extension/server.js', '--stdio'},
-      --     filetypes = { 'solidity' },
-      --     root_dir = lspconfig.util.find_git_ancestor,
-      --     single_file_support = true,
-      --   },
-      -- }
-      --
-      -- lspconfig.solidity.setup {}
     end,
   },
-  -- {
-  --   'creativenull/efmls-configs-nvim',
-  --   branch = 'dev',
-  --   dependencies = { 'nvim-lspconfig' },
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   config = function ()
-  --     local efmls = require('efmls-configs')
-  --     efmls.init {
-  --       init_options = {
-  --         documentFormatting = true,
-  --         documentRangeFormatting = true,
-  --       },
-  --     }
-  --
-  --     local prettierd = require('efmls-configs.formatters.prettier_d')
-  --     efmls.setup({
-  --       javascript = {
-  --         formatter = prettierd,
-  --       },
-  --       typescript = {
-  --         formatter = prettierd,
-  --       },
-  --       javascriptreact = {
-  --         formatter = prettierd,
-  --       },
-  --       typescriptreact = {
-  --         formatter = prettierd,
-  --       },
-  --       solidity = {
-  --         formatter= require('efmls-configs.formatters.forge_fmt'),
-  --         linter = {
-  --           require('efmls-configs.linters.solhint'),
-  --           require('efmls-configs.linters.slither'),
-  --         }
-  --       },
-  --       lua = {
-  --         linter = require('efmls-configs.linters.luacheck'),
-  --         formatter = require('efmls-configs.formatters.stylua'),
-  --       },
-  --       sh = {
-  --         linter = require('efmls-configs.linters.shellcheck'),
-  --         formatter = require('efmls-configs.formatters.shfmt'),
-  --       }
-  --     })
-  --   end
-  -- },
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-lspconfig" },
