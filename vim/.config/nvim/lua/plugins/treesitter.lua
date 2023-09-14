@@ -146,17 +146,4 @@ return {
       }
     end,
   },
-  {
-    "stevearc/aerial.nvim",
-    keys = {
-      { "{", "<cmd>AerialPrev<CR>", desc = "Prev function/interface" },
-      { "}", "<cmd>AerialNext<CR>", desc = "Next function/interface" },
-      { "<leader>a", "<cmd>AerialToggle! left<CR>", desc = "Open Aerial view" },
-    },
-    opts = {},
-    dependencies = {
-      "nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
 }

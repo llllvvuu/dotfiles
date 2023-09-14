@@ -21,6 +21,7 @@ return {
         "dapui_console",
         "dap-repl",
         "neotest-summary",
+        "query",
       },
     },
   },

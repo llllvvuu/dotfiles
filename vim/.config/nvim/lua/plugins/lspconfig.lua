@@ -170,6 +170,7 @@ return {
         jsonls = {},
         marksman = {},
         mm0_ls = {},
+        ocamllsp = { mason = false },
         pyright = {},
         rome = {},
         ruff_lsp = {},
@@ -198,6 +199,7 @@ return {
             },
           },
         },
+        semgrep = {},
         taplo = {
           keys = {
             {
@@ -226,7 +228,7 @@ return {
       setup = {
         clangd = function(_, opts)
           require("clangd_extensions").setup({ server = opts })
-          return true
+          return false
         end,
         rust_analyzer = function(_, opts)
           local ok, mason_registry = pcall(require, "mason-registry")
@@ -416,5 +418,33 @@ return {
     lazy = true,
     dependencies = { "mfussenegger/nvim-dap", "nvim-lua/plenary.nvim" },
   },
-  { "p00f/clangd_extensions.nvim", lazy = true },
+  {
+    "p00f/clangd_extensions.nvim",
+    lazy = true,
+    opts = {
+      inlay_hints = {
+        inline = false,
+      },
+      ast = {
+        --These require codicons (https://github.com/microsoft/vscode-codicons)
+        role_icons = {
+          type = "",
+          declaration = "",
+          expression = "",
+          specifier = "",
+          statement = "",
+          ["template argument"] = "",
+        },
+        kind_icons = {
+          Compound = "",
+          Recovery = "",
+          TranslationUnit = "",
+          PackExpansion = "",
+          TemplateTypeParm = "",
+          TemplateTemplateParm = "",
+          TemplateParamObject = "",
+        },
+      },
+    },
+  },
 }
