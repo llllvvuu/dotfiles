@@ -1,3 +1,6 @@
+export HISTSIZE=10000000
+export SAVEHIST=10000000
+export HISTFILESIZE=10000000
 setopt SH_WORD_SPLIT
 setopt magic_equal_subst
 setopt autopushd

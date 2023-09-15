@@ -91,6 +91,8 @@ map("n", "<C-q>", ":cfdo e<cr>", { noremap = true, silent = true })
 map("n", "gn", "<cmd>cn<cr>", { noremap = true, silent = true })
 map("n", "gp", "<cmd>cp<cr>", { noremap = true, silent = true })
 
+map("n", "<leader>pc", "<cmd>pclose<cr>", { desc = "Close Preview window" })
+
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save buffer" })
 map("n", "<leader>q", "<cmd>bp|bd #<cr>", { desc = "Close buffer" })
 

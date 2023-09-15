@@ -17,7 +17,13 @@ return {
       ignore_install = { "unsupported" },
     },
     config = function(_, opts)
-      require("nvim-treesitter").setup(opts)
+      require("nvim-treesitter.configs").setup(opts)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { '*' },
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
     end,
   },
   {

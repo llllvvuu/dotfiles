@@ -87,7 +87,7 @@ return {
       { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
       { "<leader>ds", function() require("dap").session() end, desc = "Session" },
       { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+      { "<leader>dw", function() require("dap.ui.widgets").preview() end, desc = "Hover" },
       { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
     },
 
@@ -112,6 +112,9 @@ return {
                 vim.fn.getcwd() .. "/",
                 "file"
               )
+            end,
+            args = function()
+              return vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
             end,
             cwd = "${workspaceFolder}",
           },
