@@ -1,6 +1,7 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
+    "llllvvuu/nvim-cmp",
+    branch = "feat/above",
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",

@@ -5,3 +5,4 @@ rust-analyzer
 sassc
 solang
 vcpkg
+lua-language-server

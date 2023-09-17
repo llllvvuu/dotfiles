@@ -21,6 +21,9 @@ bindkey -M viins 'jk' vi-cmd-mode
 export HISTFILE=$HOME/.zsh_history
 export KEYTIMEOUT=42
 
+# Shell config
+[ -f $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
+
 # Plugins
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 [ -s $HOME/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
@@ -31,9 +34,6 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 
 [ -x $HOME/bin/rtx ] && eval "$($HOME/bin/rtx activate zsh)"
 [ -f $HOME/.fzf.zsh ] && . $HOME/.fzf.zsh
-
-# Shell config
-[ -f $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
 
 # Completions
 fpath+=~/.zfunc
