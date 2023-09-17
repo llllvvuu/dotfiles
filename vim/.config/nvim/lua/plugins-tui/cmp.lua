@@ -62,6 +62,7 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
+          { name = "vim-dadbod-completion" },
           { name = "nvim_lsp" },
           {
             name = "omni",

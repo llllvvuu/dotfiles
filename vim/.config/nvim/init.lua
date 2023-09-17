@@ -1,6 +1,3 @@
-require("options")
-require("keymap")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -14,4 +11,17 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+if vim.g.vscode then
+  require("options")
+  require("keymap-vscode")
+  require("lazy").setup({
+    { import = "plugins" },
+  })
+else
+  require("options-tui")
+  require("keymap")
+  require("lazy").setup({
+    { import = "plugins" },
+    { import = "plugins-tui" },
+  })
+end

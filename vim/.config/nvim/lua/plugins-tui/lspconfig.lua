@@ -1,4 +1,7 @@
-local diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " ", } local function diagnostic_goto(next, severity) local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+local diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " ", }
+
+local function diagnostic_goto(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
     go({ severity = severity })
@@ -36,14 +39,14 @@ return {
         desc = "Toggle Inlay Hints",
       },
       {
-        "<leader>ld",
+        "gd",
         function()
           require("telescope.builtin").lsp_definitions({ reuse_win = true })
         end,
         desc = "Goto Definition",
       },
       {
-        "<leader>lr",
+        "gH",
         "<cmd>Telescope lsp_references<cr>",
         desc = "References",
       },
@@ -191,7 +194,7 @@ return {
             },
           },
         },
-        semgrep = {},
+        -- semgrep = {},
         taplo = {
           keys = {
             {

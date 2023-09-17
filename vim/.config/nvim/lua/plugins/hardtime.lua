@@ -1,6 +1,7 @@
 return {
   {
     "m4xshen/hardtime.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
       max_count = 1,
       allow_different_key = true,
@@ -22,6 +23,7 @@ return {
         "dap-repl",
         "neotest-summary",
         "query",
+        "dbui",
       },
     },
   },
