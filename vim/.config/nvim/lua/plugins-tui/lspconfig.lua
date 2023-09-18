@@ -1,4 +1,5 @@
-local diagnostics = { Error = " ", Warn = " ", Hint = " ", Info = " ", }
+local diagnostics =
+  { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
 local function diagnostic_goto(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -29,8 +30,8 @@ return {
     },
     keys = {
       { "<leader>lx", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-      { "<leader>lf", vim.lsp.buf.format, desc = "Format whole file" },
-      { "<leader>lf", mode = "v", vim.lsp.buf.format, desc = "Format range" },
+      -- { "<leader>lf", vim.lsp.buf.format, desc = "Format whole file" },
+      -- { "<leader>lf", mode = "v", vim.lsp.buf.format, desc = "Format range" },
       {
         "<leader>lh",
         function()
@@ -46,28 +47,35 @@ return {
         desc = "Goto Definition",
       },
       {
-        "gH",
+        "<leader>s",
+        function()
+          require("telescope.builtin").lsp_document_symbols({ reuse_win = true })
+        end,
+        desc = "LSP Document Symbols",
+      },
+      {
+        "gr",
         "<cmd>Telescope lsp_references<cr>",
         desc = "References",
       },
-      { "<leader>lc", vim.lsp.buf.rename, desc = "Rename" },
-      { "<leader>lD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+      { "<leader>r", vim.lsp.buf.rename, desc = "Rename" },
+      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
       {
-        "<leader>li",
+        "gi",
         function()
           require("telescope.builtin").lsp_implementations({ reuse_win = true })
         end,
         desc = "Goto Implementation",
       },
       {
-        "<leader>lt",
+        "gy",
         function()
           require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
         end,
         desc = "Goto Type Definition",
       },
       {
-        "<leader>la",
+        "<leader>a",
         vim.lsp.buf.code_action,
         desc = "Code Action",
         mode = { "n", "v" },

@@ -20,6 +20,8 @@ If the new path's directories does not exist, create them."
     (make-directory (file-name-directory backupFilePath) (file-name-directory backupFilePath))
     backupFilePath))
 (setq make-backup-file-name-function 'bedrock--backup-file-name)
+(defvar backup-dir "~/.emacs.d/backups/")
+(setq backup-directory-alist (list (cons "." backup-dir)))
 
 (setq enable-recursive-minibuffers t)                ; Use the minibuffer whilst in the minibuffer
 (setq completions-detailed t)                        ; Show annotations
@@ -89,6 +91,11 @@ If the new path's directories does not exist, create them."
    consult-ripgrep consult-git-grep consult-grep
    :preview-key '(:debounce 0.4 any))
   (setq consult-narrow-key "<"))
+
+(use-package consult-ls-git
+  :bind
+  (("C-c g f" . #'consult-ls-git)
+   ("C-c g F" . #'consult-ls-git-other-window)))
 
 (use-package avy
   :ensure t

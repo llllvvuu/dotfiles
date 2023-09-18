@@ -19,7 +19,7 @@ if vim.g.vscode then
   })
 else
   require("options-tui")
-  require("keymap")
+  require("keymap-tui")
   require("lazy").setup({
     { import = "plugins" },
     { import = "plugins-tui" },

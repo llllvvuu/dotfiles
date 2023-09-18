@@ -10,6 +10,10 @@ return {
             or vim.bo.commentstring
         end,
       },
+      mappings = {
+        comment = "<C-/>",
+        comment_line = "<C-/>",
+      },
     },
   },
 }

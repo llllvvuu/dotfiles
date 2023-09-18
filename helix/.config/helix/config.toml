@@ -1,0 +1,40 @@
+[editor]
+line-number = "relative"
+mouse = false
+scrolloff = 999
+cursorline = true
+cursorcolumn = true
+rulers = [80, 100, 120]
+bufferline = "multiple"
+color-modes = true
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace]
+render = "all"
+
+[editor.indent-guides]
+render = true
+
+[keys.normal]
+"C-/" = "toggle_comments"
+"C-c" = "normal_mode"
+
+[keys.normal.space]
+w = ":w"
+q = ":q"
+
+[keys.normal.space.l]
+h = ":toggle lsp.display-inlay-hints"
+
+[keys.select]
+"C-/" = "toggle_comments"
+"C-c" = "normal_mode"
+
+[keys.insert]
+j = { k = "normal_mode" }
+"C-c" = "normal_mode"
