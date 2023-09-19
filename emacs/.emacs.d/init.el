@@ -23,6 +23,9 @@ If the new path's directories does not exist, create them."
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))
 
+(setq auto-save-file-name-transforms
+      `((".*" , temporary-file-directory t)))
+
 (setq enable-recursive-minibuffers t)                ; Use the minibuffer whilst in the minibuffer
 (setq completions-detailed t)                        ; Show annotations
 (setq completion-styles '(basic initials substring)) ; Different styles to match input to candidates
@@ -181,6 +184,15 @@ If the new path's directories does not exist, create them."
   :config
   (setq completion-styles '(orderless)))
 
+; (use-package editorconfig
+;   :ensure t
+;   :config
+;   (editorconfig-mode 1))
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(require 'editorconfig)
+(editorconfig-mode 1)
+
 (load-file (expand-file-name "./treesitter.el" user-emacs-directory))
 (load-file (expand-file-name "./lsp.el" user-emacs-directory))
 
@@ -189,7 +201,7 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(catppuccin-theme use-package)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

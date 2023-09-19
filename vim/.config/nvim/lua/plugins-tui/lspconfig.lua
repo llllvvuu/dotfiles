@@ -30,8 +30,6 @@ return {
     },
     keys = {
       { "<leader>lx", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-      -- { "<leader>lf", vim.lsp.buf.format, desc = "Format whole file" },
-      -- { "<leader>lf", mode = "v", vim.lsp.buf.format, desc = "Format range" },
       {
         "<leader>lh",
         function()
@@ -73,12 +71,6 @@ return {
           require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
         end,
         desc = "Goto Type Definition",
-      },
-      {
-        "<leader>a",
-        vim.lsp.buf.code_action,
-        desc = "Code Action",
-        mode = { "n", "v" },
       },
       {
         "<c-k>",
@@ -158,6 +150,7 @@ return {
           on_attach = function(client)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
+            client.server_capabilities.documentOnTypeFormattingProvider = nil
           end,
           settings = {
             Lua = {
@@ -166,6 +159,14 @@ return {
               },
               completion = {
                 callSnippet = "Replace",
+              },
+              format = {
+                enabled = true,
+                defaultConfig = {
+                  indent_style = "space",
+                  indent_size = 2,
+                  continuation_indent = 2,
+                },
               },
             },
           },
@@ -226,6 +227,54 @@ return {
         tailwindcss = {},
         texlab = {},
         vimls = {},
+        vtsls = {
+          settings = {
+            vtsls = {
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              inlayHints = {
+                parameterNames = { enabled = "literals" },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+              referencesCodeLens = { enabled = true },
+              format = { enable = false },
+              suggest = {
+                completeFunctionCalls = { enabled = true },
+              },
+              preferGoToSourceDefinition = true,
+            },
+            javascript = {
+              preferGoToSourceDefinition = true,
+              referencesCodeLens = { enabled = true },
+              inlayHints = {
+                parameterNames = { enabled = "literals" },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+            },
+            ["js/ts"] = {
+              implicitProjectConfig = {
+                checkJs = true,
+                compilerOptions = {
+                  module = "esnext",
+                  target = "esnext",
+                },
+              },
+            },
+          },
+        },
         vuels = {},
       },
       setup = {
@@ -392,29 +441,6 @@ return {
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
     end,
-  },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-lspconfig" },
-    opts = {
-      settings = {
-        tsserver_file_preferences = {
-          includeInlayParameterNameHints = "all",
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayVariableTypeHints = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayEnumMemberValueHints = true,
-          importModuleSpecifierPreference = "non-relative",
-        },
-        complete_function_calls = true,
-        publish_diagnostic_on = "change",
-      },
-      on_attach = function(client)
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-      end,
-    },
   },
   {
     "simrat39/rust-tools.nvim",

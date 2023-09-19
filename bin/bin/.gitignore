@@ -6,3 +6,5 @@ sassc
 solang
 vcpkg
 lua-language-server
+emacs
+emacsclient

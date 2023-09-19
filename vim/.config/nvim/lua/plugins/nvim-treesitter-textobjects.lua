@@ -14,8 +14,7 @@ return {
               ["ic"] = "@comment.inner",
               ["aa"] = "@parameter.outer",
               ["ia"] = "@parameter.inner",
-              ["ab"] = "@block.outer",
-              ["ib"] = "@block.inner",
+              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
             },
           },
           move = {
@@ -25,13 +24,11 @@ return {
               ["]f"] = "@function.outer",
               ["]c"] = "@comment.outer",
               ["]a"] = "@parameter.outer",
-              ["]b"] = "@block.outer",
             },
             goto_previous_start = {
               ["[f"] = "@function.outer",
               ["[c"] = "@comment.outer",
               ["[a"] = "@parameter.outer",
-              ["[b"] = "@block.outer",
             },
           },
         },
