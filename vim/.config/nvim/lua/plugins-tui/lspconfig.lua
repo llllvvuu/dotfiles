@@ -9,6 +9,34 @@ local function diagnostic_goto(next, severity)
   end
 end
 
+vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
+  local locations = command.arguments[3]
+  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  if locations and #locations > 0 then
+    local items =
+      vim.lsp.util.locations_to_items(locations, client.offset_encoding)
+    vim.fn.setloclist(
+      0,
+      {},
+      " ",
+      { title = "References", items = items, context = ctx }
+    )
+    vim.api.nvim_command("lopen")
+  end
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client.server_capabilities.codeLensProvider then
+      vim.api.nvim_create_autocmd(
+        { "CursorHold", "CursorHoldI" },
+        { callback = vim.lsp.codelens.refresh, buffer = args.buf }
+      )
+    end
+  end,
+})
+
 return {
   {
     "llllvvuu/nvim-lspconfig",
