@@ -39,6 +39,16 @@ tools:
     root-markers:
       - pyproject.toml
       - requirements.txt
+  checkmake: &checkmake
+    # go install github.com/mrtazz/checkmake/cmd/checkmake@latest
+    lint-command: |
+      checkmake --format='{{.LineNumber}}:{{.Violation}} ({{.Rule}})
+      ' "${INPUT}"
+    lint-formats:
+      - '%l:%m'
+    lint-severity: 2  # Display at "warning" level
+    lint-source: 'checkmake'
+    lint-stdin: false
   chktex: &chktex
     # https://www.nongnu.org/chktex/
     lint-command: 'chktex -q -v0'
@@ -48,6 +58,19 @@ tools:
     lint-severity: 2  # Display at "warning" level
     lint-source: 'chktex'
     lint-stdin: true
+  cmake-lint: &cmake-lint
+    # pip install cmakelang
+    lint-command: 'cmake-lint "${INPUT}"'
+    lint-formats:
+      - '%f:%l,%c: [%s] %m'
+    lint-source: 'cmake-lint'
+    lint-stdin: false
+  cmake-format: &cmake-format
+    # @deprecated in favor of https://github.com/regen100/cmake-language-server
+    # WARNING: https://github.com/creativenull/efmls-configs-nvim/issues/64
+    # pip install cmakelang
+    format-command: 'cmake-format "${INPUT}"'
+    format-stdin: false
   fixit: &fixit
     # pip install --pre "fixit >1"
     lint-command: 'fixit lint ${INPUT}'
@@ -107,6 +130,13 @@ tools:
       - .prettierrc.mjs
       - .prettierrc.cjs
       - .prettierrc.toml
+  proselint: &proselint
+    # pip install proselint
+    lint-command: "proselint -"
+    lint-formats:
+      - '<stdin>:%l:%c: %m'
+    lint-source: "proselint"
+    lint-stdin: true
   selene: &selene
     lint-command: "selene --display-style quiet -"
     lint-formats:
@@ -230,6 +260,8 @@ root-markers:
   - .git/
 lint-debounce: 1s
 languages:
+  cmake:
+    - <<: *cmake-lint
   crystal:
     - <<: *ameba
   dockerfile:
@@ -243,11 +275,15 @@ languages:
   lua:
     - <<: *selene
     - <<: *stylua
+  make:
+    - <<: *checkmake
   markdown:
     - <<: *alex
+    - <<: *proselint
     - <<: *prettierd
   markdown.mdx:
     - <<: *alex
+    - <<: *proselint
     - <<: *prettierd
   solidity:
     - <<: *solhint
