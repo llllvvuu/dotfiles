@@ -30,7 +30,6 @@ esc = ["collapse_selection", "keep_primary_selection"]
 "$" = "goto_line_end"
 "^" = "goto_first_nonwhitespace"
 G = "goto_file_end"
-"%" = "match_brackets"
 V = ["select_mode", "extend_to_line_bounds"]
 C = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection", "insert_mode"]
 D = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection"]
@@ -95,7 +94,6 @@ esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 G = "goto_file_end"
 D = ["extend_to_line_bounds", "delete_selection", "normal_mode"]
 C = ["goto_line_start", "extend_to_line_bounds", "change_selection"]
-"%" = "match_brackets"
 
 i = "select_textobject_inner"
 a = "select_textobject_around"

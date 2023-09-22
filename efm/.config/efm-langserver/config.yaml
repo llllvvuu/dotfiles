@@ -39,6 +39,15 @@ tools:
     root-markers:
       - pyproject.toml
       - requirements.txt
+  chktex: &chktex
+    # https://www.nongnu.org/chktex/
+    lint-command: 'chktex -q -v0'
+    lint-formats:
+      - '%f:%l:%c:%n:%m'
+    lint-ignore-exit-code: true
+    lint-severity: 2  # Display at "warning" level
+    lint-source: 'chktex'
+    lint-stdin: true
   fixit: &fixit
     # pip install --pre "fixit >1"
     lint-command: 'fixit lint ${INPUT}'
@@ -60,6 +69,17 @@ tools:
     format-stdin: true
     root-markers:
       - foundry.toml
+  hadolint: &hadolint
+    # brew install hadolint
+    lint-command: 'hadolint --no-color -'
+    lint-formats:
+      - '-:%l %.%# %trror: %m'
+      - '-:%l %.%# %tarning: %m'
+      - '-:%l %.%# %tnfo: %m'
+    lint-source: 'hadolint'
+    lint-stdin: true
+    root-markers:
+      - '.hadolint.yaml'
   luacheck: &luacheck
     # luarocks install luacheck
     lint-command: 'luacheck --codes --no-color --quiet -'
@@ -212,6 +232,8 @@ lint-debounce: 1s
 languages:
   crystal:
     - <<: *ameba
+  dockerfile:
+    - <<: *hadolint
   javascript:
     - <<: *prettierd
   javascript.jsx:
@@ -234,6 +256,8 @@ languages:
   sh:
     - <<: *shellcheck
     - <<: *shfmt
+  tex:
+    - <<: *chktex
   typescript:
     - <<: *prettierd
   typescript.tsx:

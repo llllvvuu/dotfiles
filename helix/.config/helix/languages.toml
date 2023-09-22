@@ -5,9 +5,45 @@ command = "efm-langserver"
 command = "nomicfoundation-solidity-language-server"
 args = ["--stdio"]
 
+[language-server.vtsls]
+command = "vtsls"
+args = ["--stdio"]
+
+[language-server.vtsls.config]
+vtsls.experimental.completion.enableServerSideFuzzyMatch = true
+typescript.inlayHints.parameterNames.enabled = "literals"
+typescript.inlayHints.parameterTypes.enabled = true
+typescript.inlayHints.variableTypes.enabled = true
+typescript.inlayHints.propertyDeclarationTypes.enabled = true
+typescript.inlayHints.functionLikeReturnTypes.enabled = true
+typescript.inlayHints.enumMemberValues.enabled = true
+typescript.referencesCodeLens.enabled = true
+typescript.suggest.completeFunctionCalls.enabled = true
+typescript.format.enable = false
+typescript.preferGoToSourceDefinition = true
+javascript.preferGoToSourceDefinition = true
+javascript.referencesCodeLens.enabled = true
+javascript.inlayHints.parameterNames.enabled = "literals"
+javascript.inlayHints.parameterTypes.enabled = true
+javascript.inlayHints.variableTypes.enabled = true
+javascript.inlayHints.propertyDeclarationTypes.enabled = true
+javascript.inlayHints.functionLikeReturnTypes.enabled = true
+javascript.inlayHints.enumMemberValues.enabled = true
+"js/ts.implicitProjectConfig.checkJs" = true
+"js/ts.implicitProjectConfig.compilerOptions.module" = "esnext"
+"js/ts.implicitProjectConfig.compilerOptions.target" = "esnext"
+
 [[language]]
 name = "solidity"
 language-servers = [
   { name = "efm", only-features = [ "diagnostics", "format" ] },
   { name = "hardhat", except-features = [ "format" ] }
 ]
+
+[[language]]
+name = "javascript"
+language-servers = [ "vtsls" ]
+
+[[language]]
+name = "typescript"
+language-servers = [ "vtsls" ]

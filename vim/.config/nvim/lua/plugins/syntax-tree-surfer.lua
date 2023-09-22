@@ -37,8 +37,8 @@ return {
       },
       {
         "<M-o>",
-        "<Cmd>STSSelectMasterNode<CR>",
-        desc = "Select Treesitter Master Node",
+        "<Cmd>STSSelectCurrentNode<CR>",
+        desc = "Treesitter Select Current Node",
       },
       {
         "<M-n>",

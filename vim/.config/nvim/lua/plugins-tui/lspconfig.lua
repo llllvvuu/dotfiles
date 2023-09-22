@@ -145,6 +145,7 @@ return {
             client.server_capabilities.documentRangeFormattingProvider = false
           end,
         },
+        biome = {},
         bufls = {}, -- Protobuf
         clangd = {
           cmd = {
@@ -204,7 +205,6 @@ return {
         mm0_ls = {},
         ocamllsp = { mason = false },
         pyright = {},
-        rome = {},
         ruff_lsp = {},
         rust_analyzer = {
           settings = {
