@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 return {
   {
     "llllvvuu/nvim-lspconfig",
-    branch = "feat/solidity_ls_nomicfoundation_singlefile",
+    branch = "feat/solidity_ls",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       {
@@ -250,7 +250,7 @@ return {
             },
           },
         },
-        solidity_ls_nomicfoundation = {},
+        solidity_ls = {},
         sqlls = {},
         tailwindcss = {},
         texlab = {},
@@ -440,7 +440,7 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      -- get all the servers that are available thourgh mason-lspconfig
+      -- get all the servers that are available through mason-lspconfig
       local have_mason, mlsp = pcall(require, "mason-lspconfig")
       local all_mslp_servers = {}
       if have_mason then
