@@ -1,7 +1,9 @@
+[diff]
+  external = difft
 [include]
-	path = ~/.gitconfig_redact
+  path = ~/.gitconfig_redact
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [commit]
 	gpgsign = true
 [core]
@@ -24,6 +26,7 @@
 	s = status -s
 	st = stash
 	u = reset HEAD --
+  sw = show --ext-diff
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
