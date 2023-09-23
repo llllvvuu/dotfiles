@@ -24,6 +24,7 @@ return {
         "neotest-summary",
         "query",
         "dbui",
+        "fugitiveblame",
       },
     },
   },
