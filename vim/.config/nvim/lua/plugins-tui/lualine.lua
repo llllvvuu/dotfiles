@@ -1,15 +1,7 @@
 return {
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
-  {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "folke/tokyonight.nvim" },
+    dependencies = { "tokyonight.nvim" },
     event = "VeryLazy",
     opts = function()
       return {

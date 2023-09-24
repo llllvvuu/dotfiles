@@ -17,11 +17,21 @@ if vim.g.vscode then
   require("lazy").setup({
     { import = "plugins" },
   })
+elseif vim.g.started_by_firenvim then
+  require("options-tui")
+  require("options-firenvim")
+  require("keymap-tui")
+  require("lazy").setup({
+    { import = "plugins" },
+    { import = "plugins-nonvscode" },
+  })
+  vim.opt.laststatus = 0
 else
   require("options-tui")
   require("keymap-tui")
   require("lazy").setup({
     { import = "plugins" },
+    { import = "plugins-nonvscode" },
     { import = "plugins-tui" },
   })
 end
