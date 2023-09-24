@@ -11,8 +11,8 @@ return {
         end,
       },
       mappings = {
-        comment = "<C-/>",
-        comment_line = "<C-/>",
+        comment = "gc",
+        comment_line = "gcc",
       },
     },
   },
