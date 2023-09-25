@@ -1,0 +1,325 @@
+#
+# This is an example of config file for rsop, showing advanced usage.
+#
+# It makes use of many external programs you may need to install from your distribution packages or from source:
+# - bat  https://github.com/sharkdp/bat
+# - bsdtar  https://www.libarchive.org/
+# - chafa  https://hpjansson.org/chafa/
+# - delta  https://github.com/dandavison/delta
+# - dpkg  https://wiki.debian.org/Teams/Dpkg
+# - eza  https://github.com/eza-community/eza
+# - ffmpegthumbnailer  https://github.com/dirkvdb/ffmpegthumbnailer
+# - ffprobe  https://ffmpeg.org/
+# - hexyl  https://github.com/sharkdp/hexyl
+# - mdcat  https://github.com/lunaryorn/mdcat
+# - mediainfo  https://mediaarea.net/en/MediaInfo
+# - moreutils  https://joeyh.name/code/moreutils/
+# - mpv  https://mpv.io/
+# - odt2txt  https://github.com/dstosberg/odt2txt/
+# - openscad  https://openscad.org/
+# - openssl  https://www.openssl.org/
+# - pandoc  https://pandoc.org/
+# - pbzip2  http://compression.ca/pbzip2/
+# - pigz  https://www.zlib.net/pigz/
+# - pdftoppm  https://poppler.freedesktop.org/
+# - retext  https://github.com/retext-project/retext
+# - sqlite3  https://www.sqlite.org/index.html
+# - ss  https://git.kernel.org/pub/scm/network/iproute2/iproute2.git
+# - transmission-show  https://transmissionbt.com/
+# - tree  http://mama.indstate.edu/users/ice/tree/
+# - tshark  https://www.wireshark.org/
+# - w3m  https://salsa.debian.org/debian/w3m
+# - wireshark  https://www.wireshark.org/
+# - xz  https://tukaani.org/xz/
+# - zstd  https://facebook.github.io/zstd/
+#
+# You most likely want to edit this file to fit your needs.
+#
+
+#
+# File types, identified by extension or MIME type
+#
+# - extensions
+# List of extensions, always checked before MIME type. Double extensions (ie. 'tar.gz') are supported, although it usually
+# makes more sense to use a filter instead.
+#
+# - mimes
+# List of MIME types, the main type (part before the '/') can be used to match several subtypes.
+# Compared to identification by extension this has the advantage of also working with data piped from stdin.
+#
+
+[filetype.archive]
+mimes = [
+    "application/java-archive",
+    "application/vnd.rar",
+    "application/x-7z-compressed",
+    "application/x-archive",
+    "application/x-cpio",
+    "application/x-rar",
+    "application/x-tar",
+    "application/zip"
+]
+# bsdtar can decompress transparently
+extensions = ["tar.bz2", "tar.gz", "tar.xz", "tar.zst"]
+
+[filetype.audio]
+mimes = ["audio"]
+extensions = ["m4a"]
+
+[filetype.binary]
+mimes = ["application/octet-stream"]
+
+[filetype.bzip2]
+mimes = ["application/x-bzip2"]
+
+[filetype.certificate]
+mimes = ["application/pkix-cert+pem"]
+
+[filetype.deb]
+mimes = ["application/vnd.debian.binary-package"]
+
+[filetype.directory]
+mimes = ["inode/directory"]
+
+[filetype.gzip]
+mimes = ["application/gzip"]
+
+[filetype.html]
+extensions = ["htm", "html", "xhtml"]
+mimes = ["text/html"]
+
+[filetype.image]
+mimes = ["image", "image/jpeg"]
+extensions = ["svg", "jpg", "jpeg", "png", "webp"]
+
+[filetype.markdown]
+extensions = ["md"]
+
+[filetype.motion_jpeg]
+extensions = ["mp.jpg"]
+
+[filetype.msdocument]
+extensions = ["doc", "docx", "pptx", "rtf", "xlsx"]
+mimes = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document", "text/rtf"]
+
+[filetype.opendocument]
+extensions = ["odg", "odp", "ods", "odt"]
+mimes = ["application/vnd.oasis.opendocument.spreadsheet", "application/vnd.oasis.opendocument.text"]
+
+[filetype.patch]
+mimes = ["text/x-patch"]
+extensions = ["patch"]
+
+[filetype.pcap]
+mimes = ["application/vnd.tcpdump.pcap", "application/x-pcapng"]
+
+[filetype.pdf]
+mimes = ["application/pdf"]
+
+[filetype.scad]
+extensions = ["scad"]
+
+[filetype.socket]
+mimes = ["inode/socket"]
+
+[filetype.sqlite]
+mimes = ["application/vnd.sqlite3"]
+
+[filetype.text]
+mimes = [
+    "text",
+    "application/pkcs8+pem",
+    "application/x-perl",
+    "application/x-php",
+    "application/x-shellscript",
+    "application/x-subrip",
+    "application/xml"
+]
+
+[filetype.torrent]
+mimes = ["application/x-bittorrent"]
+
+[filetype.video]
+mimes = ["video", "application/vnd.ms-asf", "application/x-matroska", "application/x-riff"]
+extensions = ["avi", "ogv"]
+
+[filetype.xsv]
+extensions = ["csv", "tsv"]
+
+[filetype.xz]
+mimes = ["application/x-xz"]
+
+[filetype.zstandard]
+mimes = ["application/zstd"]
+
+
+#
+# File handlers
+#
+# - command
+# The command to run to open or preview file.
+# Substitution is done for the following expressions:
+#   %c: terminal column count
+#   %i: input path
+#   %l: terminal line count
+#   %m: input MIME type
+# Use '%%' if you need to pass a literal '%' char.
+#
+# - shell
+# If true, runs the command in a shell, use this if you use pipes. Defaults to false.
+#
+# - wait
+# If true, waits for the handler to exit. Defaults to true.
+#
+# - no_pipe
+# If true, disable piping data to handler's stdin, and use a slower temporary file instead if data is piped to rsop.
+# Incompatible with 'wait = false'. Defaults to false.
+#
+# - stdin_arg
+# When previewing or opening data from stdin, with what string to substitute '%i'. Defaults to "-", some programs require "".
+#
+
+[default_handler_preview]
+command = "echo '🔍 MIME: %m'; hexyl --border none %i | head -n $((%l - 1))"
+shell = true
+stdin_arg = ""
+
+[default_handler_open]
+command = "open %i"
+stdin_arg = ""
+
+[handler_preview.archive]
+command = "bsdtar -tf %i | grep -v '/$' | head -n %l | tree -C --noreport --fromfile . | tail -n +2 | sed 's@^....@@'"
+shell = true
+
+[handler_preview.audio]
+command = "mediainfo %i | sed 's@ \\+: @: @' | column -s ':' -t -l 2 | sed 's@ *$@@'"
+shell = true
+
+[handler_open.audio]
+command = "mpv %i"
+wait = false
+
+[handler_preview.binary]
+command = "hexyl --border none %i | head -n %l"
+shell = true
+stdin_arg = ""
+
+[handler_preview.certificate]
+command = "openssl x509 -in %i -text"
+
+[handler_open.certificate]
+command = "openssl x509 -in %i -text | less -R"
+shell = true
+
+[handler_preview.deb]
+command = "dpkg -c %i | head -n %l"
+shell = true
+
+[handler_preview.directory]
+command = "eza -alFh --tree --color=always --icons --git-ignore %i | head -n %l"
+shell = true
+
+[handler_open.directory]
+command = "cd %i"
+shell = true
+
+[handler_preview.html]
+command = "w3m -dump %i"
+no_pipe = true
+
+[handler_preview.image]
+command = "chafa --animate=off -f symbols -s %cx%l %i"
+
+[handler_preview.markdown]
+command = "mdcat %i"
+
+[handler_open.markdown]
+command = "vim %i"
+
+[handler_preview.msdocument]
+command = "pandoc -s -t markdown -- %i | mdcat"
+shell = true
+
+[handler_preview.opendocument]
+command = "odt2txt %i"
+no_pipe = true
+
+[handler_preview.patch]
+command = "cat %i | delta -s --width %c"
+shell = true
+
+[handler_preview.pcap]
+command = "tshark -t a -r %i | head -n %l"
+shell = true
+
+[handler_open.pcap]
+command = "wireshark %i"
+no_pipe = true
+
+[handler_preview.pdf]
+command = "t=$(mktemp); pdftoppm -f 1 -l 1 -scale-to-x 800 -scale-to-y -1 -singlefile -jpeg -jpegopt quality=60 -tiffcompression jpeg -- %i \"${t}\" && chafa -s %cx%l \"${t}.jpg\"; rm \"${t}.jpg\""
+shell = true
+
+[handler_preview.scad]
+command = "openscad -q --render --colorscheme=Solarized --imgsize=800,600 --export-format png -o - %i | chafa -s %cx%l -"
+shell = true
+no_pipe = true
+
+[handler_preview.socket]
+command = "ss -alxp src unix:'%i'"
+
+[handler_preview.sqlite]
+command = "sqlite3 %i .dump | bat -P --color=always -n --terminal-width %c -r :%l -l sql"
+shell = true
+no_pipe = true
+
+[handler_preview.text]
+command = "bat -P --color=always -n --terminal-width %c -r :%l %i"
+
+[handler_open.text]
+command = "vim %i"
+
+[handler_preview.torrent]
+command = "transmission-show -- %i"
+no_pipe = true
+
+[handler_preview.video]
+command = "s=$(ffprobe -hide_banner %i 2>&1 | grep -E '^  (Stream|Duration)' | sed 's@^  Stream [^ ]*:@@' | sed 's@ *@@'); l=$(echo \"$s\" | wc -l); ffmpegthumbnailer -s 800 -c jpg -q 6 -i %i -o - 2> /dev/null | chafa -s %cx$((%l - l)) -; echo \"$s\""
+shell = true
+no_pipe = true
+
+[handler_open.video]
+command = "mpv --loop %i"
+no_pipe = true
+
+[handler_preview.xsv]
+command = "bat -P --color=always -n --terminal-width %c -r :%l -l csv %i"
+
+#
+# Filters
+#
+# Filters are special handlers that process their input and send their output either to another filter or to a final handler.
+# They are typically useful to transparently decompress files like .log.xz, .pcapng.gz, tar.gz, etc.
+# but you can also use it for more specific needs like converting some document formats to markdown and then using your usual handler
+# for markdown files to preview or open it.
+# Filter configuration parameters are similar to handler, except wait that is implied as true.
+#
+
+[filter.bzip2]
+command = "pbzip2 -dc %i"
+
+[filter.gzip]
+command = "pigz -dc %i"
+
+[filter.motion_jpeg]
+# https://linuxreviews.org/Google_Pixel_%22Motion_Photo%22
+command = "tail -c +$(( $(grep -EUboa '(ftypisom|ftypmp42)' %i | cut -d ':' -f 1) - 3)) %i 2> /dev/null || cat %i"
+shell = true
+no_pipe = true
+
+[filter.xz]
+command = "xz -dc %i"
+
+[filter.zstandard]
+command = "zstd -dc %i"

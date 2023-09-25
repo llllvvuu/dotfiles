@@ -32,7 +32,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
     . $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -s /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
 
-[ -x $HOME/bin/rtx ] && eval "$($HOME/bin/rtx activate zsh)"
+[ -x $HOME/local/bin/rtx ] && eval "$($HOME/local/bin/rtx activate zsh)"
 [ -f $HOME/.fzf.zsh ] && . $HOME/.fzf.zsh
 
 # Completions

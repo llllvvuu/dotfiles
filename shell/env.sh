@@ -7,6 +7,7 @@ export LD_LIBRARY_PATH="$HOME/lib64:$HOME/lib:$LD_LIBRARY_PATH"
 export PATH="$HOME/bin:$HOME/local/bin:$PATH"
 export PS1="; "
 export FZF_CTRL_T_COMMAND="git-ls.sh"
+export FZF_CTRL_T_OPTS="--height '100%' --preview 'rsp {}' --preview-window=right,70%"
 
 [ -s $HOME/.ssh/environment ] && . $HOME/.ssh/environment
 

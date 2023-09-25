@@ -1,4 +1,4 @@
-[ -x $HOME/bin/rtx ] && eval "$($HOME/bin/rtx activate bash)"
+[ -x $HOME/local/bin/rtx ] && eval "$($HOME/local/bin/rtx activate bash)"
 [ -f $HOME/.fzf.bash ] && . $HOME/.fzf.bash
 
 shopt -s autocd

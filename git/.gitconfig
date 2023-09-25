@@ -26,6 +26,7 @@
 	s = status -s
 	st = stash
 	u = reset HEAD --
+  tree = "!sh -c 'git ls-files \"./$GIT_PREFIX/${1:-.}\" | tree --fromfile -a' -"
   sw = show --ext-diff
 [filter "lfs"]
 	required = true

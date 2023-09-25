@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "c5fb16a934892086d4ba01bac48b77c65435025e" },
+  "NeoZoom.lua": { "branch": "main", "commit": "1289b900bd478fd135dcc0faf4a43b3cf7524097" },
   "actions-preview.nvim": { "branch": "master", "commit": "5650c76abfb84d6498330dd045657ba630ecdbba" },
   "aerial.nvim": { "branch": "master", "commit": "1175f79bdd1e7800b1b65a7f99a7fe47758652ff" },
   "bufferline.nvim": { "branch": "main", "commit": "6ecd37e0fa8b156099daedd2191130e083fb1490" },
@@ -65,6 +66,7 @@
   "ssr.nvim": { "branch": "main", "commit": "b2f35df231c6b090f6eb023ddf2ad0cb88d90eb4" },
   "syntax-tree-surfer": { "branch": "feat/expose_ns_hold_swap", "commit": "1a023b26daebc0070e0aa0359071893a376380f5" },
   "telescope-git-grep.nvim": { "branch": "main", "commit": "2036a2577fc3d15af344b18aa357be96d89782bb" },
+  "telescope-undo.nvim": { "branch": "main", "commit": "3dec002ea3e7952071d26fbb5d01e2038a58a554" },
   "telescope.nvim": { "branch": "master", "commit": "40c8d2fc2b729dd442eda093cf8c9496d6e23732" },
   "tokyonight.nvim": { "branch": "main", "commit": "9a01eada39558dc3243278e6805d90e8dff45dc0" },
   "treesj": { "branch": "main", "commit": "bff8c32b826e188fa558e94c7c93ac17a8ef0365" },
