@@ -79,14 +79,14 @@ map(
 map(
   "n",
   "<leader>c",
-  ":lua toggle_quickfix()<cr>",
-  { noremap = true, silent = true }
+  toggle_quickfix,
+  { desc = "Toggle Quickfix", noremap = true, silent = true }
 )
-map("n", "<C-q>", ":cfdo e<cr>", { noremap = true, silent = true })
-map("n", "gn", "<cmd>cn<cr>", { noremap = true, silent = true })
-map("n", "gp", "<cmd>cp<cr>", { noremap = true, silent = true })
+map("n", "<C-q>", ":cfdo e<cr>", { desc = "Open all Quickfix files", noremap = true, silent = true })
+map("n", "]q", "<cmd>cn<cr>", { noremap = true, silent = true })
+map("n", "[q", "<cmd>cp<cr>", { desc = "Previous quickfix", noremap = true, silent = true })
 
-map("n", "<leader>pc", "<cmd>pclose<cr>", { desc = "Close Preview window" })
+map("n", "<leader>p", "<cmd>pclose<cr>", { desc = "Close Preview window" })
 
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save buffer" })
 map("n", "<leader>q", "<cmd>bp|bd #<cr>", { desc = "Close buffer" })

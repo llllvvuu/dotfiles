@@ -23,7 +23,7 @@ return {
     end,
     opts = {
       mappings = {
-        add = "ms",
+        add = "ys",
         delete = "ds",
         replace = "cs",
       },

@@ -84,7 +84,7 @@ return {
         "<cmd>Telescope lsp_references<cr>",
         desc = "References",
       },
-      { "<leader>r", vim.lsp.buf.rename, desc = "Rename" },
+      { "<leader>r", vim.lsp.buf.rename, desc = "LSP Rename" },
       { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
       {
         "gi",
@@ -202,6 +202,7 @@ return {
         },
         jsonls = {},
         marksman = {},
+        mdx_analyzer = {},
         mm0_ls = {},
         ocamllsp = { mason = false },
         pyright = {},

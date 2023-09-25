@@ -12,6 +12,8 @@ return {
               ["if"] = "@function.inner",
               ["ac"] = "@comment.outer",
               ["ic"] = "@comment.inner",
+              ["al"] = "@call.outer",
+              ["il"] = "@call.inner",
               ["aa"] = "@parameter.outer",
               ["ia"] = "@parameter.inner",
               ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },

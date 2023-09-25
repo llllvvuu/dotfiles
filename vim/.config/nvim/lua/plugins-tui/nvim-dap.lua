@@ -11,15 +11,10 @@ return {
     "mfussenegger/nvim-dap",
 
     dependencies = {
-
+      "hydra.nvim",
       -- fancy UI for the debugger
       {
         "rcarriga/nvim-dap-ui",
-        -- stylua: ignore
-        keys = {
-          { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-          { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-        },
         opts = {},
         config = function(_, opts)
           local dap = require("dap")
@@ -69,26 +64,16 @@ return {
       },
     },
 
-    -- stylua: ignore
+    lazy = false,
+
     keys = {
-      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-      { "<leader>dx", function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" },
-      { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-      { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
-      { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-      { "<leader>dj", function() require("dap").down() end, desc = "Down" },
-      { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-      { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-      { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-      { "<leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
-      { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-      { "<leader>ds", function() require("dap").session() end, desc = "Session" },
-      { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-      { "<leader>dw", function() require("dap.ui.widgets").preview() end, desc = "Hover" },
-      { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
+      {
+        "<leader>td",
+        function()
+          require("neotest").run.run({ strategy = "dap" })
+        end,
+        desc = "Debug Nearest",
+      },
     },
 
     config = function()
@@ -99,6 +84,8 @@ return {
       )
 
       local dap = require("dap")
+      local widgets = require("dap.ui.widgets")
+      local Hydra = require("hydra")
 
       for _, lang in ipairs({ "c", "cpp" }) do
         dap.configurations[lang] = {
@@ -123,6 +110,26 @@ return {
             request = "attach",
             name = "Attach to process",
             processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "codelldb",
+            request = "launch",
+            name = "Launch Neovim Server",
+            program = function()
+              local nvim_bin = vim.fn.input(
+                "Neovim repo root: ",
+                vim.fn.getcwd(),
+                "file"
+              ) .. "/build/bin/nvim"
+              print(
+                "Launch client using: "
+                  .. nvim_bin
+                  .. " --server 127.0.0.1:8888 --remote-ui"
+              )
+              return nvim_bin
+            end,
+            args = { "--listen", "127.0.0.1:8888", "--headless" },
             cwd = "${workspaceFolder}",
           },
         }
@@ -201,6 +208,51 @@ return {
           numhl = sign[3],
         })
       end
+
+      local hint = [[
+_<Enter>_: step over   _s_: Continue/Start   _b_: Breakpoint     _K_: Eval
+_i_: step into         _d_: Terminate        _B_: Breakpoint Condition
+_o_: step out          _x_: Clear Breakpoints
+_c_: to cursor         _a_: Goto (no execute)
+^
+_q_: exit]]
+      Hydra({
+        hint = hint,
+        config = {
+          color = "pink",
+          invoke_on_body = true,
+          hint = {
+            position = "bottom",
+            border = "rounded",
+          },
+        },
+        name = "DAP",
+        mode = { "n", "x" },
+        body = "<leader>d",
+        on_enter = function()
+          vim.bo.modifiable = false
+        end,
+        heads = {
+          { "<Enter>", dap.step_over, { silent = true } },
+          { "i", dap.step_into, { silent = true } },
+          { "o", dap.step_out, { silent = true } },
+          { "c", dap.run_to_cursor, { silent = true } },
+          { "s", dap.continue, { silent = true } },
+          { "a", dap.goto_, { silent = true } },
+          { "d", dap.terminate, { exit = true, silent = true } },
+          { "x", dap.clear_breakpoints, { silent = true } },
+          { "b", dap.toggle_breakpoint, { silent = true } },
+          {
+            "B",
+            function()
+              dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+            end,
+            { silent = true },
+          },
+          { "K", widgets.hover, { silent = true } },
+          { "q", nil, { exit = true, nowait = true } },
+        },
+      })
     end,
   },
 }
