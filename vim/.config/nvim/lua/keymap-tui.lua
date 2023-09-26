@@ -80,16 +80,16 @@ map(
   "n",
   "<leader>c",
   toggle_quickfix,
-  { desc = "Toggle Quickfix", noremap = true, silent = true }
+  { desc = "Toggle Qui[c]kfix", noremap = true, silent = true }
 )
 map("n", "<C-q>", ":cfdo e<cr>", { desc = "Open all Quickfix files", noremap = true, silent = true })
-map("n", "]q", "<cmd>cn<cr>", { noremap = true, silent = true })
-map("n", "[q", "<cmd>cp<cr>", { desc = "Previous quickfix", noremap = true, silent = true })
+map("n", "]q", "<cmd>cn<cr>", { desc = "Next [q]uickfix", noremap = true, silent = true })
+map("n", "[q", "<cmd>cp<cr>", { desc = "Previous [q]uickfix", noremap = true, silent = true })
 
-map("n", "<leader>p", "<cmd>pclose<cr>", { desc = "Close Preview window" })
+map("n", "<leader>p", "<cmd>pclose<cr>", { desc = "Close [p]review window" })
 
-map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save buffer" })
-map("n", "<leader>q", "<cmd>bp|bd #<cr>", { desc = "Close buffer" })
+map("n", "<leader>w", "<cmd>w<cr>", { desc = "write buffer (save)" })
+map("n", "<leader>q", "<cmd>bp|bd #<cr>", { desc = "quit buffer" })
 
 map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
 map("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })

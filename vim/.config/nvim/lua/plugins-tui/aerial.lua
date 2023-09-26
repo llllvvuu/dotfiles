@@ -5,7 +5,7 @@ return {
     keys = {
       { "{", "<cmd>AerialPrev<CR>", desc = "Prev function/interface" },
       { "}", "<cmd>AerialNext<CR>", desc = "Next function/interface" },
-      { "<leader>ta", "<cmd>AerialToggle! left<CR>", desc = "Open Aerial view" },
+      { "<leader>O", "<cmd>AerialToggle! left<CR>", desc = "Toggle [O]utline (aerial.nvim)" },
     },
     opts = {
       autojump = true,

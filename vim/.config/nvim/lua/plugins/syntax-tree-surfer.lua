@@ -147,7 +147,7 @@ return {
         _<Enter>_: Exit (Keep Selection)              _q_: Exit (Discard Selection)
         ]]
         Hydra({
-          name = "Surf Tree",
+          name = "syntax-tree-[S]urfer",
           body = "<leader>S",
           mode = { "n", "x" },
           hint = hint,

@@ -2,8 +2,8 @@ return {
   {
     "Wansmer/treesj",
     keys = {
-      { "gS", "<Cmd>TSJSplit<CR>", desc = "Tree-sitter split" },
-      { "gJ", "<Cmd>TSJJoin<CR>", desc = "Tree-sitter join" },
+      { "gS", "<Cmd>TSJSplit<CR>", desc = "Split Line (treesj)" },
+      { "gJ", "<Cmd>TSJJoin<CR>", desc = "Join Line (treesj)" },
     },
     opts = {
       use_default_keymaps = false,

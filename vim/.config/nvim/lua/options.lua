@@ -14,3 +14,11 @@ opt.clipboard = "unnamedplus"
 opt.ignorecase = true
 opt.inccommand = "nosplit"
 opt.timeoutlen = 300
+
+vim.api.nvim_create_autocmd(
+  "FileType",
+  {
+    pattern = { "markdown*", "text" },
+    command = "setlocal wrap",
+  }
+)

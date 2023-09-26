@@ -63,55 +63,55 @@ return {
         function()
           vim.lsp.inlay_hint(0)
         end,
-        desc = "Toggle Inlay Hints",
+        desc = "Toggle [L]SP inlay [h]ints",
       },
       {
         "gd",
         function()
           require("telescope.builtin").lsp_definitions({ reuse_win = true })
         end,
-        desc = "Goto Definition",
+        desc = "LSP goto [d]efinition (telescope.nvim)",
       },
       {
         "<leader>s",
         function()
           require("telescope.builtin").lsp_document_symbols({ reuse_win = true })
         end,
-        desc = "LSP Document Symbols",
+        desc = "LSP document [s]ymbols (telescope.nvim)",
       },
       {
         "gr",
         "<cmd>Telescope lsp_references<cr>",
-        desc = "References",
+        desc = "LSP [r]eferences (telescope.nvim)",
       },
-      { "<leader>r", vim.lsp.buf.rename, desc = "LSP Rename" },
-      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+      { "<leader>r", vim.lsp.buf.rename, desc = "LSP [r]ename" },
+      { "gD", vim.lsp.buf.declaration, desc = "LSP Goto [D]eclaration" },
       {
         "gi",
         function()
           require("telescope.builtin").lsp_implementations({ reuse_win = true })
         end,
-        desc = "Goto Implementation",
+        desc = "LSP goto [i]mplementation (telescope.nvim)",
       },
       {
         "gy",
         function()
           require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
         end,
-        desc = "Goto Type Definition",
+        desc = "LSP goto T[y]pe Definition (telescope.nvim)",
       },
       {
         "<c-k>",
         vim.lsp.buf.signature_help,
         mode = "i",
-        desc = "Signature Help",
+        desc = "LSP Signature Help",
       },
-      { "]d", diagnostic_goto(true), desc = "Next Diagnostic" },
-      { "[d", diagnostic_goto(false), desc = "Prev Diagnostic" },
-      { "]e", diagnostic_goto(true, "ERROR"), desc = "Next Error" },
-      { "[e", diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-      { "]w", diagnostic_goto(true, "WARN"), desc = "Next Warning" },
-      { "[w", diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
+      { "]d", diagnostic_goto(true), desc = "LSP next [d]iagnostic" },
+      { "[d", diagnostic_goto(false), desc = "LSP prev [d]iagnostic" },
+      { "]e", diagnostic_goto(true, "ERROR"), desc = "LSP next [e]rror" },
+      { "[e", diagnostic_goto(false, "ERROR"), desc = "LSP prev [e]rror" },
+      { "]w", diagnostic_goto(true, "WARN"), desc = "LSP next [w]arning" },
+      { "[w", diagnostic_goto(false, "WARN"), desc = "LSP prev [w]arning" },
     },
     ---@class PluginLspOpts
     opts = {

@@ -1,11 +1,14 @@
 return {
   {
     "nvim-neotest/neotest",
+    lazy = false,
     dependencies = {
-      "alfaix/neotest-gtest",
+      "hydra.nvim",
+      "llllvvuu/neotest-gtest",
       "llllvvuu/neotest-foundry",
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-go",
+      "nvim-treesitter",
     },
     opts = function()
       return {
@@ -48,18 +51,85 @@ return {
         opts.adapters = adapters
       end
 
-      require("neotest").setup(opts)
+      local neotest = require("neotest")
+      neotest.setup(opts)
+
+      local hint = [[
+ ^ ^                  ^ ^    TESTING 󰙨
+ _t_: test nearest    _a_: attach nearest    _o_: output           _O_: toggle output panel
+ _f_: test file       _x_: stop nearest      _d_: debug nearest    _n_: jump to next test
+ _q_: exit            _w_: toggle watch      _s_: goto summary     _p_: jump to prev test
+
+SUMMARY WINDOW:
+"a" attach       "M" clear marked  "T" clear target    "d" debug
+"D" debug marked "<CR>" expand     "<2-LeftMouse>" expand all
+"e" expand all   "i" jumpto        "m" mark            "J" next failed
+"o" output       "K" prev failed   "r" run             "R" run marked
+"O" short        "u" stop          "t" target          "w" watch
+]]
+      local prev_win = nil
+      require("hydra")({
+        hint = hint,
+        name = "neo[t]est",
+        mode = { "n", "x" },
+        body = "<leader>t",
+        config = {
+          color = "pink",
+          invoke_on_body = true,
+          hint = {
+            position = "bottom",
+            border = "rounded",
+          },
+          on_enter = function()
+            vim.bo.modifiable = false
+            require("neotest").summary.open()
+          end,
+          on_exit = function()
+            require("neotest").summary.close()
+          end,
+        },
+        heads = {
+          { "t", neotest.run.run, { silent = true } },
+          { "x", neotest.run.stop, { silent = true } },
+          {
+            "f",
+            function()
+              neotest.run.run(vim.fn.expand("%"))
+            end,
+            { silent = true },
+          },
+          {
+            "d",
+            function()
+              neotest.run.run({ strategy = "dap" })
+              require("plugins-tui.nvim-dap").hydra:activate()
+            end,
+            { silent = true, exit = true },
+          },
+          { "a", neotest.run.attach, { silent = true } },
+          { "o", neotest.output.open, { silent = true } },
+          { "O", neotest.output_panel.toggle, { silent = true } },
+          { "n", neotest.jump.next, { silent = true } },
+          { "w", neotest.watch.toggle, { silent = true } },
+          { "p", neotest.jump.prev, { silent = true } },
+          {
+            "s",
+            function()
+              neotest.summary.open()
+              local cur_win = vim.api.nvim_get_current_win()
+              local win = vim.fn.bufwinid("Neotest Summary")
+              if win == cur_win then
+                vim.api.nvim_set_current_win(prev_win)
+              elseif win and win > -1 then
+                prev_win = cur_win
+                vim.api.nvim_set_current_win(win)
+              end
+            end,
+            { silent = true },
+          },
+          { "q", nil, { exit = true, nowait = true } },
+        },
+      })
     end,
-    -- stylua: ignore
-    keys = {
-      { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
-      { "<leader>tT", function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Run All Test Files" },
-      { "<leader>tn", function() require("neotest").run.run() end, desc = "Run Nearest" },
-      { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
-      { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
-      { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
-      { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
-      { "<leader>t?", ":h neotest.setup_project()<CR>25k", desc = "Neotest Outline Keybind Help" },
-    },
   },
 }

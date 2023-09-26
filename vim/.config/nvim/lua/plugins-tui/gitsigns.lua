@@ -14,7 +14,7 @@ return {
       ^ ^              _<Enter>_: Neogit              _q_: exit
       ]]
       require("hydra")({
-        name = "Git",
+        name = "gitsigns / neogit",
         hint = hint,
         config = {
           color = "pink",

@@ -7,7 +7,7 @@ return {
         function()
           require("actions-preview").code_actions()
         end,
-        desc = "LSP Code Actions Preview",
+        desc = "LSP code [a]ctions preview",
         mode = {"n", "v"},
       },
     },

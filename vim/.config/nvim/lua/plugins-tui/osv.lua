@@ -3,11 +3,11 @@ return {
     "jbyuki/one-small-step-for-vimkind",
     keys = {
       {
-        "<leader>dv",
+        "<leader>o",
         function()
           require("osv").launch({ port = 8086 })
         end,
-        desc = "Start Neovim Debug Server",
+        desc = "osv - Debug Neovim's Lua (port 8086)",
       },
     },
   },

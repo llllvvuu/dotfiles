@@ -286,7 +286,6 @@ languages:
     - <<: *proselint
     - <<: *prettierd
   solidity:
-    - <<: *solhint
     - <<: *slither
     - <<: *forge-fmt
   sh:

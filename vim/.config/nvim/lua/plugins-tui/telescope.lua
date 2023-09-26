@@ -11,11 +11,15 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     keys = {
-      { "<leader>f", "<cmd>Telescope git_files<cr>", desc = "Git Files" },
+      {
+        "<leader>f",
+        "<cmd>Telescope git_files<cr>",
+        desc = "git [f]iles (telescope.nvim)",
+      },
       {
         "<leader>b",
         "<cmd>Telescope buffers show_all_buffers=true<cr>",
-        desc = "Buffers",
+        desc = "buffers (telescope.nvim)",
       },
       {
         "<leader>/",
@@ -32,7 +36,7 @@ return {
       {
         "<leader>u",
         "<cmd>Telescope undo<cr>",
-        desc = "Undo Tree",
+        desc = "undotree (telescope.nvim)",
       },
     },
     opts = {
