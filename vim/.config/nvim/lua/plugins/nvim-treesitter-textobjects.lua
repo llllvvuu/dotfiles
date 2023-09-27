@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     config = function()
-      require("nvim-treesitter.configs").setup {
+      require("nvim-treesitter.configs").setup({
         textobjects = {
           select = {
             enable = true,
@@ -16,7 +16,11 @@ return {
               ["il"] = "@call.inner",
               ["aa"] = "@parameter.outer",
               ["ia"] = "@parameter.inner",
-              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+              ["as"] = {
+                query = "@scope",
+                query_group = "locals",
+                desc = "Select language scope",
+              },
             },
           },
           move = {
@@ -34,7 +38,7 @@ return {
             },
           },
         },
-      }
+      })
     end,
   },
 }

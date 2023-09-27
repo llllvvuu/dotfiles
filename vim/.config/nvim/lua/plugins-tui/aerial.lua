@@ -5,7 +5,11 @@ return {
     keys = {
       { "{", "<cmd>AerialPrev<CR>", desc = "Prev function/interface" },
       { "}", "<cmd>AerialNext<CR>", desc = "Next function/interface" },
-      { "<leader>O", "<cmd>AerialToggle! left<CR>", desc = "Toggle [O]utline (aerial.nvim)" },
+      {
+        "<leader>O",
+        "<cmd>AerialToggle! left<CR>",
+        desc = "Toggle [O]utline (aerial.nvim)",
+      },
     },
     opts = {
       autojump = true,
@@ -14,7 +18,7 @@ return {
       show_guides = true,
       layout = {
         default_direction = "prefer_left",
-      }
+      },
     },
     dependencies = {
       "nvim-treesitter",

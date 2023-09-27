@@ -5,7 +5,7 @@ return {
       {
         "<leader>lf",
         function()
-          require("conform").format { lsp_fallback = true }
+          require("conform").format({ lsp_fallback = true })
         end,
         desc = "LSP Format Document",
       },

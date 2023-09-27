@@ -8,8 +8,8 @@ return {
           require("actions-preview").code_actions()
         end,
         desc = "LSP code [a]ctions preview",
-        mode = {"n", "v"},
+        mode = { "n", "v" },
       },
     },
-  }
+  },
 }

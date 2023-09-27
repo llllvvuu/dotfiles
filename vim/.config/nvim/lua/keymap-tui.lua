@@ -82,9 +82,24 @@ map(
   toggle_quickfix,
   { desc = "Toggle Qui[c]kfix", noremap = true, silent = true }
 )
-map("n", "<C-q>", ":cfdo e<cr>", { desc = "Open all Quickfix files", noremap = true, silent = true })
-map("n", "]q", "<cmd>cn<cr>", { desc = "Next [q]uickfix", noremap = true, silent = true })
-map("n", "[q", "<cmd>cp<cr>", { desc = "Previous [q]uickfix", noremap = true, silent = true })
+map(
+  "n",
+  "<C-q>",
+  ":cfdo e<cr>",
+  { desc = "Open all Quickfix files", noremap = true, silent = true }
+)
+map(
+  "n",
+  "]q",
+  "<cmd>cn<cr>",
+  { desc = "Next [q]uickfix", noremap = true, silent = true }
+)
+map(
+  "n",
+  "[q",
+  "<cmd>cp<cr>",
+  { desc = "Previous [q]uickfix", noremap = true, silent = true }
+)
 
 map("n", "<leader>p", "<cmd>pclose<cr>", { desc = "Close [p]review window" })
 
