@@ -1,7 +1,7 @@
 #!/bin/sh
 
-alias l='ls -lF'
-alias la='ls -laF'
+alias l='eza -lF'
+alias la='eza -laF'
 alias rm='rm -i'
 
 command -v tmux-tui >/dev/null 2>&1 && alias t='tmux-tui'
