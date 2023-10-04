@@ -123,6 +123,22 @@ table.insert(M, {
           args = { "--listen", "127.0.0.1:8888", "--headless" },
           cwd = "${workspaceFolder}",
         },
+        {
+          type = "codelldb",
+          request = "launch",
+          name = "Launch node binary",
+          program = function()
+            return vim.fn.input(
+              "Node repo root: ",
+              vim.fn.getcwd(),
+              "file"
+            ) .. "/out/Debug/node"
+          end,
+          args = function()
+            return vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
+          end,
+          cwd = "${workspaceFolder}",
+        },
       }
     end
 

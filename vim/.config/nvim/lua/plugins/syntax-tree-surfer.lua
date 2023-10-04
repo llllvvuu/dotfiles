@@ -157,17 +157,10 @@ return {
           },
           on_enter = function()
             surfer.select_current_node()
-            surfer.held_node = nil
+            surfer.clear_held_node()
           end,
           on_exit = function()
-            if surfer.held_node then
-              vim.api.nvim_buf_del_extmark(
-                0,
-                surfer.ns,
-                surfer.held_node.extmark_id
-              )
-              surfer.held_node = nil
-            end
+            surfer.clear_held_node()
           end,
         },
         heads = {
