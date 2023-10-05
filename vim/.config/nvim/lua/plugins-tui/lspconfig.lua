@@ -100,12 +100,6 @@ return {
         end,
         desc = "LSP goto T[y]pe Definition (telescope.nvim)",
       },
-      {
-        "<c-k>",
-        vim.lsp.buf.signature_help,
-        mode = "i",
-        desc = "LSP Signature Help",
-      },
       { "]d", diagnostic_goto(true), desc = "LSP next [d]iagnostic" },
       { "[d", diagnostic_goto(false), desc = "LSP prev [d]iagnostic" },
       { "]e", diagnostic_goto(true, "ERROR"), desc = "LSP next [e]rror" },
@@ -190,12 +184,10 @@ return {
                 callSnippet = "Replace",
               },
               format = {
-                enabled = true,
-                defaultConfig = {
-                  indent_style = "space",
-                  indent_size = 2,
-                  continuation_indent = 2,
-                },
+                enable = false,
+              },
+              hint = {
+                enable = true,
               },
             },
           },
