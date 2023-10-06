@@ -55,6 +55,7 @@ return {
         dependencies = { "williamboman/mason.nvim", opts = {} },
       },
       "hrsh7th/cmp-nvim-lsp",
+      "ray-x/lsp_signature.nvim",
     },
     keys = {
       { "<leader>lx", vim.diagnostic.open_float, desc = "Line Diagnostics" },
@@ -72,6 +73,7 @@ return {
         end,
         desc = "LSP goto [d]efinition (telescope.nvim)",
       },
+      -- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
       {
         "<leader>s",
         function()
@@ -381,7 +383,7 @@ return {
 
       vim.lsp.handlers["textDocument/hover"] =
         vim.lsp.with(vim.lsp.handlers.hover, {
-          border = "single",
+          -- border = "single",
           silent = true,
         })
 
