@@ -15,22 +15,19 @@ return {
     },
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "*" },
-        callback = function()
-          pcall(vim.treesitter.start)
-          local hl_ns = vim.api.nvim_get_namespaces()["treesitter/highlighter"]
-          if vim.g.vscode and hl_ns then
-            vim.api.nvim_set_decoration_provider(hl_ns, {
-              on_win = vim.treesitter.highlighter._on_win,
-              _on_spell_nav = nil,
-              on_line = nil,
-            })
-          end
-          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-          -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end,
-      })
+      if not vim.g.vscode then
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = { "*" },
+          callback = function()
+            if pcall(vim.treesitter.start) then
+              vim.wo.foldmethod = "expr"
+              vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+              vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
+              -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+          end,
+        })
+      end
     end,
   },
 }
