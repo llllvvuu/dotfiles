@@ -1,7 +1,7 @@
 return {
   {
     "llllvvuu/syntax-tree-surfer",
-    branch = "feat/expose_ns_hold_swap",
+    branch = "dev",
     dependencies = { "nvim-treesitter", "hydra.nvim" },
     lazy = false,
     keys = {
@@ -150,7 +150,7 @@ return {
         mode = { "n", "x" },
         hint = not vim.g.vscode and hint,
         config = {
-          color = "amaranth",
+          color = "pink",
           invoke_on_body = true,
           hint = {
             border = "rounded",
@@ -179,11 +179,15 @@ return {
           {
             "o",
             function()
-              surfer.surf("parent", "visual")
+              if vim.api.nvim_get_mode().mode ~= "v" then
+                surfer.select_current_node()
+              else
+                surfer.surf("parent", "visual")
+              end
             end,
           },
           {
-            "i",
+            vim.g.vscode and "I" or "i",
             function()
               surfer.surf("child", "visual")
             end,

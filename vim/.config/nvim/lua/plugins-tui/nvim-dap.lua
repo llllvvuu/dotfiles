@@ -120,7 +120,11 @@ table.insert(M, {
             )
             return nvim_bin
           end,
-          args = { "--listen", "127.0.0.1:8888", "--headless" },
+          args = function()
+            local args = vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
+            vim.list_extend(args, { "--listen", "127.0.0.1:8888", "--headless" })
+            return args
+          end,
           cwd = "${workspaceFolder}",
         },
         {
