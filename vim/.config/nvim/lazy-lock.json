@@ -64,6 +64,7 @@
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "652345bd1aa333f60c9cbb1259f77155786e5514" },
   "repolink.nvim": { "branch": "master", "commit": "a8b35579ce497f7cebb785bc35095d709d021721" },
   "rust-tools.nvim": { "branch": "master", "commit": "0cc8adab23117783a0292a0c8a2fbed1005dc645" },
+  "satellite.nvim": { "branch": "main", "commit": "a3a966e4573854ec683de061a7c4892278c36b72" },
   "ssr.nvim": { "branch": "main", "commit": "b2f35df231c6b090f6eb023ddf2ad0cb88d90eb4" },
   "syntax-tree-surfer": { "branch": "dev", "commit": "4fd55ac963778d2ad2c829f2289ced8973794ce6" },
   "telescope-git-grep.nvim": { "branch": "main", "commit": "2036a2577fc3d15af344b18aa357be96d89782bb" },

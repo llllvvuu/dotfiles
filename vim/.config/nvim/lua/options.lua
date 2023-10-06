@@ -11,6 +11,7 @@ g.omni_sql_no_default_maps = 1
 local opt = vim.opt
 
 opt.clipboard = "unnamedplus"
+opt.foldenable = false
 opt.ignorecase = true
 opt.inccommand = "nosplit"
 opt.timeoutlen = 300

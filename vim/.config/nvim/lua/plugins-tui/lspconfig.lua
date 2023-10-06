@@ -188,6 +188,7 @@ return {
               },
               hint = {
                 enable = true,
+                setType = true,
               },
             },
           },
