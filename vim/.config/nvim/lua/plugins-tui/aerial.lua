@@ -17,7 +17,7 @@ return {
       open_automatic = true,
       show_guides = true,
       layout = {
-        default_direction = "prefer_left",
+        default_direction = "prefer_right",
       },
     },
     dependencies = {

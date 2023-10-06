@@ -139,7 +139,7 @@ return {
       local surfer = require("syntax-tree-surfer")
       surfer.setup()
       local hint = [[
-      _n_: Next Sibling     _p_: Previous Sibling     _o_: Out (Parent Node)     _i_: In (Child Node)
+      _n_: Next Sibling     _p_: Previous Sibling     _O_: Out (Parent Node)     _I_: In (Child Node)
       _N_: Swap w/ Next     _P_: Swap w/ Previous     _s_: Hold Or Swap Node
       ^
       _<Enter>_: Exit (Keep Selection)              _q_: Exit (Discard Selection)
@@ -156,6 +156,7 @@ return {
             border = "rounded",
           },
           on_enter = function()
+            vim.bo.modifiable = false
             surfer.select_current_node()
             surfer.clear_held_node()
           end,
@@ -177,7 +178,7 @@ return {
             end,
           },
           {
-            "o",
+            "O",
             function()
               if vim.api.nvim_get_mode().mode ~= "v" then
                 surfer.select_current_node()
@@ -187,7 +188,7 @@ return {
             end,
           },
           {
-            vim.g.vscode and "I" or "i",
+            "I",
             function()
               surfer.surf("child", "visual")
             end,
@@ -195,20 +196,26 @@ return {
           {
             "N",
             function()
+              vim.bo.modifiable = true
               surfer.surf("next", "visual", true)
+              vim.bo.modifiable = false
             end,
             { desc = "swapN" },
           },
           {
             "P",
             function()
+              vim.bo.modifiable = true
               surfer.surf("prev", "visual", true)
+              vim.bo.modifiable = false
             end,
           },
           {
             "s",
             function()
+              vim.bo.modifiable = true
               surfer.hold_or_swap(true)
+              vim.bo.modifiable = false
             end,
             { desc = "holdswap" },
           },

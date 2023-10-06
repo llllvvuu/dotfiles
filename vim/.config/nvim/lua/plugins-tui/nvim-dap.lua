@@ -65,7 +65,26 @@ table.insert(M, {
     },
   },
 
-  lazy = false,
+  -- stylua: ignore
+  keys = {
+    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dx", function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" },
+    { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
+    { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+    { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+    { "<leader>dk", function() require("dap").up() end, desc = "Up" },
+    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+    { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { "<leader>dw", function() require("dap.ui.widgets").preview() end, desc = "Hover" },
+  },
 
   config = function()
     vim.api.nvim_set_hl(
@@ -75,8 +94,6 @@ table.insert(M, {
     )
 
     local dap = require("dap")
-    local widgets = require("dap.ui.widgets")
-    local Hydra = require("hydra")
 
     for _, lang in ipairs({ "c", "cpp" }) do
       dap.configurations[lang] = {
@@ -219,58 +236,6 @@ table.insert(M, {
         numhl = sign[3],
       })
     end
-
-    local hint = [[
-_<Enter>_: step over   _s_: Continue/Start     _b_: Breakpoint     _K_: Eval
-_i_: step into         _d_: Terminate          _B_: Breakpoint Condition
-_o_: step out          _x_: Clear Breakpoints  _t_: Test Nearest
-_c_: to cursor         _a_: Goto (no execute)
-^
-_q_: exit]]
-    M.hydra = Hydra({
-      hint = hint,
-      config = {
-        color = "pink",
-        invoke_on_body = true,
-        hint = {
-          position = "bottom",
-          border = "rounded",
-        },
-      },
-      name = "debugger (nvim-dap)",
-      mode = { "n", "x" },
-      body = "<leader>d",
-      on_enter = function()
-        vim.bo.modifiable = false
-      end,
-      heads = {
-        { "<Enter>", dap.step_over, { silent = true } },
-        { "i", dap.step_into, { silent = true } },
-        { "o", dap.step_out, { silent = true } },
-        { "c", dap.run_to_cursor, { silent = true } },
-        { "s", dap.continue, { silent = true } },
-        { "a", dap.goto_, { silent = true } },
-        { "d", dap.terminate, { exit = true, silent = true } },
-        { "x", dap.clear_breakpoints, { silent = true } },
-        { "b", dap.toggle_breakpoint, { silent = true } },
-        {
-          "B",
-          function()
-            dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-          end,
-          { silent = true },
-        },
-        { "K", widgets.hover, { silent = true } },
-        {
-          "t",
-          function()
-            require("neotest").run.run({ strategy = "dap" })
-          end,
-          { silent = true },
-        },
-        { "q", nil, { exit = true, nowait = true } },
-      },
-    })
   end,
 })
 

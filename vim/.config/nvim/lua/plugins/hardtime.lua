@@ -25,6 +25,8 @@ return {
         "query",
         "dbui",
         "fugitiveblame",
+        "neo-tree",
+        "neo-tree-popup",
       },
     },
   },
