@@ -1,3 +1,2 @@
-return {
-  { "lewis6991/satellite.nvim", event = "BufEnter" },
-}
+--- @type LazyPluginSpec
+return { "lewis6991/satellite.nvim", event = "BufEnter" }

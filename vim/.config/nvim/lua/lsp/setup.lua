@@ -1,9 +1,11 @@
 return {
+  --- @param opts lspconfig.options.clangd
   clangd = function(_, opts)
     require("clangd_extensions").setup({ server = opts })
     return false
   end,
 
+  --- @param opts lspconfig.options.rust_analyzer
   rust_analyzer = function(_, opts)
     local ok, mason_registry = pcall(require, "mason-registry")
     local adapter ---@type any

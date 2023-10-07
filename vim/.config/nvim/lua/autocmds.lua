@@ -10,11 +10,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufReadPre", {
-  pattern = "*",
-  command = 'if getfsize(expand("%")) > 1000000 | syntax off | endif',
-})
-
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(opts)
     local fname = vim.api.nvim_buf_get_name(opts.buf)

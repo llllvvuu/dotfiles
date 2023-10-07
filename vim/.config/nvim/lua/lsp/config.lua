@@ -1,7 +1,7 @@
 ---@param opts PluginLspOpts
 return function(_, opts)
-  require("lsp.handlers")()
-  require("lsp.diagnostics")(opts)
+  require("lsp.handlers").setup()
+  require("lsp.diagnostics").setup(opts)
   require("lsp.servers.fixit").setup({})
 
   local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

@@ -1,34 +1,34 @@
+--- @type LazyPluginSpec
 return {
-  {
-    "zbirenbaum/copilot.lua",
-    opts = {
-      panel = { enabled = false },
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept = "<M-a>",
-          accept_word = "<M-w>",
-          accept_line = "<M-l>",
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<C-]>",
-        },
-      },
-      filetypes = {
-        yaml = true,
-        markdown = true,
-        gitcommit = true,
-        hgcommit = true,
-        svn = true,
-        cvs = true,
+  "zbirenbaum/copilot.lua",
+  opts = {
+    panel = { enabled = false },
+    suggestion = {
+      enabled = true,
+      auto_trigger = true,
+      keymap = {
+        accept = "<M-a>",
+        accept_word = "<M-w>",
+        accept_line = "<M-l>",
+        next = "<M-]>",
+        prev = "<M-[>",
+        dismiss = "<C-]>",
       },
     },
-    config = function(_, opts)
-      require("copilot").setup(opts)
+    filetypes = {
+      yaml = true,
+      markdown = true,
+      gitcommit = true,
+      hgcommit = true,
+      svn = true,
+      cvs = true,
+    },
+  },
+  config = function(_, opts)
+    require("copilot").setup(opts)
 
-      local map = vim.keymap.set
-      local suggestions = require("copilot.suggestion")
+    local map = vim.keymap.set
+    local suggestions = require("copilot.suggestion")
 
       -- stylua: ignore start
       map("i", "å", suggestions.accept, { desc = "[copilot] accept suggestion", silent = true })
@@ -45,7 +45,6 @@ return {
 
       map("i", "“", suggestions.prev, { desc = "[copilot] accept prev", silent = true })
       map("i", "<M-“>", suggestions.prev, { desc = "[copilot] accept prev", silent = true })
-      -- stylua: ignore end
-    end,
-  },
+    -- stylua: ignore end
+  end,
 }

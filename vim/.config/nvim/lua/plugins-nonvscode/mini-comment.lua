@@ -1,5 +1,8 @@
 return {
+  --- @type LazyPluginSpec
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+
+  --- @type LazyPluginSpec
   {
     "echasnovski/mini.comment",
     event = "VeryLazy",

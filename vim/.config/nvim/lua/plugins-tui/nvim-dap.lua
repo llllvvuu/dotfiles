@@ -1,3 +1,5 @@
+--- @diagnostic disable: missing-fields
+
 local dap_icons = {
   Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
   Breakpoint = " ",
@@ -6,9 +8,8 @@ local dap_icons = {
   LogPoint = ".>",
 }
 
-local M = {}
-
-table.insert(M, {
+--- @type LazyPluginSpec
+return {
   "mfussenegger/nvim-dap",
 
   dependencies = {
@@ -55,6 +56,7 @@ table.insert(M, {
 
   -- stylua: ignore
   keys = {
+    -- TODO: change to mini.clue sub-mode
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dx", function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" },
@@ -97,6 +99,4 @@ table.insert(M, {
       })
     end
   end,
-})
-
-return M
+}

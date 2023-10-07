@@ -1,7 +1,6 @@
+--- @type LazyPluginSpec
 return {
-  {
-    "leoluz/nvim-dap-go",
-    config = true,
-    ft = "go",
-  },
+  "leoluz/nvim-dap-go",
+  config = true,
+  ft = "go",
 }

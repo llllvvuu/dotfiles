@@ -1,5 +1,6 @@
 vim.g.firenvim_config.localSettings[".*"] = { takeover = "never" }
 
+--- @type table
 local timer
 
 vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {

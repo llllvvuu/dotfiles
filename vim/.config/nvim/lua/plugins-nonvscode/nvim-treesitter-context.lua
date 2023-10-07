@@ -1,3 +1,2 @@
-return {
-  { "nvim-treesitter/nvim-treesitter-context" },
-}
+--- @type LazyPluginSpec
+return { "nvim-treesitter/nvim-treesitter-context" }
