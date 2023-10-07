@@ -53,10 +53,14 @@ NVIM_APPNAME=llllvvuu/dotfiles/vim/.config/nvim nvim
 + [folke/trouble.nvim](https://dotfyle.com/plugins/folke/trouble.nvim)
 ### editing-support
 
++ [debugloop/telescope-undo.nvim](https://dotfyle.com/plugins/debugloop/telescope-undo.nvim)
 + [echasnovski/mini.pairs](https://dotfyle.com/plugins/echasnovski/mini.pairs)
 + [nvim-treesitter/nvim-treesitter-context](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context)
 + [HiPhish/rainbow-delimiters.nvim](https://dotfyle.com/plugins/HiPhish/rainbow-delimiters.nvim)
 + [Wansmer/treesj](https://dotfyle.com/plugins/Wansmer/treesj)
+### file-explorer
+
++ [nvim-neo-tree/neo-tree.nvim](https://dotfyle.com/plugins/nvim-neo-tree/neo-tree.nvim)
 ### formatting
 
 + [stevearc/conform.nvim](https://dotfyle.com/plugins/stevearc/conform.nvim)
@@ -65,16 +69,22 @@ NVIM_APPNAME=llllvvuu/dotfiles/vim/.config/nvim nvim
 + [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
 ### git
 
++ [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
 + [NeogitOrg/neogit](https://dotfyle.com/plugins/NeogitOrg/neogit)
++ [9seconds/repolink.nvim](https://dotfyle.com/plugins/9seconds/repolink.nvim)
 + [sindrets/diffview.nvim](https://dotfyle.com/plugins/sindrets/diffview.nvim)
 ### indent
 
 + [lukas-reineke/indent-blankline.nvim](https://dotfyle.com/plugins/lukas-reineke/indent-blankline.nvim)
 ### keybinding
 
++ [anuvyklack/hydra.nvim](https://dotfyle.com/plugins/anuvyklack/hydra.nvim)
 + [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
 ### lsp
 
++ [aznhe21/actions-preview.nvim](https://dotfyle.com/plugins/aznhe21/actions-preview.nvim)
++ [ray-x/lsp_signature.nvim](https://dotfyle.com/plugins/ray-x/lsp_signature.nvim)
++ [linrongbin16/lsp-progress.nvim](https://dotfyle.com/plugins/linrongbin16/lsp-progress.nvim)
 + [stevearc/aerial.nvim](https://dotfyle.com/plugins/stevearc/aerial.nvim)
 ### lsp-installer
 
@@ -86,6 +96,7 @@ NVIM_APPNAME=llllvvuu/dotfiles/vim/.config/nvim nvim
 
 + [jbyuki/one-small-step-for-vimkind](https://dotfyle.com/plugins/jbyuki/one-small-step-for-vimkind)
 + [folke/neodev.nvim](https://dotfyle.com/plugins/folke/neodev.nvim)
++ [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
 + [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
 ### plugin-manager
 
@@ -93,9 +104,15 @@ NVIM_APPNAME=llllvvuu/dotfiles/vim/.config/nvim nvim
 ### quickfix
 
 + [kevinhwang91/nvim-bqf](https://dotfyle.com/plugins/kevinhwang91/nvim-bqf)
+### scrollbar
+
++ [lewis6991/satellite.nvim](https://dotfyle.com/plugins/lewis6991/satellite.nvim)
 ### snippet
 
 + [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
+### split-and-window
+
++ [anuvyklack/windows.nvim](https://dotfyle.com/plugins/anuvyklack/windows.nvim)
 ### statusline
 
 + [nvim-lualine/lualine.nvim](https://dotfyle.com/plugins/nvim-lualine/lualine.nvim)
@@ -110,14 +127,10 @@ NVIM_APPNAME=llllvvuu/dotfiles/vim/.config/nvim nvim
 ### test
 
 + [nvim-neotest/neotest](https://dotfyle.com/plugins/nvim-neotest/neotest)
-### treesitter-based
-
-+ [ziontee113/syntax-tree-surfer](https://dotfyle.com/plugins/ziontee113/syntax-tree-surfer)
 ### utility
 
 + [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
 + [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
-+ [kevinhwang91/nvim-ufo](https://dotfyle.com/plugins/kevinhwang91/nvim-ufo)
 ### workflow
 
 + [m4xshen/hardtime.nvim](https://dotfyle.com/plugins/m4xshen/hardtime.nvim)

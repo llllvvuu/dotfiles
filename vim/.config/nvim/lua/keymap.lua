@@ -8,3 +8,11 @@ map("n", "]g", "g,", { desc = "Next chan[g]e" })
 map("n", "<leader>e", "<C-w>c", { desc = "exit window" })
 map("n", "<D-v>", '"+p', { desc = "Paste from system clipboard" })
 map("i", "<D-v>", "<C-r>+", { desc = "Paste from system clipboard" })
+
+vim.opt.rtp:prepend("/Users/llwu/git/@llllvvuu/interactive-inlay.nvim")
+map(
+  "n",
+  "H",
+  require("interactive-inlay").inlay_tooltip_at_cursor_word,
+  { desc = "Inlay hint tooltip" }
+)

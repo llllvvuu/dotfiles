@@ -18,8 +18,12 @@ return {
       if not vim.g.vscode then
         vim.api.nvim_create_autocmd("FileType", {
           pattern = { "*" },
-          callback = function()
-            if pcall(vim.treesitter.start) then
+          callback = function(data)
+            if
+              data.match ~= "csv" -- play nice with rainbow_csv
+              and data.match ~= "tsv"
+              and pcall(vim.treesitter.start)
+            then
               vim.wo.foldmethod = "expr"
               vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
               vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"

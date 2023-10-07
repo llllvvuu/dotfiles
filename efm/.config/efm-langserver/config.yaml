@@ -254,8 +254,8 @@ tools:
       - '.yamllint.yaml'
       - '.yamllint.yml'
 version: 2
-# log-file: /Users/llwu/efmlog.txt
-# log-level: 9
+log-file: /Users/llwu/efmlog.txt
+log-level: 9
 root-markers:
   - .git/
 lint-debounce: 1s
@@ -289,6 +289,9 @@ languages:
     - <<: *slither
     - <<: *forge-fmt
   sh:
+    - <<: *shellcheck
+    - <<: *shfmt
+  zsh:
     - <<: *shellcheck
     - <<: *shfmt
   tex:

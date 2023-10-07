@@ -1,10 +1,12 @@
-[ -x $HOME/local/bin/rtx ] && eval "$($HOME/local/bin/rtx activate bash)"
-[ -f $HOME/.fzf.bash ] && . $HOME/.fzf.bash
+#!/bin/bash
+
+[ -x "$HOME/local/bin/rtx" ] && eval "$("$HOME/local/bin/rtx" activate bash)"
+[ -f "$HOME/.fzf.bash" ] && . "$HOME/.fzf.bash"
 
 shopt -s autocd
 
-[ -s $HOME/git-completion.bash ] && . $HOME/git-completion.bash
-[ -s /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[ -s "$HOME/git-completion.bash" ] && . "$HOME/git-completion.bash"
+[ -s /usr/local/etc/bash_completion ] && . "/usr/local/etc/bash_completion"
 [ -s /usr/share/bash-completion/completions/git ] && \
     . /usr/share/bash-completion/completions/git
 
@@ -17,6 +19,7 @@ then
   else
     for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
     do
+      # shellcheck disable=SC1090
       [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
     done
   fi
@@ -29,4 +32,4 @@ bind '"\e[Z": menu-complete-backward'
 bind "set show-all-if-ambiguous on"
 bind "set menu-complete-display-prefix on"
 
-[ -s $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
+[ -s "$HOME/dotfiles/shell/config.sh" ] && . "$HOME/dotfiles/shell/config.sh"

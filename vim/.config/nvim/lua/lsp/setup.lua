@@ -8,7 +8,6 @@ return {
     local ok, mason_registry = pcall(require, "mason-registry")
     local adapter ---@type any
     if ok then
-      -- rust tools configuration for debugging support
       local codelldb = mason_registry.get_package("codelldb")
       local extension_path = codelldb:get_install_path() .. "/extension/"
       local codelldb_path = extension_path .. "adapter/codelldb"
@@ -20,32 +19,11 @@ return {
         liblldb_path
       )
     end
+
     require("rust-tools").setup({
-      dap = {
-        adapter = adapter,
-      },
-      tools = {
-        on_initialized = function()
-          vim.cmd([[
-            augroup RustLSP
-            autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
-            autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
-            autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
-            augroup END
-          ]])
-        end,
-      },
+      dap = { adapter = adapter },
       server = opts,
     })
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "rust",
-      command = [[
-        nnoremap <buffer> K <cmd>RustHoverActions<cr>
-        nnoremap <buffer> <leader>lg <cmd>RustDebuggables<cr>
-        nnoremap <buffer> <leader>lm <cmd>RustRunnables<cr>
-      ]],
-    })
-
     return true
   end,
 }

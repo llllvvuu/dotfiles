@@ -1,4 +1,6 @@
-[ -s ~/.shellrc ] && source ~/.shellrc
+#!/bin/sh
+#
+[ -s "$HOME/.shellrc" ] && . "$HOME/.shellrc"
 
-source "$HOME/dotfiles/shell/env.sh"
-source "$HOME/dotfiles/shell/aliases.sh"
+. "$HOME/dotfiles/shell/env.sh"
+. "$HOME/dotfiles/shell/aliases.sh"

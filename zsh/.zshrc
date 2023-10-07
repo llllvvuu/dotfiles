@@ -18,22 +18,22 @@ setopt HIST_BEEP
 bindkey -v '^?' backward-delete-char
 bindkey -M viins 'jk' vi-cmd-mode
 
-export HISTFILE=$HOME/.zsh_history
+export HISTFILE="$HOME/.zsh_history"
 export KEYTIMEOUT=42
 
 # Shell config
-[ -f $HOME/dotfiles/shell/config.sh ] && . $HOME/dotfiles/shell/config.sh
+[ -f "$HOME/dotfiles/shell/config.sh" ] && . "$HOME/dotfiles/shell/config.sh"
 
 # Plugins
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
-[ -s $HOME/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
-    . $HOME/zsh-autosuggestions/zsh-autosuggestions.zsh
-[ -s $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
-    . $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -s "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+    . "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -s "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
+    . "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -s /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
 
-[ -x $HOME/local/bin/rtx ] && eval "$($HOME/local/bin/rtx activate zsh)"
-[ -f $HOME/.fzf.zsh ] && . $HOME/.fzf.zsh
+[ -x "$HOME/local/bin/rtx" ] && eval "$("$HOME/local/bin/rtx" activate zsh)"
+[ -f "$HOME/.fzf.zsh" ] && . "$HOME/.fzf.zsh"
 
 # Completions
 fpath+=~/.zfunc
@@ -46,10 +46,10 @@ done
 compinit -C
 autoload -U +X bashcompinit && bashcompinit
 
-[ -s $HOME/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh ] && \
-    . $HOME/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh
+[ -s "$HOME/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh" ] && \
+    . "$HOME/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh"
 
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+[ -f "$HOME/.config/tabtab/zsh/__tabtab.zsh" ] && . "$HOME/.config/tabtab/zsh/__tabtab.zsh"
 
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.*' insert-sections true

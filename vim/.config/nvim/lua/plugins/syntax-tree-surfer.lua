@@ -37,102 +37,32 @@ return {
         end,
         desc = "Treesitter Swap Prev",
       },
-      {
-        "<M-o>",
-        "<Cmd>STSSelectCurrentNode<CR>",
-        desc = "Treesitter Select Current Node",
-      },
-      {
-        "<M-ø>",
-        "<Cmd>STSSelectCurrentNode<CR>",
-        desc = "Treesitter Select Current Node",
-      },
-      {
-        "ø",
-        "<Cmd>STSSelectCurrentNode<CR>",
-        desc = "Treesitter Select Current Node",
-      },
-      {
-        "<M-n>",
-        "<Cmd>STSSelectNextSiblingNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Next",
-      },
-      {
-        "<M-˜>",
-        "<Cmd>STSSelectNextSiblingNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Next",
-      },
-      {
-        "˜",
-        "<Cmd>STSSelectNextSiblingNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Next",
-      },
-      {
-        "<M-p>",
-        "<Cmd>STSSelectPrevSiblingNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Prev",
-      },
-      {
-        "π",
-        "<Cmd>STSSelectPrevSiblingNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Prev",
-      },
-      {
-        "<M-π>",
-        "<Cmd>STSSelectPrevSiblingNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Prev",
-      },
-      {
-        "<M-o>",
-        "<Cmd>STSSelectParentNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Parent",
-      },
-      {
-        "<M-ø>",
-        "<Cmd>STSSelectParentNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Parent",
-      },
-      {
-        "ø",
-        "<Cmd>STSSelectParentNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Parent",
-      },
-      {
-        "<M-i>",
-        "<Cmd>STSSelectChildNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Child",
-      },
-      {
-        "<M-ˆ>",
-        "<Cmd>STSSelectChildNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Child",
-      },
-      {
-        "ˆ",
-        "<Cmd>STSSelectChildNode<CR>",
-        mode = "x",
-        desc = "Treesitter Select Child",
-      },
+
+      -- stylua: ignore start
+      { "<M-o>", "<Cmd>STSSelectCurrentNode<CR>", desc = "Treesitter Select Current Node" },
+      { "<M-ø>", "<Cmd>STSSelectCurrentNode<CR>", desc = "Treesitter Select Current Node" },
+      { "ø", "<Cmd>STSSelectCurrentNode<CR>", desc = "Treesitter Select Current Node" },
+
+      { "<M-n>", "<Cmd>STSSelectNextSiblingNode<CR>", mode = "x", desc = "Treesitter Select Next" },
+      { "<M-˜>", "<Cmd>STSSelectNextSiblingNode<CR>", mode = "x", desc = "Treesitter Select Next" },
+      { "˜", "<Cmd>STSSelectNextSiblingNode<CR>", mode = "x", desc = "Treesitter Select Next" },
+
+      { "<M-p>", "<Cmd>STSSelectPrevSiblingNode<CR>", mode = "x", desc = "Treesitter Select Prev" },
+      { "π", "<Cmd>STSSelectPrevSiblingNode<CR>", mode = "x", desc = "Treesitter Select Prev" },
+      { "<M-π>", "<Cmd>STSSelectPrevSiblingNode<CR>", mode = "x", desc = "Treesitter Select Prev" },
+
+      { "<M-o>", "<Cmd>STSSelectParentNode<CR>", mode = "x", desc = "Treesitter Select Parent" },
+      { "<M-ø>", "<Cmd>STSSelectParentNode<CR>", mode = "x", desc = "Treesitter Select Parent" },
+      { "ø", "<Cmd>STSSelectParentNode<CR>", mode = "x", desc = "Treesitter Select Parent" },
+
+      { "<M-i>", "<Cmd>STSSelectChildNode<CR>", mode = "x", desc = "Treesitter Select Child" },
+      { "<M-ˆ>", "<Cmd>STSSelectChildNode<CR>", mode = "x", desc = "Treesitter Select Child" },
+      { "ˆ", "<Cmd>STSSelectChildNode<CR>", mode = "x", desc = "Treesitter Select Child" },
+
       { "<C-n>", "<Cmd>STSSwapNextVisual<CR>", mode = "x" },
       { "<C-p>", "<Cmd>STSSwapPrevVisual<CR>", mode = "x" },
-      {
-        "<C-s>",
-        function()
-          require("syntax-tree-surfer").hold_or_swap(true)
-        end,
-        mode = "x",
-      },
+      { "<C-s>", function() require("syntax-tree-surfer").hold_or_swap(true) end, mode = "x" },
+      -- stylua: ignore end
     },
     opts = {},
     config = function()
@@ -164,19 +94,10 @@ return {
             surfer.clear_held_node()
           end,
         },
+        -- stylua: ignore
         heads = {
-          {
-            "n",
-            function()
-              surfer.surf("next", "visual")
-            end,
-          },
-          {
-            "p",
-            function()
-              surfer.surf("prev", "visual")
-            end,
-          },
+          { "n", function() surfer.surf("next", "visual") end },
+          { "p", function() surfer.surf("prev", "visual") end },
           {
             "O",
             function()
@@ -187,12 +108,7 @@ return {
               end
             end,
           },
-          {
-            "I",
-            function()
-              surfer.surf("child", "visual")
-            end,
-          },
+          { "I", function() surfer.surf("child", "visual") end },
           {
             "N",
             function()
@@ -219,11 +135,7 @@ return {
             end,
             { desc = "holdswap" },
           },
-          {
-            "<Enter>",
-            nil,
-            { exit = true, nowait = true, desc = "keep" },
-          },
+          { "<Enter>", nil, { exit = true, nowait = true, desc = "keep" } },
           {
             "q",
             function()

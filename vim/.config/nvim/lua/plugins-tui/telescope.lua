@@ -10,34 +10,14 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>f",
-        "<cmd>Telescope git_files<cr>",
-        desc = "git [f]iles (telescope.nvim)",
-      },
-      {
-        "<leader>b",
-        "<cmd>Telescope buffers show_all_buffers=true<cr>",
-        desc = "buffers (telescope.nvim)",
-      },
-      {
-        "<leader>/",
-        function()
-          require("git_grep").live_grep()
-        end,
-        desc = "Live Grep",
-      },
-      {
-        "<leader>*",
-        "<cmd>Telescope grep_string<cr>",
-        desc = "Grep Under Cursor",
-      },
-      {
-        "<leader>u",
-        "<cmd>Telescope undo<cr>",
-        desc = "undotree (telescope.nvim)",
-      },
+      { "<leader>f", "<cmd>Telescope git_files<cr>", desc = "git [f]iles (telescope.nvim)" },
+      { "<leader>b", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "buffers (telescope.nvim)" },
+      { "<leader>/", function() require("git_grep").live_grep() end, desc = "Live Grep" },
+      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep Under Cursor" },
+      { "<leader>u", "<cmd>Telescope undo<cr>", desc = "undotree (telescope.nvim)" },
+      { "<leader>j", function() require'telescope.builtin'.jumplist() end, desc = "jumplist (telescope.nvim)" },
     },
     opts = {
       defaults = {

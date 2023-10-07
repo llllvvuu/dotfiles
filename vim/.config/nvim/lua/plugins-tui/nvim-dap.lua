@@ -12,8 +12,6 @@ table.insert(M, {
   "mfussenegger/nvim-dap",
 
   dependencies = {
-    "hydra.nvim",
-    -- fancy UI for the debugger
     {
       "rcarriga/nvim-dap-ui",
       opts = {},
@@ -33,28 +31,18 @@ table.insert(M, {
       end,
     },
 
-    -- virtual text for the debugger
     {
       "theHamsta/nvim-dap-virtual-text",
       opts = {},
     },
 
-    -- mason.nvim integration
     {
       "jay-babu/mason-nvim-dap.nvim",
       dependencies = "mason.nvim",
       cmd = { "DapInstall", "DapUninstall" },
       opts = {
-        -- Makes a best effort to setup the various debuggers with
-        -- reasonable debug configurations
         automatic_installation = true,
-
-        -- You can provide additional configuration to the handlers,
-        -- see mason-nvim-dap README for more information
         handlers = {},
-
-        -- You'll need to check that you have the required things installed
-        -- online, please don't ask me how to install them :)
         ensure_installed = {
           "codelldb",
           "delve",
@@ -87,149 +75,20 @@ table.insert(M, {
   },
 
   config = function()
+    require("dapconfig.codelldb").setup()
+    require("dapconfig.pwa-node").setup()
+    require("dapconfig.nlua").setup()
+
     vim.api.nvim_set_hl(
       0,
       "DapStoppedLine",
       { default = true, link = "Visual" }
     )
 
-    local dap = require("dap")
-
-    for _, lang in ipairs({ "c", "cpp" }) do
-      dap.configurations[lang] = {
-        {
-          type = "codelldb",
-          request = "launch",
-          name = "Launch file",
-          program = function()
-            return vim.fn.input(
-              "Path to executable: ",
-              vim.fn.getcwd() .. "/",
-              "file"
-            )
-          end,
-          args = function()
-            return vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
-          end,
-          cwd = "${workspaceFolder}",
-        },
-        {
-          type = "codelldb",
-          request = "attach",
-          name = "Attach to process",
-          processId = require("dap.utils").pick_process,
-          cwd = "${workspaceFolder}",
-        },
-        {
-          type = "codelldb",
-          request = "launch",
-          name = "Launch Neovim Server",
-          program = function()
-            local nvim_bin = vim.fn.input(
-              "Neovim repo root: ",
-              vim.fn.getcwd(),
-              "file"
-            ) .. "/build/bin/nvim"
-            print(
-              "Launch client using: "
-                .. nvim_bin
-                .. " --server 127.0.0.1:8888 --remote-ui"
-            )
-            return nvim_bin
-          end,
-          args = function()
-            local args =
-              vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
-            vim.list_extend(
-              args,
-              { "--listen", "127.0.0.1:8888", "--headless" }
-            )
-            return args
-          end,
-          cwd = "${workspaceFolder}",
-        },
-        {
-          type = "codelldb",
-          request = "launch",
-          name = "Launch node binary",
-          program = function()
-            return vim.fn.input("Node repo root: ", vim.fn.getcwd(), "file")
-              .. "/out/Debug/node"
-          end,
-          args = function()
-            return vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
-          end,
-          cwd = "${workspaceFolder}",
-        },
-      }
-    end
-
-    if not dap.adapters["pwa-node"] then
-      require("dap").adapters["pwa-node"] = {
-        type = "server",
-        host = "localhost",
-        port = "${port}",
-        executable = {
-          command = "node",
-          args = {
-            require("mason-registry")
-              .get_package("js-debug-adapter")
-              :get_install_path()
-              .. "/js-debug/src/dapDebugServer.js",
-            "${port}",
-          },
-        },
-      }
-    end
-
-    for _, language in ipairs({
-      "typescript",
-      "javascript",
-      "typescriptreact",
-      "javascriptreact",
-    }) do
-      if not dap.configurations[language] then
-        dap.configurations[language] = {
-          {
-            type = "pwa-node",
-            request = "launch",
-            name = "Launch file",
-            program = "${file}",
-            cwd = "${workspaceFolder}",
-          },
-          {
-            type = "pwa-node",
-            request = "attach",
-            name = "Attach",
-            processId = require("dap.utils").pick_process,
-            cwd = "${workspaceFolder}",
-          },
-        }
-      end
-    end
-
-    if not dap.configurations.lua then
-      dap.configurations.lua = {
-        {
-          type = "nlua",
-          request = "attach",
-          name = "Attach to running Neovim instance",
-        },
-      }
-    end
-
-    if not dap.adapters.lua then
-      dap.adapters.nlua = function(callback, config)
-        callback({
-          type = "server",
-          host = config.host or "127.0.0.1",
-          port = config.port or 8086,
-        })
-      end
-    end
-
     for name, sign in pairs(dap_icons) do
-      sign = type(sign) == "table" and sign or { sign }
+      if type(sign) == "string" then
+        sign = { sign }
+      end
       vim.fn.sign_define("Dap" .. name, {
         text = sign[1],
         texthl = sign[2] or "DiagnosticInfo",

@@ -4,7 +4,7 @@ return {
     lazy = false,
     dependencies = {
       "hydra.nvim",
-      "llllvvuu/neotest-gtest",
+      "alfaix/neotest-gtest",
       "llllvvuu/neotest-foundry",
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-go",
