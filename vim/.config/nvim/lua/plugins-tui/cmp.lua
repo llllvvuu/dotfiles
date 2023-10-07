@@ -1,3 +1,5 @@
+--- @diagnostic disable: missing-fields
+
 return {
   {
     "llllvvuu/nvim-cmp",
@@ -13,15 +15,11 @@ return {
       "clangd_extensions.nvim",
     },
     opts = function()
-      vim.api.nvim_set_hl(
-        0,
-        "CmpGhostText",
-        { link = "Comment", default = true }
-      )
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local defaults = require("cmp.config.default")()
       table.insert(defaults.sorting, require("clangd_extensions.cmp_scores"))
+      --- @type cmp.ConfigSchema
       return {
         autocomplete = {
           cmp.TriggerEvent.InsertEnter,

@@ -138,8 +138,12 @@ table.insert(M, {
             return nvim_bin
           end,
           args = function()
-            local args = vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
-            vim.list_extend(args, { "--listen", "127.0.0.1:8888", "--headless" })
+            local args =
+              vim.split(vim.fn.input("Args:"), " ", { trimempty = true })
+            vim.list_extend(
+              args,
+              { "--listen", "127.0.0.1:8888", "--headless" }
+            )
             return args
           end,
           cwd = "${workspaceFolder}",
@@ -149,11 +153,8 @@ table.insert(M, {
           request = "launch",
           name = "Launch node binary",
           program = function()
-            return vim.fn.input(
-              "Node repo root: ",
-              vim.fn.getcwd(),
-              "file"
-            ) .. "/out/Debug/node"
+            return vim.fn.input("Node repo root: ", vim.fn.getcwd(), "file")
+              .. "/out/Debug/node"
           end,
           args = function()
             return vim.split(vim.fn.input("Args:"), " ", { trimempty = true })

@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.mdx",
-  callback = function(opts)
-    vim.api.nvim_buf_set_option(0, "filetype", "markdown.mdx")
+  callback = function()
+    vim.bo.filetype = "markdown.mdx"
   end,
 })

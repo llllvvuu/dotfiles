@@ -8,6 +8,8 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
       timer:stop()
       timer:close()
     end
-    timer = vim.defer_fn(function() vim.cmd([[ write ]]) end, 500)
+    timer = vim.defer_fn(function()
+      vim.cmd([[ write ]])
+    end, 500)
   end,
 })

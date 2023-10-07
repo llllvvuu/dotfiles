@@ -2,9 +2,9 @@ require("keymap")
 
 local map = vim.keymap.set
 
-function toggle_quickfix()
+local function toggle_quickfix()
   local win_info = vim.fn.getwininfo()
-  for _, win in pairs(win_info) do
+  for _, win in pairs(win_info or {}) do
     if win.quickfix == 1 then
       vim.cmd("cclose")
       return
@@ -13,66 +13,65 @@ function toggle_quickfix()
   vim.cmd("copen")
 end
 
-function surround_in_quotes()
-  local lines = vim.api.nvim_buf_get_lines(
-    0,
-    vim.fn.line("'<") - 1,
-    vim.fn.line("'>"),
-    false
-  )
-
-  for i, line in ipairs(lines) do
-    local leading_whitespace = line:match("^(%s*)")
-    local content = line:match("^%s*(.-)%s*$")
-    lines[i] = leading_whitespace .. '"' .. content .. '"'
+--- @return number, number
+local function visual_range()
+  local l1 = vim.fn.line("v") or 0
+  local l2 = vim.fn.line(".") or l1
+  if l1 > l2 then
+    return l2 - 1, l1
+  else
+    return l1 - 1, l2
   end
-
-  vim.api.nvim_buf_set_lines(
-    0,
-    vim.fn.line("'<") - 1,
-    vim.fn.line("'>"),
-    false,
-    lines
-  )
 end
 
-function toggle_commas()
-  local lines = vim.api.nvim_buf_get_lines(
-    0,
-    vim.fn.line("'<") - 1,
-    vim.fn.line("'>"),
-    false
-  )
+local function surround_in_quotes()
+  local start, end_ = visual_range()
+  local lines = vim.api.nvim_buf_get_lines(0, start, end_, false)
 
   for i, line in ipairs(lines) do
-    if line:sub(-1) == "," then
-      -- remove the comma if it's the last character
-      lines[i] = line:sub(1, -2)
-    else
-      -- add a comma at the end if there isn't one
-      lines[i] = line .. ","
+    if line:len() ~= 0 then
+      local leading_whitespace = line:match("^(%s*)")
+      --- @type string
+      local content = line:match("^%s*(.-)%s*$")
+      if content:byte(1) == 34 and content:byte(-1) == 34 then
+        content = content:sub(2, -2)
+        lines[i] = leading_whitespace .. content
+      else
+        lines[i] = leading_whitespace .. '"' .. content .. '"'
+      end
     end
   end
 
-  vim.api.nvim_buf_set_lines(
-    0,
-    vim.fn.line("'<") - 1,
-    vim.fn.line("'>"),
-    false,
-    lines
-  )
+  vim.api.nvim_buf_set_lines(0, start, end_, false, lines)
+end
+
+local function toggle_commas()
+  local start, end_ = visual_range()
+  local lines = vim.api.nvim_buf_get_lines(0, start, end_, false)
+
+  for i, line in ipairs(lines) do
+    if line:len() ~= 0 then
+      if line:sub(-1) == "," then
+        lines[i] = line:sub(1, -2)
+      else
+        lines[i] = line .. ","
+      end
+    end
+  end
+
+  vim.api.nvim_buf_set_lines(0, start, end_, false, lines)
 end
 
 map(
   "v",
   "q",
-  ":lua surround_in_quotes()<CR>",
+  surround_in_quotes,
   { noremap = true, silent = true, desc = "Surround each line in quotes" }
 )
 map(
   "v",
   "m",
-  ":lua toggle_commas()<CR>",
+  toggle_commas,
   { noremap = true, silent = true, desc = "Toggle co[m]mas after each line" }
 )
 
