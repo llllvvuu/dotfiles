@@ -34,7 +34,6 @@ end
 
 return {
   "echasnovski/mini.clue",
-  lazy = false,
   opts = function()
     local miniclue = require("mini.clue")
     return {
@@ -73,13 +72,17 @@ return {
         miniclue.gen_clues.z(),
         { mode = "n", keys = "g'", desc = "Jump to mark (don't affect jumplist)" },
         { mode = "n", keys = "g`", desc = "Jump to mark (don't affect jumplist)" },
+        { mode = "x", keys = "g'", desc = "Jump to mark (don't affect jumplist)" },
+        { mode = "x", keys = "g`", desc = "Jump to mark (don't affect jumplist)" },
         { mode = "n", keys = "<leader>l", desc = "LSP" },
         { mode = "n", keys = "<leader>x", desc = "trouble.nvim" },
         { mode = "n", keys = "<leader>d", desc = "DAP" },
         { mode = "n", keys = "<leader><C-t>", desc = "[DUMMY - IGNORE]" },
         { mode = "n", keys = "<leader><C-g>", desc = "[DUMMY - IGNORE]" },
         { mode = "n", keys = "<leader><C-g>y", postkeys = "<leader><C-g>" },
-        { mode = { "n", "x" }, keys = "<leader><C-v>", desc = "[DUMMY - IGNORE]" },
+        { mode = "n", keys = "<leader><C-v>", desc = "[DUMMY - IGNORE]" },
+        { mode = "x", keys = "<leader><C-v>", desc = "[DUMMY - IGNORE]" },
+        { mode = "x", keys = "<leader>g", desc = "git" },
         native_window_submode_extra(),
         submode(
           not vim.g.vscode and not vim.g.started_by_firenvim,

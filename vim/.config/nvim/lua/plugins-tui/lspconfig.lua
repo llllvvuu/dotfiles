@@ -16,7 +16,6 @@ return {
       dependencies = { "williamboman/mason.nvim", opts = {} },
     },
     "hrsh7th/cmp-nvim-lsp",
-    "ray-x/lsp_signature.nvim",
   },
   keys = require("lsp.keys"),
   ---@class PluginLspOpts

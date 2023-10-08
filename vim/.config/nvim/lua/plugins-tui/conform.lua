@@ -8,7 +8,8 @@ return {
       function()
         require("conform").format({ lsp_fallback = true })
       end,
-      desc = "LSP Format Document",
+      mode = { "n", "x" },
+      desc = "LSP Format",
     },
   },
 }

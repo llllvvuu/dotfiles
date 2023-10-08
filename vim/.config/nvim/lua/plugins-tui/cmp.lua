@@ -10,6 +10,7 @@ return {
     "hrsh7th/cmp-buffer",
     { "wookayin/cmp-omni", branch = "fix-return" },
     "hrsh7th/cmp-path",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
     "saadparwaiz1/cmp_luasnip",
     { "Saecki/crates.nvim", event = { "BufRead Cargo.toml" }, config = true },
     "clangd_extensions.nvim",
@@ -60,6 +61,7 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
+        { name = "nvim_lsp_signature_help" },
         { name = "vim-dadbod-completion" },
         { name = "nvim_lsp" },
         {
