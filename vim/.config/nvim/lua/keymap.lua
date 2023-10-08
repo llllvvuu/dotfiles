@@ -9,7 +9,7 @@ map("n", "<leader>e", "<C-w>c", { desc = "exit window" })
 map("n", "<D-v>", '"+p', { desc = "Paste from system clipboard" })
 map("i", "<D-v>", "<C-r>+", { desc = "Paste from system clipboard" })
 
-vim.opt.rtp:prepend("/Users/llwu/git/@llllvvuu/interactive-inlay.nvim")
+vim.opt.rtp:prepend(vim.fn.expand("$HOME/git/@llllvvuu/interactive-inlay.nvim"))
 map(
   "n",
   "H",

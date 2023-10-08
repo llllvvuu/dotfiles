@@ -1,10 +1,20 @@
 --- @diagnostic disable: missing-fields
 
+local prefix = "<leader><C-v>" -- dummy prefix for mini.clue
+
+local function surf_parent()
+  local surfer = require("syntax-tree-surfer")
+  if vim.api.nvim_get_mode().mode ~= "v" then
+    surfer.select_current_node()
+  else
+    surfer.surf("parent", "visual")
+  end
+end
+
 --- @type LazyPluginSpec
 return {
-  "llllvvuu/syntax-tree-surfer",
-  branch = "dev",
-  dependencies = { "nvim-treesitter", "hydra.nvim" },
+  "ziontee113/syntax-tree-surfer",
+  dependencies = { "nvim-treesitter" },
   lazy = false,
   keys = {
     {
@@ -64,88 +74,29 @@ return {
     { "<C-n>", "<Cmd>STSSwapNextVisual<CR>", mode = "x" },
     { "<C-p>", "<Cmd>STSSwapPrevVisual<CR>", mode = "x" },
     { "<C-s>", function() require("syntax-tree-surfer").hold_or_swap(true) end, mode = "x" },
+    { "<leader>v", surf_parent, mode = { "n", "x", "v" } , desc = "visual syntax-tree-surfer" },
+    { prefix .."O", surf_parent, mode = { "n", "x", "v" }, desc = "parent ([O]ut)" },
+    { prefix .."I", function()
+      require("syntax-tree-surfer").surf("child", "visual")
+    end, mode = { "x", "v" }, desc = "child ([I]n)" },
+    { prefix .. "n", function()
+      require("syntax-tree-surfer").surf("next", "visual")
+    end, mode = { "x", "v" }, desc = "next" },
+    { prefix .. "p", function()
+      require("syntax-tree-surfer").surf("prev", "visual")
+    end, mode = { "x", "v" }, desc = "previous" },
+    { prefix .. "N", function()
+      require("syntax-tree-surfer").surf("next", "visual", true)
+    end, mode = { "x", "v" }, desc = "Swap with [N]ext" },
+    { prefix .. "P", function()
+      require("syntax-tree-surfer").surf("prev", "visual", true)
+    end, mode = { "x", "v" }, desc = "Swap with [P]revious" },
+    { prefix .. "s", function()
+      require("syntax-tree-surfer").hold_or_swap(true)
+    end, mode = { "x", "v" }, desc = "hold or [s]wap" },
+    { prefix .. "q", function() vim.cmd("norm! ") end, mode = { "n", "x", "v" }, desc = "quit" },
+    { prefix .. "<Space>", function() end, mode = { "n", "x", "v" }, desc = "confirm selection" },
     -- stylua: ignore end
   },
-  opts = {},
-  config = function()
-    local surfer = require("syntax-tree-surfer")
-    surfer.setup()
-    local hint = [[
-    _n_: Next Sibling     _p_: Previous Sibling     _O_: Out (Parent Node)     _I_: In (Child Node)
-    _N_: Swap w/ Next     _P_: Swap w/ Previous     _s_: Hold Or Swap Node
-    ^
-    _<Enter>_: Exit (Keep Selection)              _q_: Exit (Discard Selection)
-    ]]
-    require("hydra")({
-      name = "syntax-tree-[S]urfer",
-      body = "<leader>S",
-      mode = { "n", "x" },
-      hint = not vim.g.vscode and hint,
-      config = {
-        color = "pink",
-        invoke_on_body = true,
-        hint = {
-          border = "rounded",
-        },
-        on_enter = function()
-          vim.bo.modifiable = false
-          surfer.select_current_node()
-          surfer.clear_held_node()
-        end,
-        on_exit = function()
-          surfer.clear_held_node()
-        end,
-      },
-      -- stylua: ignore
-      heads = {
-        { "n", function() surfer.surf("next", "visual") end },
-        { "p", function() surfer.surf("prev", "visual") end },
-        {
-          "O",
-          function()
-            if vim.api.nvim_get_mode().mode ~= "v" then
-              surfer.select_current_node()
-            else
-              surfer.surf("parent", "visual")
-            end
-          end,
-        },
-        { "I", function() surfer.surf("child", "visual") end },
-        {
-          "N",
-          function()
-            vim.bo.modifiable = true
-            surfer.surf("next", "visual", true)
-            vim.bo.modifiable = false
-          end,
-          { desc = "swapN" },
-        },
-        {
-          "P",
-          function()
-            vim.bo.modifiable = true
-            surfer.surf("prev", "visual", true)
-            vim.bo.modifiable = false
-          end,
-        },
-        {
-          "s",
-          function()
-            vim.bo.modifiable = true
-            surfer.hold_or_swap(true)
-            vim.bo.modifiable = false
-          end,
-          { desc = "holdswap" },
-        },
-        { "<Enter>", nil, { exit = true, nowait = true, desc = "keep" } },
-        {
-          "q",
-          function()
-            vim.cmd("norm! ")
-          end,
-          { exit = true, nowait = true, desc = "discard" },
-        },
-      },
-    })
-  end,
+  config = true,
 }

@@ -12,15 +12,23 @@ end
 return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
-    -- stylua: ignore
-    keys = {
-      { "<leader>f", "<cmd>Telescope git_files<cr>", desc = "git [f]iles (telescope.nvim)" },
-      { "<leader>b", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "buffers (telescope.nvim)" },
-      { "<leader>/", function() require("git_grep").live_grep() end, desc = "Live Grep" },
-      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep Under Cursor" },
-      { "<leader>u", "<cmd>Telescope undo<cr>", desc = "undotree (telescope.nvim)" },
-      { "<leader>j", function() require'telescope.builtin'.jumplist() end, desc = "jumplist (telescope.nvim)" },
-    },
+  -- stylua: ignore
+  keys = {
+    { "<leader>f", "<cmd>Telescope git_files<cr>", desc = "git [f]iles (telescope.nvim)" },
+    { "<leader>b", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "buffers (telescope.nvim)" },
+    { "<leader>/", function() require("git_grep").live_grep() end, desc = "Live Grep" },
+    { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep Under Cursor" },
+    { "<leader>u", "<cmd>Telescope undo<cr>", desc = "undotree (telescope.nvim)" },
+    { "<leader>j", function() require'telescope.builtin'.jumplist() end, desc = "jumplist (telescope.nvim)" },
+    { "<leader>m", "<cmd>Telescope macros<cr>", desc = "macros (NeoComposer)" },
+  },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons",
+    { "davvid/telescope-git-grep.nvim", branch = "main" },
+    "debugloop/telescope-undo.nvim",
+    "NeoComposer.nvim",
+  },
   opts = {
     defaults = {
       prompt_prefix = " ",
@@ -43,15 +51,10 @@ return {
       },
     },
   },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons",
-    { "davvid/telescope-git-grep.nvim", branch = "main" },
-    "debugloop/telescope-undo.nvim",
-  },
   config = function(_, opts)
     require("telescope").setup(opts)
     require("telescope").load_extension("git_grep")
+    require("telescope").load_extension("macros")
     require("telescope").load_extension("undo")
   end,
 }

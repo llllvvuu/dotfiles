@@ -1,14 +1,54 @@
+--- @diagnostic disable: missing-fields
+
+--- @type integer?
+local prev_win = nil
+local prefix = "<leader><C-t>" -- dummy prefix for mini.clue
+
+local function toggle_focus_summary()
+  local cur_win = vim.api.nvim_get_current_win()
+  local win = vim.fn.bufwinid("Neotest Summary")
+  if not win or win == -1 then
+    require("neotest").summary.open()
+  elseif win == cur_win then
+    if prev_win then
+      vim.api.nvim_set_current_win(prev_win)
+    end
+  elseif win > -1 then
+    prev_win = cur_win
+    vim.api.nvim_set_current_win(win)
+  end
+end
+
 --- @type LazyPluginSpec
 return {
   "nvim-neotest/neotest",
-  lazy = false,
   dependencies = {
-    "hydra.nvim",
     "alfaix/neotest-gtest",
     "llllvvuu/neotest-foundry",
     "nvim-neotest/neotest-python",
     "nvim-neotest/neotest-go",
     "nvim-treesitter",
+  },
+  -- stylua: ignore
+  keys = {
+    { "<leader>t", function() require("neotest").summary.open() end, desc = "neo[t]est" },
+    { prefix .. "t", function() require("neotest").run.run() end, desc = "test nearest" },
+    { prefix .. "x", function() require("neotest").run.stop() end, desc = "stop test" },
+    { prefix .. "f", function()
+      require("neotest").run.run(vim.api.nvim_buf_get_name(0))
+    end, desc = "test [f]ile" },
+    { prefix .. "d", function()
+      require("neotest").summary.close()
+      require("neotest").run.run({ strategy = "dap", suite = false })
+    end, desc = "debug nearest test (DAP)" },
+    { prefix .. "a", function() require("neotest").run.attach() end, desc = "attach" },
+    { prefix .. "o", function() require("neotest").output.open() end, desc = "open output" },
+    { prefix .. "O", function() require("neotest").output_panel.toggle() end, desc = "toggle [O]utput panel" },
+    { prefix .. "n", function() require("neotest").jump.next() end, desc = "next test" },
+    { prefix .. "w", function() require("neotest").watch.toggle() end, desc = "toggle [w]atch" },
+    { prefix .. "p", function() require("neotest").jump.prev() end, desc = "prev test" },
+    { prefix .. "s", toggle_focus_summary, desc = "open [s]ummary" },
+    { prefix .. "q", function() require("neotest").summary.close() end, desc = "quit neotest" },
   },
   opts = function()
     return {
@@ -53,84 +93,5 @@ return {
 
     local neotest = require("neotest")
     neotest.setup(opts)
-
-    local hint = [[
- ^ ^                  ^ ^    TESTING 󰙨
- _t_: test nearest    _a_: attach nearest    _o_: output           _O_: toggle output panel
- _f_: test file       _x_: stop nearest      _d_: debug nearest    _n_: jump to next test
- _q_: exit            _w_: toggle watch      _s_: goto summary     _p_: jump to prev test
-
-SUMMARY WINDOW:
-"a" attach       "M" clear marked  "T" clear target    "d" debug
-"D" debug marked "<CR>" expand     "<2-LeftMouse>" expand all
-"e" expand all   "i" jumpto        "m" mark            "J" next failed
-"o" output       "K" prev failed   "r" run             "R" run marked
-"O" short        "u" stop          "t" target          "w" watch
-]]
-    local prev_win = nil
-    require("hydra")({
-      hint = hint,
-      name = "neo[t]est",
-      mode = { "n", "x" },
-      body = "<leader>t",
-      config = {
-        color = "pink",
-        invoke_on_body = true,
-        hint = {
-          position = "bottom",
-          border = "rounded",
-        },
-        on_enter = function()
-          vim.bo.modifiable = false
-          require("neotest").summary.open()
-        end,
-        on_exit = function()
-          require("neotest").summary.close()
-        end,
-      },
-      heads = {
-        { "t", neotest.run.run, { silent = true } },
-        { "x", neotest.run.stop, { silent = true } },
-        {
-          "f",
-          function()
-            neotest.run.run(vim.fn.expand("%"))
-          end,
-          { silent = true },
-        },
-        {
-          "d",
-          function()
-            neotest.run.run({ strategy = "dap", suite = false })
-            -- TODO: activate DAP sub-mode
-          end,
-          { silent = true, exit = true },
-        },
-        { "a", neotest.run.attach, { silent = true } },
-        { "o", neotest.output.open, { silent = true } },
-        { "O", neotest.output_panel.toggle, { silent = true } },
-        { "n", neotest.jump.next, { silent = true } },
-        { "w", neotest.watch.toggle, { silent = true } },
-        { "p", neotest.jump.prev, { silent = true } },
-        {
-          "s",
-          function()
-            neotest.summary.open()
-            local cur_win = vim.api.nvim_get_current_win()
-            local win = vim.fn.bufwinid("Neotest Summary")
-            if win == cur_win then
-              if prev_win then
-                vim.api.nvim_set_current_win(prev_win)
-              end
-            elseif win and win > -1 then
-              prev_win = cur_win
-              vim.api.nvim_set_current_win(win)
-            end
-          end,
-          { silent = true },
-        },
-        { "q", nil, { exit = true, nowait = true } },
-      },
-    })
   end,
 }
