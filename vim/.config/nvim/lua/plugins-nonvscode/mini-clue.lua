@@ -25,6 +25,13 @@ local function submode(is_available, keys, prefix, overrides, modes)
   end
 end
 
+local function native_window_submode_extra()
+  local win_keys = { "c", "o", "=", "_", "+", "s", "v", "m", "z" }
+  return vim.tbl_map(function(key)
+    return { mode = "n", keys = "<C-w>" .. key, postkeys = "<C-w>" }
+  end, win_keys)
+end
+
 return {
   "echasnovski/mini.clue",
   lazy = false,
@@ -58,7 +65,11 @@ return {
       clues = {
         miniclue.gen_clues.marks(),
         miniclue.gen_clues.registers(),
-        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.windows({
+          submode_move = true,
+          submode_navigate = true,
+          submode_resize = true,
+        }),
         miniclue.gen_clues.z(),
         { mode = "n", keys = "g'", desc = "Jump to mark (don't affect jumplist)" },
         { mode = "n", keys = "g`", desc = "Jump to mark (don't affect jumplist)" },
@@ -69,6 +80,7 @@ return {
         { mode = "n", keys = "<leader><C-g>", desc = "[DUMMY - IGNORE]" },
         { mode = "n", keys = "<leader><C-g>y", postkeys = "<leader><C-g>" },
         { mode = { "n", "x" }, keys = "<leader><C-v>", desc = "[DUMMY - IGNORE]" },
+        native_window_submode_extra(),
         submode(
           not vim.g.vscode and not vim.g.started_by_firenvim,
           require("plugins-tui.nvim-dap").keys,
