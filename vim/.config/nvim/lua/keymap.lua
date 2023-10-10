@@ -1,5 +1,10 @@
 local map = vim.keymap.set
 
+-- stylua: ignore start
+map("v", "q", require("utils").surround_in_quotes, { desc = "Surround each line in quotes" })
+map("v", "m", require("utils").toggle_commas, { desc = "Toggle co[m]mas after each line" })
+-- stylua: ignore end
+
 map("n", "gh", "0", { desc = "Beginning of line" })
 map("n", "gs", "^", { desc = "first non-whitespace character" })
 map("n", "gl", "$", { desc = "End of line" })

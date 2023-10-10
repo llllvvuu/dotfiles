@@ -17,6 +17,7 @@ local opt = vim.opt
 opt.clipboard = "unnamedplus"
 opt.foldenable = false
 opt.ignorecase = true
+opt.incsearch = true
 opt.inccommand = "nosplit"
 opt.syntax = "off"
 opt.timeoutlen = 300

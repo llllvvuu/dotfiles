@@ -2,12 +2,8 @@ require("keymap")
 
 local map = vim.keymap.set
 
--- stylua: ignore start
-map("v", "q", require("utils").surround_in_quotes, { desc = "Surround each line in quotes" })
-map("v", "m", require("utils").toggle_commas, { desc = "Toggle co[m]mas after each line" })
-
+-- stylua: ignore
 map("n", "<leader>c", require("utils").toggle_quickfix, { desc = "Toggle Qui[c]kfix" })
--- stylua: ignore end
 map("n", "<C-q>", ":cfdo e<cr>", { desc = "Open all Quickfix files" })
 map("n", "]q", "<cmd>cn<cr>", { desc = "Next [q]uickfix" })
 map("n", "[q", "<cmd>cp<cr>", { desc = "Previous [q]uickfix" })

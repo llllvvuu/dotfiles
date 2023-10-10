@@ -70,6 +70,7 @@ return {
           submode_resize = true,
         }),
         miniclue.gen_clues.z(),
+        miniclue.gen_clues.g(),
         { mode = "n", keys = "g'", desc = "Jump to mark (don't affect jumplist)" },
         { mode = "n", keys = "g`", desc = "Jump to mark (don't affect jumplist)" },
         { mode = "x", keys = "g'", desc = "Jump to mark (don't affect jumplist)" },

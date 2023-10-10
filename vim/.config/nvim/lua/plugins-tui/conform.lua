@@ -1,6 +1,7 @@
 --- @type LazyPluginSpec
 return {
   "stevearc/conform.nvim",
+  opts = {},
   keys = {
     --- @diagnostic disable-next-line: missing-fields
     {
