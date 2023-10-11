@@ -12,7 +12,7 @@ return {
   {
     "<leader>lh",
     function()
-      vim.lsp.inlay_hint(0)
+      vim.lsp.inlay_hint.toggle(0)
     end,
     desc = "Toggle [L]SP inlay [h]ints",
   },
