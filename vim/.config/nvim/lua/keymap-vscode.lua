@@ -43,7 +43,6 @@ map("n", "<leader>/", function()
   require("vscode-neovim").notify("workbench.action.findInFiles")
 end)
 map("i", "<C-k>", function()
-  print("pressed")
   require("vscode-neovim").call("editor.action.triggerParameterHints")
 end, { desc = "Signature Help" })
 
