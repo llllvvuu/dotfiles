@@ -46,9 +46,6 @@ map("i", "<C-k>", function()
   require("vscode-neovim").call("editor.action.triggerParameterHints")
 end, { desc = "Signature Help" })
 
-map("v", "<", "<gv")
-map("v", ">", ">gv")
-
 map("n", "<leader>w", function()
   require("vscode-neovim").notify("workbench.action.files.save")
 end)
