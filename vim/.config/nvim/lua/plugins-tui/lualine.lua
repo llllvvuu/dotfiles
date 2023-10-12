@@ -3,7 +3,6 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "tokyonight.nvim",
-    "NeoComposer.nvim",
     {
       "linrongbin16/lsp-progress.nvim",
       config = function()
@@ -35,7 +34,6 @@ return {
           },
         },
         lualine_c = {
-          require('NeoComposer.ui').status_recording,
           function()
             return require("lsp-progress").progress({
               format = function(messages)

@@ -11,12 +11,14 @@ local function submode(is_available, keys, prefix, overrides, modes)
     local clues = {}
     for _, key in pairs(keys) do
       local postkeys = overrides[key[1]] ~= nil and overrides[key[1]] or prefix
-      for _, mode in pairs(modes or { "n" }) do
-        table.insert(clues, {
-          mode = mode,
-          keys = key[1],
-          postkeys = postkeys,
-        })
+      if postkeys ~= "" then
+        for _, mode in pairs(modes or { "n" }) do
+          table.insert(clues, {
+            mode = mode,
+            keys = key[1],
+            postkeys = postkeys,
+          })
+        end
       end
     end
     return clues
@@ -100,7 +102,7 @@ return {
           not vim.g.vscode and not vim.g.started_by_firenvim,
           require("plugins-tui.gitsigns").keys,
           "<leader><C-g>",
-          { ["<leader><C-g>q"] = "" }
+          { ["<leader><C-g>q"] = "", ["<leader><C-g>g"] = "" }
         ),
         submode(
           true,

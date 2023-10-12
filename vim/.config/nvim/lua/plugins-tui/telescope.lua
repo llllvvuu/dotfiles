@@ -20,14 +20,12 @@ return {
     { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep Under Cursor" },
     { "<leader>u", "<cmd>Telescope undo<cr>", desc = "undotree (telescope.nvim)" },
     { "<leader>j", function() require'telescope.builtin'.jumplist() end, desc = "jumplist (telescope.nvim)" },
-    { "<leader>m", "<cmd>Telescope macros<cr>", desc = "macros (NeoComposer)" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
     { "davvid/telescope-git-grep.nvim", branch = "main" },
     "debugloop/telescope-undo.nvim",
-    "NeoComposer.nvim",
   },
   opts = {
     defaults = {
@@ -54,7 +52,6 @@ return {
   config = function(_, opts)
     require("telescope").setup(opts)
     require("telescope").load_extension("git_grep")
-    require("telescope").load_extension("macros")
     require("telescope").load_extension("undo")
   end,
 }

@@ -23,7 +23,7 @@ return {
     { prefix .. "w", function() require('gitsigns').toggle_word_diff() end, desc = "toggle [w]ord diff" },
     { prefix .. "b", function() require('gitsigns').blame_line() end, desc = "blame line" },
     { prefix .. "r", function() require('gitsigns').reset_hunk() end, desc = "reset hunk" },
-    { prefix .. "<Enter>", function() require("neogit").open() end, desc = "Neogit" },
+    { prefix .. "g", ":Neogit<CR>", desc = "Neogit" },
     { prefix .. "j", function()
       if vim.wo.diff then
         return "]c"
