@@ -15,7 +15,7 @@ return {
   },
   opts = {
     autojump = true,
-    disable_max_size = 100000,
+    disable_max_size = 250000,
     open_automatic = true,
     show_guides = true,
     layout = {
