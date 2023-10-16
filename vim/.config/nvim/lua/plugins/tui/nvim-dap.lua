@@ -75,9 +75,9 @@ return {
   },
 
   config = function()
-    require("dapconfig.codelldb").setup()
-    require("dapconfig.pwa-node").setup()
-    require("dapconfig.nlua").setup()
+    require("debugger.codelldb").setup()
+    require("debugger.pwa-node").setup()
+    require("debugger.nlua").setup()
 
     vim.api.nvim_set_hl(
       0,

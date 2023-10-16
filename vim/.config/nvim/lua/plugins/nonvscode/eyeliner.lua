@@ -9,7 +9,7 @@ return {
         if vim.fn.getfsize(vim.api.nvim_buf_get_name(opts.buf)) > 100000 then
           vim.cmd("EyelinerDisable")
         end
-      end
+      end,
     })
   end,
 }

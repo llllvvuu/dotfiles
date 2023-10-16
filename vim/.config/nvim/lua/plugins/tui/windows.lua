@@ -17,7 +17,9 @@ return {
     },
     {
       "<C-w>m",
-      function() require("windows.commands").maximize() end,
+      function()
+        require("windows.commands").maximize()
+      end,
       desc = "maximize window",
     },
   },

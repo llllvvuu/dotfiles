@@ -8,7 +8,7 @@ return {
       function()
         require("osv").launch({ port = 8086 })
       end,
-      desc = "osv - Debug Neovim's Lua (port 8086)",
+      desc = "osv - Debug nvim lua (port 8086)",
     },
   },
 }

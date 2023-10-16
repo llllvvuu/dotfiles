@@ -13,25 +13,27 @@ vim.opt.rtp:prepend(lazypath)
 
 if vim.g.vscode then
   require("options")
-  require("keymap-vscode")
+  require("keymap.vscode")
   require("lazy").setup({
     { import = "plugins" },
   })
 elseif vim.g.started_by_firenvim then
-  require("options-tui")
-  require("options-firenvim")
-  require("keymap-tui")
+  require("options")
+  require("options.nonvscode")
+  require("options.firenvim")
+  require("keymap.tui")
   require("lazy").setup({
     { import = "plugins" },
-    { import = "plugins-nonvscode" },
+    { import = "plugins.nonvscode" },
   })
   vim.opt.laststatus = 0
 else
-  require("options-tui")
-  require("keymap-tui")
+  require("options")
+  require("options.nonvscode")
+  require("keymap.tui")
   require("lazy").setup({
     { import = "plugins" },
-    { import = "plugins-nonvscode" },
-    { import = "plugins-tui" },
+    { import = "plugins.nonvscode" },
+    { import = "plugins.tui" },
   })
 end

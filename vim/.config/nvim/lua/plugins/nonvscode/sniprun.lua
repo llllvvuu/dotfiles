@@ -10,13 +10,23 @@ return {
   cmd = { "SnipRun" },
   keys = {
     { "<leader>5", "<Plug>SnipRun", mode = { "n", "x" }, desc = "SnipRun" },
-    { "<leader>4", function()
-      require'sniprun.display'.close_all()
-      require'sniprun'.reset()
-    end, mode = { "n", "x" }, desc = "Close SnipRun" },
-    { "<leader>6", function()
-      require'sniprun.display'.clear_virtual_text()
-    end, mode = { "n", "x" }, desc = "Clear SnipRun Virtual Text" },
+    {
+      "<leader>4",
+      function()
+        require("sniprun.display").close_all()
+        require("sniprun").reset()
+      end,
+      mode = { "n", "x" },
+      desc = "Close SnipRun",
+    },
+    {
+      "<leader>6",
+      function()
+        require("sniprun.display").clear_virtual_text()
+      end,
+      mode = { "n", "x" },
+      desc = "Clear SnipRun Virtual Text",
+    },
   },
   opts = {
     selected_interpreters = {
@@ -38,6 +48,6 @@ return {
       "VirtualTextOk",
       "LongTempFloatingWindow",
       "TerminalWithCode",
-    }
+    },
   },
 }

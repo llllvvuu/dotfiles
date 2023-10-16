@@ -1,5 +1,3 @@
-require("options")
-
 local opt = vim.opt
 
 opt.colorcolumn = vim.list_extend({ 80, 100 }, vim.fn.range(120, 999))

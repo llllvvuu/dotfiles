@@ -51,6 +51,11 @@ return {
         { mode = "x", keys = "'" },
         { mode = "x", keys = "`" },
 
+        { mode = "n", keys = "]" },
+        { mode = "n", keys = "[" },
+        { mode = "x", keys = "]" },
+        { mode = "x", keys = "[" },
+
         { mode = "n", keys = '"' },
         { mode = "x", keys = '"' },
         { mode = "i", keys = "<C-r>" },
@@ -72,11 +77,8 @@ return {
           submode_resize = true,
         }),
         miniclue.gen_clues.z(),
-        miniclue.gen_clues.g(),
-        { mode = "n", keys = "g'", desc = "Jump to mark (don't affect jumplist)" },
-        { mode = "n", keys = "g`", desc = "Jump to mark (don't affect jumplist)" },
-        { mode = "x", keys = "g'", desc = "Jump to mark (don't affect jumplist)" },
-        { mode = "x", keys = "g`", desc = "Jump to mark (don't affect jumplist)" },
+        require("clues.g"),
+
         { mode = "n", keys = "<leader>l", desc = "LSP" },
         { mode = "n", keys = "<leader>x", desc = "trouble.nvim" },
         { mode = "n", keys = "<leader>d", desc = "DAP" },
@@ -86,21 +88,22 @@ return {
         { mode = "n", keys = "<leader><C-v>", desc = "[DUMMY - IGNORE]" },
         { mode = "x", keys = "<leader><C-v>", desc = "[DUMMY - IGNORE]" },
         { mode = "x", keys = "<leader>g", desc = "git" },
+
         native_window_submode_extra(),
         submode(
           not vim.g.vscode and not vim.g.started_by_firenvim,
-          require("plugins-tui.nvim-dap").keys,
+          require("plugins.tui.nvim-dap").keys,
           "<leader>d"
         ),
         submode(
           not vim.g.vscode and not vim.g.started_by_firenvim,
-          require("plugins-tui.neotest").keys,
+          require("plugins.tui.neotest").keys,
           "<leader><C-t>",
           { ["<leader><C-t>q"] = "", ["<leader><C-t>d"] = "<leader>d" }
         ),
         submode(
           not vim.g.vscode and not vim.g.started_by_firenvim,
-          require("plugins-tui.gitsigns").keys,
+          require("plugins.tui.gitsigns").keys,
           "<leader><C-g>",
           { ["<leader><C-g>q"] = "", ["<leader><C-g>g"] = "" }
         ),
@@ -117,7 +120,7 @@ return {
       },
       window = {
         config = {
-          width = 42,
+          width = "auto",
         },
         delay = 69,
         scroll_down = "<C-d>",
