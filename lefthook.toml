@@ -1,0 +1,13 @@
+[pre-commit]
+parallel = true
+
+[pre-commit.commands.fix-sh]
+run = "sh lint.sh --write"
+stage_fixed = true
+
+[pre-commit.commands.lint-lua]
+run = "selene --config vim/.config/nvim/selene.toml vim/.config/nvim"
+
+[pre-commit.commands.fix-lua]
+run = "stylua --config-path vim/.config/nvim/stylua.toml vim/.config/nvim"
+stage_fixed = true

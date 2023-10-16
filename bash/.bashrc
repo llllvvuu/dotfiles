@@ -7,18 +7,15 @@ shopt -s autocd
 
 [ -s "$HOME/git-completion.bash" ] && . "$HOME/git-completion.bash"
 [ -s /usr/local/etc/bash_completion ] && . "/usr/local/etc/bash_completion"
-[ -s /usr/share/bash-completion/completions/git ] && \
-    . /usr/share/bash-completion/completions/git
+[ -s /usr/share/bash-completion/completions/git ] &&
+  . /usr/share/bash-completion/completions/git
 
-if command -v brew &>/dev/null
-then
+if command -v brew &>/dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
-  then
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
     source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
   else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
-    do
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
       # shellcheck disable=SC1090
       [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
     done

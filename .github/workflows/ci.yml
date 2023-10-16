@@ -1,0 +1,34 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+name: ci
+
+permissions: {}
+
+"on":
+  push:
+    branches:
+      - main
+  pull_request: ~
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-22.04
+    permissions:
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@762d02aa393cd7c7f196feb932d16db1e5c5aa77
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --config-path vim/.config/nvim/stylua.toml --color always --check vim/.config/nvim
+          version: 0.18.2
+      - uses: NTBBloodbath/selene-action@68d1ed05cd53716aa8b9b3b81f8b63462949fab6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --config vim/.config/nvim/selene.toml vim/.config/nvim
+      - uses: luizm/action-sh-checker@76ab0b22e1f194e4a582edc7969df6485c4e9246

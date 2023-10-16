@@ -37,4 +37,5 @@ return {
   vimls = {},
   vtsls = require("lsp.servers.vtsls"),
   vuels = {},
+  yamlls = {},
 }

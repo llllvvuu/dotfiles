@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mattn/efm-langserver/master/schema.json
 tools:
   action-lint: &action-lint
     # go install github.com/rhysd/actionlint/cmd/actionlint@latest
@@ -287,7 +288,6 @@ languages:
     - <<: *prettierd
   solidity:
     - <<: *slither
-    - <<: *forge-fmt
   sh:
     - <<: *shellcheck
     - <<: *shfmt

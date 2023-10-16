@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ramfs_size_mb=1024m
 mount_point=~/ramdisk
 mkdir "$mount_point"

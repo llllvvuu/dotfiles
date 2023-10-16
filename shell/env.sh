@@ -14,7 +14,7 @@ export FZF_CTRL_T_OPTS="--height '100%' --preview 'rsp {}' --preview-window=righ
 
 [ -s "$HOME/.ssh/environment" ] && . "$HOME/.ssh/environment"
 
-command -v vim > /dev/null 2>&1 && export EDITOR="vim"
+command -v vim >/dev/null 2>&1 && export EDITOR="vim"
 command -v nvim >/dev/null 2>&1 && export EDITOR="nvim"
 
 # vim: set ft=sh:
