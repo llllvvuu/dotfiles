@@ -15,6 +15,16 @@ return {
     { "Saecki/crates.nvim", event = { "BufRead Cargo.toml" }, config = true },
     "clangd_extensions.nvim",
   },
+  keys = {
+    {
+      "<C-x><C-o>",
+      function()
+        require("cmp").complete()
+      end,
+      mode = "i",
+      desc = "Trigger cmp",
+    },
+  },
   opts = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
