@@ -12,16 +12,16 @@ g.loaded_sql_completion = 0
 g.omni_sql_default_compl_type = "syntax"
 g.omni_sql_no_default_maps = 1
 
-if vim.fn.has('wsl') then
+if vim.fn.has("wsl") ~= 0 then
   local win32yank = vim.fn.resolve(vim.fn.exepath("win32yank.exe"))
   g.clipboard = {
     copy = {
-      ["+"] = { win32yank, '-i', '--crlf' },
-      ["*"] = { win32yank, '-i', '--crlf' },
+      ["+"] = { win32yank, "-i", "--crlf" },
+      ["*"] = { win32yank, "-i", "--crlf" },
     },
     paste = {
-      ["+"] = { win32yank, '-o', '--lf' },
-      ["*"] = { win32yank, '-o', '--lf' },
+      ["+"] = { win32yank, "-o", "--lf" },
+      ["*"] = { win32yank, "-o", "--lf" },
     },
   }
 end

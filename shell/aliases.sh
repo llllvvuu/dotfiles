@@ -2,7 +2,6 @@
 
 alias rm='rm -i'
 
-command -v tmux-tui >/dev/null 2>&1 && alias t='tmux-tui'
 command -v git >/dev/null 2>&1 && alias g='git'
 if command -v eza >/dev/null 2>&1; then
   alias l='eza -lF'
