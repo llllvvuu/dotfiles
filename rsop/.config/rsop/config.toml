@@ -107,8 +107,7 @@ extensions = ["odg", "odp", "ods", "odt"]
 mimes = ["application/vnd.oasis.opendocument.spreadsheet", "application/vnd.oasis.opendocument.text"]
 
 [filetype.patch]
-mimes = ["text/x-patch"]
-extensions = ["patch"]
+extensions = ["patch", "diff"]
 
 [filetype.pcap]
 mimes = ["application/vnd.tcpdump.pcap", "application/x-pcapng"]
