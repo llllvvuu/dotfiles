@@ -1,6 +1,5 @@
 local opt = vim.opt
 
-opt.colorcolumn = vim.list_extend({ 80, 100 }, vim.fn.range(120, 999))
 opt.cursorcolumn = true
 opt.cursorline = true
 opt.expandtab = true

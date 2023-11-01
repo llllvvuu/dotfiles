@@ -30,3 +30,4 @@ bind "set show-all-if-ambiguous on"
 bind "set menu-complete-display-prefix on"
 
 [ -s "$HOME/dotfiles/shell/config.sh" ] && . "$HOME/dotfiles/shell/config.sh"
+. "$HOME/.cargo/env"
