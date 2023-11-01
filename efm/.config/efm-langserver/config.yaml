@@ -259,8 +259,8 @@ tools:
       - '.yamllint.yaml'
       - '.yamllint.yml'
 version: 2
-log-file: /home/llwu/efmlog.txt
-log-level: 9
+# log-file: /home/llwu/efmlog.txt
+# log-level: 9
 root-markers:
   - .git/
 lint-debounce: 1s
