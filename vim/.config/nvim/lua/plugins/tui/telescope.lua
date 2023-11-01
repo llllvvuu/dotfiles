@@ -40,6 +40,7 @@ return {
     },
     extensions = {
       undo = {
+        use_delta = true,
         side_by_side = true,
         diff_context_lines = 8,
         layout_strategy = "vertical",
