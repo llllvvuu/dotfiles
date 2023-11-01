@@ -17,7 +17,6 @@ return {
   eslint = {},
   gopls = {},
   graphql = {},
-  hls = {}, -- Haskell
   html = {},
   lua_ls = require("lsp.servers.lua_ls"),
   jsonls = { on_attach = nofmt },

@@ -49,6 +49,7 @@ return {
           "delve",
           "js",
           "python",
+          "haskell",
         },
       },
     },
