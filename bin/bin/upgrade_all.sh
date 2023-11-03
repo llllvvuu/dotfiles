@@ -5,7 +5,7 @@ has() {
 }
 
 has brew && brew update && brew upgrade
-has apt && sudo apt update && sudo apt full-upgrade --autoremove --purge -y
+has apt && has apt-get && sudo apt update && sudo apt full-upgrade --autoremove --purge -y
 has cargo-install-update && cargo install-update -a
 has go-global-update && go-global-update
 has npm && npm -g update
