@@ -14,3 +14,6 @@
 [submodule "emacs/combobulate"]
 	path = emacs/combobulate
 	url = https://github.com/mickeynp/combobulate
+[submodule "zsh-z"]
+	path = zsh/zsh-z
+	url = https://github.com/agkozak/zsh-z.git

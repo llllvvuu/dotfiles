@@ -26,6 +26,8 @@ export KEYTIMEOUT=42
 
 # Plugins
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+[ -s "$HOME/zsh-z/zsh-z.plugin.zsh" ] && \
+    . "$HOME/zsh-z/zsh-z.plugin.zsh"
 [ -s "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
     . "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -s "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
@@ -54,3 +56,4 @@ autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.*' insert-sections true
 zstyle ':completion:*:man:*' menu yes select
+zstyle ':completion:*' menu select
