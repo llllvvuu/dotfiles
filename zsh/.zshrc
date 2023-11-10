@@ -30,8 +30,8 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
     . "$HOME/zsh-z/zsh-z.plugin.zsh"
 [ -s "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
     . "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
-[ -s "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
-    . "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -s "$HOME/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ] && \
+    . "$HOME/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 [ -s /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
 
 [ -x "$HOME/local/bin/rtx" ] && eval "$("$HOME/local/bin/rtx" activate zsh)"

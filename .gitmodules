@@ -1,13 +1,9 @@
-[submodule "zsh-syntax-highlighting"]
-	path = zsh/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-	branch = master
 [submodule "zsh-autosuggestions"]
 	path = zsh/zsh-autosuggestions
-	url = git@github.com:zsh-users/zsh-autosuggestions.git
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "zsh-yarn-completions"]
 	path = zsh/zsh-yarn-completions
-	url = git@github.com:chrisands/zsh-yarn-completions.git
+	url = https://github.com/chrisands/zsh-yarn-completions
 [submodule "zsh-completions"]
 	path = zsh/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
@@ -17,3 +13,6 @@
 [submodule "zsh-z"]
 	path = zsh/zsh-z
 	url = https://github.com/agkozak/zsh-z.git
+[submodule "fast-syntax-highlighting"]
+	path = zsh/fast-syntax-highlighting
+	url = https://github.com/zdharma-continuum/fast-syntax-highlighting.git
