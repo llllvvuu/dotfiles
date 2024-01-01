@@ -1,6 +1,9 @@
 --- @type LazyPluginSpec
 return {
   "nvim-treesitter/nvim-treesitter",
+  dependencies = {
+    { "LiadOz/nvim-dap-repl-highlights", opts = {} },
+  },
   build = ":TSUpdate",
   lazy = false,
   ---@type TSConfig
@@ -11,7 +14,7 @@ return {
     },
     auto_install = true,
     sync_install = false,
-    ensure_installed = {},
+    ensure_installed = { "dap_repl" },
     ignore_install = { "unsupported" },
     indent = { enable = not vim.g.vscode },
     modules = {},

@@ -6,9 +6,10 @@ return {
   branch = "feat/above",
   event = "InsertEnter",
   dependencies = {
+    "rcarriga/cmp-dap",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
-    { "wookayin/cmp-omni", branch = "fix-return" },
+    -- { "wookayin/cmp-omni", branch = "fix-return" },
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "saadparwaiz1/cmp_luasnip",
@@ -40,6 +41,9 @@ return {
       completion = {
         completeopt = "menu,preview,menuone,noselect",
       },
+      enabled = function()
+        return defaults.enabled() or require("cmp_dap").is_dap_buffer()
+      end,
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -71,15 +75,16 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
+        { name = "dap" },
         { name = "nvim_lsp_signature_help" },
         { name = "vim-dadbod-completion" },
         { name = "nvim_lsp" },
-        {
-          name = "omni",
-          option = {
-            disable_omnifuncs = { "v:lua.vim.lsp.omnifunc" },
-          },
-        },
+        -- {
+        --   name = "omni",
+        --   option = {
+        --     disable_omnifuncs = { "v:lua.vim.lsp.omnifunc" },
+        --   },
+        -- },
         { name = "luasnip" },
         { name = "crates" },
         { name = "buffer" },
