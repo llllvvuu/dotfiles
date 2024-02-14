@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -x "$HOME/local/bin/rtx" ] && eval "$("$HOME/local/bin/rtx" activate bash)"
+[ -x "$HOME/.local/bin/mise" ] && eval "$("$HOME/.local/bin/mise" activate bash)"
 [ -f "$HOME/.fzf.bash" ] && . "$HOME/.fzf.bash"
 
 shopt -s autocd

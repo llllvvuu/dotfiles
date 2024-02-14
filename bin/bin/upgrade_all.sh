@@ -11,4 +11,4 @@ has go-global-update && go-global-update
 has npm && npm -g update
 has pip-review && pip-review --auto
 has ghcup && ghcup upgrade && ghcup list
-has rtx && rtx outdated
+has mise && mise outdated

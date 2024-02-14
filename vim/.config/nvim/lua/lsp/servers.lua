@@ -31,7 +31,7 @@ return {
   taplo = require("lsp.servers.taplo"),
   solidity_ls = {},
   sqlls = {},
-  tailwindcss = {},
+  tailwindcss = require("lsp.servers.tailwindcss"),
   texlab = {},
   vimls = {},
   vtsls = require("lsp.servers.vtsls"),
