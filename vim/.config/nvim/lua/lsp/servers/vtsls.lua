@@ -7,6 +7,7 @@ return {
   on_attach = nofmt,
   settings = {
     vtsls = {
+      autoUseWorkspaceTsdk = true,
       experimental = {
         completion = {
           enableServerSideFuzzyMatch = true,

@@ -1,0 +1,58 @@
+[
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPrevDiagnostic",
+      "[ b": "pane::ActivatePrevItem",
+      "] b": "pane::ActivateNextItem",
+      "g d": "editor::GoToDefinition",
+      "g r": "editor::FindAllReferences",
+      "g y": "editor::GoToTypeDefinition",
+      "K": "editor::Hover",
+      "ctrl-l": "editor::Cancel",
+      "ctrl-w l": "terminal_panel::ToggleFocus",
+      "ctrl-b l": "terminal_panel::ToggleFocus",
+      "ctrl-w w": "terminal_panel::ToggleFocus",
+      "ctrl-b z": "workspace::ToggleZoom",
+      "ctrl-b v": "terminal_panel::ToggleFocus",
+      "space a": "editor::ToggleCodeActions",
+      "space r": "editor::Rename",
+      "space w": "workspace::Save",
+      "space q": "pane::CloseActiveItem",
+      "space f": "file_finder::Toggle",
+      "space l f": "editor::Format",
+      "space l h": "editor::ToggleInlayHints"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "g c c": "editor::ToggleComments"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore",
+      "cmd-e": "editor::ShowCompletions",
+      "ctrl-e": "editor::Cancel"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-b z": "workspace::ToggleZoom",
+      "ctrl-w h": "terminal_panel::ToggleFocus",
+      "ctrl-b h": "terminal_panel::ToggleFocus",
+      "ctrl-w w": "terminal_panel::ToggleFocus",
+      "cmd-t": "workspace::NewTerminal"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "g c": "editor::ToggleComments"
+    }
+  }
+]

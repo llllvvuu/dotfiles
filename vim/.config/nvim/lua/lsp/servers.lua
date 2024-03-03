@@ -5,7 +5,7 @@ local nofmt = require("lsp.util").nofmt
 ---@type lspconfig.options
 return {
   bashls = { on_attach = nofmt },
-  biome = { on_attach = nofmt },
+  -- biome = { on_attach = nofmt },
   bufls = {}, -- Protobuf
   clangd = require("lsp.servers.clangd"),
   cmake = {},

@@ -1,7 +1,6 @@
 --- @type LazyPluginSpec
 return {
-  "llllvvuu/nvim-lspconfig",
-  branch = "feat/solidity_ls",
+  "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     {
