@@ -24,7 +24,7 @@ return {
   mdx_analyzer = { on_attach = nofmt },
   mm0_ls = {},
   ocamllsp = { mason = false },
-  pyright = {},
+  basedpyright = {},
   ruff_lsp = {},
   rust_analyzer = require("lsp.servers.rust_analyzer"),
   -- semgrep = {},

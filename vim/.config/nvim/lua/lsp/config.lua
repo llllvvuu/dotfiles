@@ -2,7 +2,7 @@
 return function(_, opts)
   require("lsp.handlers").setup()
   require("lsp.diagnostics").setup(opts)
-  require("lsp.servers.fixit").setup({})
+  -- require("lsp.servers.fixit").setup({})
 
   local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   local capabilities = vim.tbl_deep_extend(

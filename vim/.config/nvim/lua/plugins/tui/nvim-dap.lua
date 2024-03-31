@@ -15,6 +15,7 @@ return {
   dependencies = {
     {
       "rcarriga/nvim-dap-ui",
+      dependencies = { "nvim-neotest/nvim-nio" },
       opts = {},
       config = function(_, opts)
         local dap = require("dap")
