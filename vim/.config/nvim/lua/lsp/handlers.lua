@@ -35,28 +35,28 @@ return {
       end
     end
 
-    local aucmds = {}
-    local augroup =
-      vim.api.nvim_create_augroup("lsp_augroup", { clear = false })
-
-    vim.api.nvim_create_autocmd("LspAttach", {
-      callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if
-          client
-          and client.server_capabilities.codeLensProvider
-          and not aucmds[args.buf]
-        then
-          aucmds[args.buf] = vim.api.nvim_create_autocmd(
-            { "CursorHold", "CursorHoldI" },
-            {
-              group = augroup,
-              callback = vim.lsp.codelens.refresh,
-              buffer = args.buf,
-            }
-          )
-        end
-      end,
-    })
+    -- local aucmds = {}
+    -- local augroup =
+    --   vim.api.nvim_create_augroup("lsp_augroup", { clear = false })
+    --
+    -- vim.api.nvim_create_autocmd("LspAttach", {
+    --   callback = function(args)
+    --     local client = vim.lsp.get_client_by_id(args.data.client_id)
+    --     if
+    --       client
+    --       and client.server_capabilities.codeLensProvider
+    --       and not aucmds[args.buf]
+    --     then
+    --       aucmds[args.buf] = vim.api.nvim_create_autocmd(
+    --         { "CursorHold", "CursorHoldI" },
+    --         {
+    --           group = augroup,
+    --           callback = vim.lsp.codelens.refresh,
+    --           buffer = args.buf,
+    --         }
+    --       )
+    --     end
+    --   end,
+    -- })
   end,
 }

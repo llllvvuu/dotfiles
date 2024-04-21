@@ -37,4 +37,5 @@ return {
   vtsls = require("lsp.servers.vtsls"),
   vuels = {},
   yamlls = {},
+  zls = {},
 }

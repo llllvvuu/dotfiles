@@ -1,7 +1,19 @@
 --- @type LazyPluginSpec
 return {
   "stevearc/conform.nvim",
-  opts = {},
+  opts = {
+    formatters_by_ft = {
+      lua = { "stylua" },
+      python = { "black" },
+      javascript = { { "prettierd", "prettier" } },
+      javascriptreact = { { "prettierd", "prettier" } },
+      typescript = { { "prettierd", "prettier" } },
+      typescriptreact = { { "prettierd", "prettier" } },
+      markdown = { { "prettierd", "prettier" } },
+      json = { { "prettierd", "prettier" } },
+      rust = { "rustfmt" },
+    },
+  },
   keys = {
     --- @diagnostic disable-next-line: missing-fields
     {
