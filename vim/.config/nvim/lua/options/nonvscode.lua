@@ -22,6 +22,7 @@ opt.spelloptions:append({ "camel" })
 opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 2
+-- https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
 opt.termguicolors = true
 opt.updatetime = 250
 opt.wildmode = "longest:full,full"

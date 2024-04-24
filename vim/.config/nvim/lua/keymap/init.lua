@@ -17,11 +17,3 @@ map("v", "m", require("utils").toggle_commas, { desc = "Toggle co[m]mas after ea
 
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
-vim.opt.rtp:prepend(vim.fn.expand("$HOME/git/@llllvvuu/interactive-inlay.nvim"))
-map(
-  "n",
-  "H",
-  require("interactive-inlay").inlay_tooltip_at_cursor_word,
-  { desc = "Inlay hint tooltip" }
-)
