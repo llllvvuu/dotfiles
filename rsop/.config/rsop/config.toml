@@ -216,7 +216,7 @@ command = "dpkg -c %i | head -n %l"
 shell = true
 
 [handler_preview.directory]
-command = "eza -alh --tree --color=always --icons --git-ignore %i | head -n %l"
+command = "eza -alh --tree --color=always --icons --git-ignore --ignore-submodule-contents %i | head -n %l"
 shell = true
 
 [handler_open.directory]
