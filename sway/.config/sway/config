@@ -1,6 +1,6 @@
 # Windows key
 set $mod Mod4
-set $term alacritty
+set $term kitty
 
 set $left h
 set $down j
@@ -72,9 +72,12 @@ input "type:keyboard" {
     xkb_options caps:ctrl_modifier
 }
 
-set $wifi $(nmcli radio wifi)
+set $profile $(asusctl profile -p | awk '{print $NF}')
+set $device $(nmcli device | grep \ wifi\  | awk '{print $1}')
+set $wifi $(nmcli -f GENERAL.CONNECTION device show $device | awk '{print $2}')
+set $wifi_status $(nmcli -f GENERAL.STATE device show $device | awk '{print $3}' | sed 's/(connected)/📶/;s/(disconnected)/📵/;s/(connecting/🔄/')
 set $volu $(pactl list sinks | grep "Volume" | head -n 1 | awk '{print $5}')
-set $micr $(pactl list sources | grep "Mute" | head -n 1 | awk '{print $2}')
+set $brightness $(brightnessctl | awk -F'[()]' '{print $2}' | awk '$1{print $1}')
 set $bat0 $(cat /sys/class/power_supply/BAT0/capacity)
 set $date $(date "+%a %F %H:%M")
 
@@ -84,7 +87,7 @@ set $temp $(sensors | awk '/^Tctl:/ {print $2}')
 set $nvidia_temp $(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
 set $disk_usage $(df -h / | awk '/\// {print $3 "/" $2}')
 
-set $status \| wifi: [$wifi] \| vol: [$volu] \| mic: [$micr] \| batt: [$bat0%] \| cpu: [$cpu_usage%] \| ram: [$ram_usage] \| cpu_temp: [$temp] \| nv_temp: [$nvidia_temp°C] \| disk: [$disk_usage] \| date: [$date]
+set $status 🖴  [$disk_usage] \| 🐏 [$ram_usage] \| 🟩 [$nvidia_temp°C] \| 🌡️ [$temp] \| 🧠 [$cpu_usage%] \| 🌀 [$profile] \| "$wifi_status" [$wifi] \| 🔊 [$volu] \| ☀️ [$brightness] \| 🔋 [$bat0%] \| 📅 [$date]
 
 bar {
     position top
@@ -98,3 +101,16 @@ bar {
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+
+bindsym $mod+End exec swaylock -i "$HOME/.config/sway/padlock.png" -s center -c 000000
+
+exec swayidle -w \
+    timeout 300 'swaylock -i "$HOME/.config/sway/padlock.png" -s center -c 000000' \
+    timeout 600 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -i "$HOME/.config/sway/padlock.png"  -s center -c 000000'
+
+font pango:Iosevka Nerd Font 9
