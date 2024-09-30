@@ -3,6 +3,9 @@
 alias rm='rm -i'
 
 command -v git >/dev/null 2>&1 && alias g='git'
+v() {
+  . "${1:-.}"/.*/*/bin/activate
+}
 if command -v eza >/dev/null 2>&1; then
   alias l='eza -lF'
   alias la='eza -laF'

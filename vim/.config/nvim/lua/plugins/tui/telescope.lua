@@ -42,7 +42,7 @@ return {
       undo = {
         use_delta = true,
         side_by_side = true,
-        diff_context_lines = 8,
+        vim_diff_opts = { ctxlen = 8 },
         layout_strategy = "vertical",
         layout_config = {
           preview_height = 0.6,
